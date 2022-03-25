@@ -42,6 +42,13 @@
                         <p>Water Consumption</p>
                     </a>
                 </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('paper_consumption') }}" class="nav-link">
+                        <i class="fas fa-file"></i> &nbsp;&nbsp;&nbsp;
+                        <p>Paper Consumption - PROD</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div><!-- Sidebar -->

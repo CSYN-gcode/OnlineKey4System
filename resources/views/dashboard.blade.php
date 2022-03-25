@@ -23,7 +23,7 @@
                     <div class="col-md-12 mt-3">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Dashboard</h4>
+                                <h4>Dashboard - SG</h4>
                             </div>
 
                             <div class="card-body">
@@ -165,7 +165,7 @@
                                         </div><br>
                                 
                                         <div class="table-responsive">
-                                            <table id="tblViewWaterConsumption" class="table table-sm table-bordered table-striped table-hover text-center" style="width: 100%;">
+                                            <table id="tblViewWaterConsumption" class="table table-sm table-bordered table-striped table-hover display nowrap" style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 6.66%;">Water Consumption</th>
@@ -225,37 +225,37 @@
                                                     <tr>
                                                         <td style="width: 6.66%;">|</td>
                                                         {{-- <td style="width: 6.66%;"></td> --}}
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
+                                                        <td style="width: 6.66%;" class="april-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="may-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="june-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="july-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="august-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="september-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="october-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="november-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="december-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="january-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="february-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="march-water-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="total-water-actual-target"></td>
                                                     </tr>
 
                                                     <tr>
                                                         <td style="width: 6.66%;">Tricolor Chart Data</td>
                                                         {{-- <td style="width: 6.66%;"></td> --}}
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
+                                                        <td style="width: 6.66%;" class="april-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="may-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="june-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="july-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="august-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="september-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="october-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="november-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="december-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="january-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="february-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="march-water-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="total-water-tricolor"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -334,37 +334,37 @@
                                                     <tr>
                                                         <td style="width: 6.66%;">|</td>
                                                         {{-- <td style="width: 6.66%;"></td> --}}
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
+                                                        <td style="width: 6.66%;" class="april-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-actual-target"></td>
                                                     </tr>
 
                                                     <tr>
                                                         <td style="width: 6.66%;">Tricolor Chart Data</td>
                                                         {{-- <td style="width: 6.66%;"></td> --}}
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
-                                                        <td style="width: 6.66%;"></td>
+                                                        <td style="width: 6.66%;" class="april-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-tricolor"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -897,6 +897,21 @@
                             $('.april-paper-current-fy-actual').html(paperActualApril + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconApril);
                         }
 
+                        if(paperTargetApril == 0 || paperActualApril == 0) {
+                            $('.april-paper-actual-target').html('-');
+                        } else {
+                            var aprilDifference = paperTargetApril - paperActualApril;
+                            var aprilDifference = aprilDifference.toFixed(2);
+                            $('.april-paper-actual-target').html(aprilDifference);
+
+                            if(aprilDifference < 0) {
+                                $('.may-paper-actual-target').html(aprilDifference);
+                                $('.may-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.may-paper-actual-target').html(aprilDifference);
+                            }
+                        }
+
 
                         if(paperTargetMay == 0) {
                             $('.may-paper-current-fy-target').html('-');
@@ -908,6 +923,20 @@
                             $('.may-paper-current-fy-actual').html('-');
                         } else {
                             $('.may-paper-current-fy-actual').html(paperActualMay + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconMay);
+                        }
+
+                        if(paperTargetMay == 0 || paperActualMay == 0) {
+                            $('.may-paper-actual-target').html('-');
+                        } else {
+                            var mayDifference = paperTargetMay - paperActualMay;
+                            var mayDifference = mayDifference.toFixed(2);
+
+                            if(mayDifference < 0) {
+                                $('.may-paper-actual-target').html(mayDifference);
+                                $('.may-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.may-paper-actual-target').html(mayDifference);
+                            }
                         }
 
                     
@@ -923,6 +952,20 @@
                             $('.june-paper-current-fy-actual').html(paperActualJune + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJune);
                         }
 
+                        if(paperTargetJune == 0 || paperActualJune == 0) {
+                            $('.june-paper-actual-target').html('-');
+                        } else {
+                            var juneDifference = paperTargetJune - paperActualJune;
+                            var juneDifference = juneDifference.toFixed(2);
+
+                            if(juneDifference < 0) {
+                                $('.june-paper-actual-target').html(juneDifference);
+                                $('.june-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.june-paper-actual-target').html(juneDifference);
+                            }
+                        }
+
 
                         if(paperTargetJuly == 0) {
                             $('.july-paper-current-fy-target').html('-');
@@ -934,6 +977,20 @@
                             $('.july-paper-current-fy-actual').html('-');
                         } else {
                             $('.july-paper-current-fy-actual').html(paperActualJuly + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJuly);
+                        }
+
+                        if(paperTargetJuly == 0 || paperActualJuly == 0) {
+                            $('.july-paper-actual-target').html('-');
+                        } else {
+                            var julyDifference = paperTargetJuly - paperActualJuly;
+                            var julyDifference = julyDifference.toFixed(2);
+
+                            if(julyDifference < 0) {
+                                $('.july-paper-actual-target').html(julyDifference);
+                                $('.july-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.july-paper-actual-target').html(julyDifference);
+                            }
                         }
 
 
@@ -949,6 +1006,20 @@
                             $('.august-paper-current-fy-actual').html(paperActualAugust + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconAugust);
                         }
 
+                        if(paperTargetAugust == 0 || paperActualAugust == 0) {
+                            $('.august-paper-actual-target').html('-');
+                        } else {
+                            var augustDifference = paperTargetAugust - paperActualAugust;
+                            var augustDifference = augustDifference.toFixed(2);
+
+                            if(augustDifference < 0) {
+                                $('.august-paper-actual-target').html(augustDifference);
+                                $('.august-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.august-paper-actual-target').html(augustDifference);
+                            }
+                        }
+
 
                         if(paperTargetSeptember == 0) {
                             $('.september-paper-current-fy-target').html('-');
@@ -962,6 +1033,20 @@
                             $('.september-paper-current-fy-actual').html(paperActualSeptember + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconSeptember);
                         }
 
+                        if(paperTargetSeptember == 0 || paperActualSeptember == 0) {
+                            $('.september-paper-actual-target').html('-');
+                        } else {
+                            var septemberDifference = paperTargetSeptember - paperActualSeptember;
+                            var septemberDifference = septemberDifference.toFixed(2);
+
+                            if(septemberDifference < 0) {
+                                $('.september-paper-actual-target').html(septemberDifference);
+                                $('.september-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.september-paper-actual-target').html(septemberDifference);
+                            }
+                        }
+
 
                         if(paperTargetOctober == 0) {
                             $('.october-paper-current-fy-target').html('-');
@@ -973,6 +1058,20 @@
                             $('.october-paper-current-fy-actual').html('-');
                         } else {
                             $('.october-paper-current-fy-actual').html(paperActualOctober + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconOctober);
+                        }
+
+                        if(paperTargetOctober == 0 || paperActualOctober == 0) {
+                            $('.october-paper-actual-target').html('-');
+                        } else {
+                            var octoberDifference = paperTargetOctober - paperActualOctober;
+                            var octoberDifference = octoberDifference.toFixed(2);
+
+                            if(octoberDifference < 0) {
+                                $('.october-paper-actual-target').html(octoberDifference);
+                                $('.october-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.october-paper-actual-target').html(octoberDifference);
+                            }
                         }
 
 
@@ -989,6 +1088,21 @@
                         }
 
 
+                        if(paperTargetNovember == 0 || paperActualNovember == 0) {
+                            $('.november-paper-actual-target').html('-');
+                        } else {
+                            var novemberDifference = paperTargetNovember - paperActualNovember;
+                            var novemberDifference = novemberDifference.toFixed(2);
+
+                            if(novemberDifference < 0) {
+                                $('.november-paper-actual-target').html(novemberDifference);
+                                $('.november-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.november-paper-actual-target').html(novemberDifference);
+                            }
+                        }
+
+
                         if(paperTargetDecember == 0) {
                             $('.december-paper-current-fy-target').html('-');
                         } else {
@@ -999,6 +1113,20 @@
                             $('.december-paper-current-fy-actual').html('-');
                         } else {
                             $('.december-paper-current-fy-actual').html(paperActualDecember + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconDecember);
+                        }
+
+                        if(paperTargetDecember == 0 || paperActualDecember == 0) {
+                            $('.december-paper-actual-target').html('-');
+                        } else {
+                            var decemberDifference = paperTargetDecember - paperActualDecember;
+                            var decemberDifference = decemberDifference.toFixed(2);
+
+                            if(decemberDifference < 0) {
+                                $('.december-paper-actual-target').html(decemberDifference);
+                                $('.december-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.december-paper-actual-target').html(decemberDifference);
+                            }
                         }
 
 
@@ -1014,6 +1142,20 @@
                             $('.january-paper-current-fy-actual').html(paperActualJanuary + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJanuary);
                         }
 
+                        if(paperTargetJanuary == 0 || paperActualJanuary == 0) {
+                            $('.january-paper-actual-target').html('-');
+                        } else {
+                            var januaryDifference = paperTargetJanuary - paperActualJanuary;
+                            var januaryDifference = januaryDifference.toFixed(2);
+
+                            if(januaryDifference < 0) {
+                                $('.january-paper-actual-target').html(januaryDifference);
+                                $('.january-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.january-paper-actual-target').html(januaryDifference);
+                            }
+                        }
+
 
                         if(paperTargetFebruary == 0) {
                             $('.february-paper-current-fy-target').html('-');
@@ -1027,6 +1169,20 @@
                             $('.february-paper-current-fy-actual').html(paperActualFebruary + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconFebruary);
                         }
 
+                        if(paperTargetFebruary == 0 || paperActualFebruary == 0) {
+                            $('.february-paper-actual-target').html('-');
+                        } else {
+                            var februaryDifference = paperTargetFebruary - paperActualFebruary;
+                            var februaryDifference = februaryDifference.toFixed(2);
+
+                            if(februaryDifference < 0) {
+                                $('.february-paper-actual-target').html(februaryDifference);
+                                $('.february-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.february-paper-actual-target').html(februaryDifference);
+                            }
+                        }
+
 
                         if(paperTargetMarch == 0) {
                             $('.march-paper-current-fy-target').html('-');
@@ -1038,6 +1194,21 @@
                             $('.march-paper-current-fy-actual').html('-');
                         } else {
                             $('.march-paper-current-fy-actual').html(paperActualMarch + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconMarch);
+                        }
+
+
+                        if(paperTargetMarch == 0 || paperActualMarch == 0) {
+                            $('.march-paper-actual-target').html('-');
+                        } else {
+                            var marchDifference = paperTargetMarch - paperActualMarch;
+                            var marchDifference = marchDifference.toFixed(2);
+
+                            if(marchDifference < 0) {
+                                $('.march-paper-actual-target').html(marchDifference);
+                                $('.march-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.march-paper-actual-target').html(marchDifference);
+                            }
                         }
 
                         var paperTargetTotal = paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust + paperTargetSeptember + paperTargetOctober + paperTargetNovember + paperTargetDecember + paperTargetJanuary + paperTargetFebruary + paperTargetMarch;
@@ -1064,7 +1235,233 @@
                         }
 
 
+                        if(paperTargetTotal == 0 || paperActualTotal == 0) {
+                            $('.total-paper-actual-target').html('-');
+                        } else {
+                            var totalDifference = paperTargetTotal - paperActualTotal;
+                            var totalDifference = totalDifference.toFixed(2);
 
+                            if(totalDifference < 0) {
+                                $('.total-paper-actual-target').html(totalDifference);
+                                $('.total-paper-actual-target').css('color', 'red');
+                            } else {
+                                $('.total-paper-actual-target').html(totalDifference);
+                            }
+                        }
+
+                    //===== BASED ON EXCEL COMPUTATION ==============
+                    //===== SUBTRACT PAPER TARGET FOR APRIL FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR APRIL ==============
+                    var aprilTricolor = paperTargetTotal - paperTargetApril + paperActualApril;
+                    var aprilTricolor =  Number(aprilTricolor.toFixed(2));
+                    //===== SUBTRACT PAPER TARGET FOR APRIL FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR APRIL ==============
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY) ==============
+                    var aprilMayTarget =  paperTargetApril + paperTargetMay;
+                    var aprilMayTarget =  Number(aprilMayTarget.toFixed(2));
+
+                    var aprilMayActual =  paperActualApril + paperActualMay;
+                    var aprilMayActual =  Number(aprilMayActual.toFixed(2));
+
+
+                    var mayTricolor = paperTargetTotal - aprilMayTarget + aprilMayActual;
+                    var mayTricolor =  Number(mayTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE) ==============
+                    var aprilMayJuneTarget =  paperTargetApril + paperTargetMay + paperTargetJune;
+                    var aprilMayJuneTarget =  Number(aprilMayJuneTarget.toFixed(2));
+
+                    var aprilMayJuneActual =  paperActualApril + paperActualMay + paperActualJune;
+                    var aprilMayJuneActual =  Number(aprilMayJuneActual.toFixed(2));
+
+                    var juneTricolor = paperTargetTotal - aprilMayJuneTarget + aprilMayJuneActual;
+                    var juneTricolor =  Number(juneTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE +JULY) ==============
+                    var aprilMayJuneJulyTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly;
+                    var aprilMayJuneJulyTarget =  Number(aprilMayJuneJulyTarget.toFixed(2));
+
+                    var aprilMayJuneJulyActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly;
+                    var aprilMayJuneJulyActual =  Number(aprilMayJuneJulyActual.toFixed(2));
+
+                    var julyTricolor = paperTargetTotal - aprilMayJuneJulyTarget + aprilMayJuneJulyActual;
+                    var julyTricolor =  Number(julyTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY + AUGUST) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE + JULY + AUGUST) ==============
+                    var aprilMayJuneJulyAugustTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust;
+                    var aprilMayJuneJulyAugustTarget =  Number(aprilMayJuneJulyAugustTarget.toFixed(2));
+
+                    var aprilMayJuneJulyAugustActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly + paperActualAugust;
+                    var aprilMayJuneJulyAugustActual =  Number(aprilMayJuneJulyAugustActual.toFixed(2));
+
+                    var augustTricolor = paperTargetTotal - aprilMayJuneJulyAugustTarget + aprilMayJuneJulyAugustActual;
+                    var augustTricolor =  Number(augustTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY + AUGUST + SEPTEMBER) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE + JULY + AUGUST + SEPTEMBER) ==============
+                    var aprilMayJuneJulyAugustSeptemberTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust + paperTargetSeptember;
+                    var aprilMayJuneJulyAugustSeptemberTarget =  Number(aprilMayJuneJulyAugustSeptemberTarget.toFixed(2));
+
+                    var aprilMayJuneJulyAugustSeptemberActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly + paperActualAugust + paperActualSeptember;
+                    var aprilMayJuneJulyAugustSeptemberActual =  Number(aprilMayJuneJulyAugustSeptemberActual.toFixed(2));
+
+                    var septemberTricolor = paperTargetTotal - aprilMayJuneJulyAugustSeptemberTarget + aprilMayJuneJulyAugustSeptemberActual;
+                    var septemberTricolor =  Number(septemberTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY + AUGUST + SEPTEMBER + OCTOBER) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE + JULY + AUGUST + SEPTEMBER + OCTOBER) ==============
+                    var aprilMayJuneJulyAugustSeptemberOctoberTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust + paperTargetSeptember + paperTargetOctober;
+                    var aprilMayJuneJulyAugustSeptemberOctoberTarget =  Number(aprilMayJuneJulyAugustSeptemberOctoberTarget.toFixed(2));
+
+                    var aprilMayJuneJulyAugustSeptemberOctoberActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly + paperActualAugust + paperActualSeptember + paperActualOctober;
+                    var aprilMayJuneJulyAugustSeptemberOctoberActual =  Number(aprilMayJuneJulyAugustSeptemberOctoberActual.toFixed(2));
+
+                    var octoberTricolor = paperTargetTotal - aprilMayJuneJulyAugustSeptemberOctoberTarget + aprilMayJuneJulyAugustSeptemberOctoberActual;
+                    var octoberTricolor =  Number(octoberTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE + JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER) ==============
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust + paperTargetSeptember + paperTargetOctober + paperTargetNovember;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberTarget =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberTarget.toFixed(2));
+
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly + paperActualAugust + paperActualSeptember + paperActualOctober + paperActualNovember;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberActual =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberActual.toFixed(2));
+
+                    var novemberTricolor = paperTargetTotal - aprilMayJuneJulyAugustSeptemberOctoberNovemberTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberActual;
+                    var novemberTricolor =  Number(novemberTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER + DECEMBER) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE + JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER + DECEMBER) ==============
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust + paperTargetSeptember + paperTargetOctober + paperTargetNovember + paperTargetDecember;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberTarget =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberTarget.toFixed(2));
+
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly + paperActualAugust + paperActualSeptember + paperActualOctober + paperActualNovember + paperActualDecember;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberActual =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberActual.toFixed(2));
+
+                    var decemberTricolor = paperTargetTotal - aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberActual;
+                    var decemberTricolor =  Number(decemberTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER + DECEMBER + JANUARY) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE + JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER + DECEMBER + JANUARY) ==============
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust + paperTargetSeptember + paperTargetOctober + paperTargetNovember + paperTargetDecember + paperTargetJanuary;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryTarget =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryTarget.toFixed(2));
+
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly + paperActualAugust + paperActualSeptember + paperActualOctober + paperActualNovember + paperActualDecember + paperActualJanuary;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryActual =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryActual.toFixed(2));
+
+                    var januaryTricolor = paperTargetTotal - aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryActual;
+                    var januaryTricolor =  Number(januaryTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER + DECEMBER + JANUARY + FEBRUARY) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE + JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER + DECEMBER + JANUARY + FEBRUARY) ==============
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust + paperTargetSeptember + paperTargetOctober + paperTargetNovember + paperTargetDecember + paperTargetJanuary + paperTargetFebruary;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryTarget =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryTarget.toFixed(2));
+
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly + paperActualAugust + paperActualSeptember + paperActualOctober + paperActualNovember + paperActualDecember + paperActualJanuary + paperActualFebruary;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryActual =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryActual.toFixed(2));
+
+                    var februaryTricolor = paperTargetTotal - aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryActual;
+                    var februaryTricolor =  Number(februaryTricolor.toFixed(2));
+
+
+                    //===== SUBTRACT PAPER TARGET FOR (APRIL + MAY + JUNE +JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER + DECEMBER + JANUARY + FEBRUARY + MARCH) FROM PAPER TARGET TOTAL THEN ADD PAPER ACTUAL FOR (APRIL + MAY + JUNE + JULY + AUGUST + SEPTEMBER + OCTOBER + NOVEMBER + DECEMBER + JANUARY + FEBRUARY + MARCH) ==============
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchTarget =  paperTargetApril + paperTargetMay + paperTargetJune + paperTargetJuly + paperTargetAugust + paperTargetSeptember + paperTargetOctober + paperTargetNovember + paperTargetDecember + paperTargetJanuary + paperTargetFebruary + paperTargetMarch;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchTarget =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchTarget.toFixed(2));
+
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchActual =  paperActualApril + paperActualMay + paperActualJune + paperActualJuly + paperActualAugust + paperActualSeptember + paperActualOctober + paperActualNovember + paperActualDecember + paperActualJanuary + paperActualFebruary + paperActualMarch;
+                    var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchActual =  Number(aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchActual.toFixed(2));
+
+                    var marchTricolor = paperTargetTotal - aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchActual;
+                    var marchTricolor =  Number(marchTricolor.toFixed(2));
+
+
+                    var totalTricolor = '';
+
+                
+                        if(aprilTricolor != 0) {
+                            $('.april-paper-tricolor').html(aprilTricolor);
+                        } else {
+                            $('.april-paper-tricolor').html('-');
+                        }
+
+
+                        if(mayTricolor != 0) {
+                            $('.may-paper-tricolor').html(mayTricolor);
+                        } else {
+                            $('.may-paper-tricolor').html('-');
+                        }
+                    
+
+                        if(juneTricolor != 0) {
+                            $('.june-paper-tricolor').html(juneTricolor);
+                        } else {
+                            $('.june-paper-tricolor').html('-');
+                        }
+
+                        if(julyTricolor != 0) {
+                            $('.july-paper-tricolor').html(julyTricolor);
+                        } else {
+                            $('.july-paper-tricolor').html('-');
+                        }
+
+                        if(augustTricolor != 0) {
+                            $('.august-paper-tricolor').html(augustTricolor);
+                        } else {
+                            $('.august-paper-tricolor').html('-');
+                        }
+
+                        if(septemberTricolor != 0) {
+                            $('.september-paper-tricolor').html(septemberTricolor);
+                        } else {
+                            $('.september-paper-tricolor').html('-');
+                        }
+
+                        if(octoberTricolor != 0) {
+                            $('.october-paper-tricolor').html(octoberTricolor);
+                        } else {
+                            $('.october-paper-tricolor').html('-');
+                        }
+
+                        if(novemberTricolor != 0) {
+                            $('.november-paper-tricolor').html(novemberTricolor);
+                        } else {
+                            $('.november-paper-tricolor').html('-');
+                        }
+
+
+                        if(decemberTricolor != 0) {
+                            $('.december-paper-tricolor').html(decemberTricolor);
+                        } else {
+                            $('.december-paper-tricolor').html('-');
+                        }
+
+                        if(januaryTricolor != 0) {
+                            $('.january-paper-tricolor').html(januaryTricolor);
+                        } else {
+                            $('.january-paper-tricolor').html('-');
+                        }
+
+                        if(februaryTricolor != 0) {
+                            $('.february-paper-tricolor').html(februaryTricolor);
+                        } else {
+                            $('.february-paper-tricolor').html('-');
+                        }
+
+                        if(marchTricolor != 0) {
+                            $('.march-paper-tricolor').html(marchTricolor);
+                        } else {
+                            $('.march-paper-tricolor').html('-');
+                        }
+
+
+                        if(totalTricolor != 0) {
+                            $('.total-paper-tricolor').html('-');
+                        } else {
+                            $('.total-paper-tricolor').html('-');
+                        }
+ 
                     }
                 });
             }
@@ -1076,6 +1473,258 @@
                 $(".selectYearPaper").val();
 
                 GetCurrentFYPaperData();
+                    
+                dataTablePaperConsumptions.draw();
+            });
+
+
+            function GetCurrentFYWaterData() {
+                $.ajax({
+                    type: "get",
+                    url: "get_current_water_data",
+                    data: {
+                        fiscal_year: $('#selFiscalYearWater').val()
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        var currentYear = Number(response['currentYear']);
+                        var nextYear = Number(response['currentYear'] + 1);
+                        var iconApril = response['iconApril']; 
+                        var iconMay = response['iconMay']; 
+                        var iconJune = response['iconJune']; 
+                        var iconJuly = response['iconJuly']; 
+                        var iconAugust = response['iconAugust']; 
+                        var iconSeptember = response['iconSeptember']; 
+                        var iconOctober = response['iconOctober']; 
+                        var iconNovember = response['iconNovember']; 
+                        var iconDecember = response['iconDecember']; 
+                        var iconJanuary = response['iconJanuary']; 
+                        var iconFebruary = response['iconFebruary']; 
+                        var iconMarch = response['iconMarch']; 
+                        var aprilWaterTarget = Number(response['aprilWaterTarget']);
+                        var aprilWaterActual = Number(response['aprilWaterActual']);
+                        var mayWaterTarget = Number(response['mayWaterTarget']);
+                        var mayWaterActual = Number(response['mayWaterActual']);
+                        var juneWaterTarget = Number(response['juneWaterTarget']);
+                        var juneWaterActual = Number(response['juneWaterActual']);
+                        var julyWaterTarget = Number(response['julyWaterTarget']);
+                        var julyWaterActual = Number(response['julyWaterActual']);
+                        var augustWaterTarget = Number(response['augustWaterTarget']);
+                        var augustWaterActual = Number(response['augustWaterActual']);
+                        var septemberWaterTarget = Number(response['septemberWaterTarget']);
+                        var septemberWaterActual = Number(response['septemberWaterActual']);
+                        var octoberWaterTarget = Number(response['octoberWaterTarget']);
+                        var octoberWaterActual = Number(response['octoberWaterActual']);
+                        var novemberWaterTarget = Number(response['novemberWaterTarget']);
+                        var novemberWaterActual = Number(response['novemberWaterActual']);
+                        var decemberWaterTarget = Number(response['decemberWaterTarget']);
+                        var decemberWaterActual = Number(response['decemberWaterActual']);
+                        var januaryWaterTarget = Number(response['januaryWaterTarget']);
+                        var januaryWaterActual = Number(response['januaryWaterActual']);
+                        var februaryWaterTarget = Number(response['februaryWaterTarget']);
+                        var februaryWaterActual = Number(response['februaryWaterActual']);
+                        var marchWaterTarget = Number(response['marchWaterTarget']);
+                        var marchWaterActual = Number(response['marchWaterActual']);
+
+
+                        $('.april-water-current-fy').html('April ' + currentYear);
+                        $('.may-water-current-fy').html('May ' + currentYear);
+                        $('.june-water-current-fy').html('June ' + currentYear);
+                        $('.july-water-current-fy').html('July ' + currentYear);
+                        $('.august-water-current-fy').html('August ' + currentYear);
+                        $('.september-water-current-fy').html('September ' + currentYear);
+                        $('.october-water-current-fy').html('October ' + currentYear);
+                        $('.november-water-current-fy').html('November ' + currentYear);
+                        $('.december-water-current-fy').html('December ' + currentYear);
+                        $('.january-water-current-fy').html('January ' + nextYear);
+                        $('.february-water-current-fy').html('February ' + nextYear);
+                        $('.march-water-current-fy').html('March ' + nextYear);
+
+                        if(aprilWaterTarget == 0) {
+                            $('.april-water-current-fy-target').html('-');
+                        } else {
+                            $('.april-water-current-fy-target').html(aprilWaterTarget);
+                        }
+
+                        if(aprilWaterActual == 0) {
+                            $('.april-water-current-fy-actual').html('-');
+                        } else {
+                            $('.april-water-current-fy-actual').html(aprilWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconApril);
+                        }
+
+
+                        if(mayWaterTarget == 0) {
+                            $('.may-water-current-fy-target').html('-');
+                        } else {
+                            $('.may-water-current-fy-target').html(mayWaterTarget);
+                        }
+
+                        if(mayWaterActual == 0) {
+                            $('.may-water-current-fy-actual').html('-');
+                        } else {
+                            $('.may-water-current-fy-actual').html(mayWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconMay);
+                        }
+
+
+                        if(juneWaterTarget == 0) {
+                            $('.june-water-current-fy-target').html('-');
+                        } else {
+                            $('.june-water-current-fy-target').html(juneWaterTarget);
+                        }
+
+                        if(juneWaterActual == 0) {
+                            $('.june-water-current-fy-actual').html('-');
+                        } else {
+                            $('.june-water-current-fy-actual').html(juneWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJune);
+                        }
+
+
+                        if(julyWaterTarget == 0) {
+                            $('.july-water-current-fy-target').html('-');
+                        } else {
+                            $('.july-water-current-fy-target').html(julyWaterTarget);
+                        }
+
+                        if(julyWaterActual == 0) {
+                            $('.july-water-current-fy-actual').html('-');
+                        } else {
+                            $('.july-water-current-fy-actual').html(julyWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJuly);
+                        }
+
+
+                        if(augustWaterTarget == 0) {
+                            $('.august-water-current-fy-target').html('-');
+                        } else {
+                            $('.august-water-current-fy-target').html(augustWaterTarget);
+                        }
+
+                        if(augustWaterActual == 0) {
+                            $('.august-water-current-fy-actual').html('-');
+                        } else {
+                            $('.august-water-current-fy-actual').html(augustWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconAugust);
+                        }
+
+
+                        if(septemberWaterTarget == 0) {
+                            $('.september-water-current-fy-target').html('-');
+                        } else {
+                            $('.september-water-current-fy-target').html(septemberWaterTarget);
+                        }
+
+                        if(septemberWaterActual == 0) {
+                            $('.september-water-current-fy-actual').html('-');
+                        } else {
+                            $('.september-water-current-fy-actual').html(septemberWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconSeptember);
+                        }
+
+
+                        if(octoberWaterTarget == 0) {
+                            $('.october-water-current-fy-target').html('-');
+                        } else {
+                            $('.october-water-current-fy-target').html(octoberWaterTarget);
+                        }
+
+                        if(octoberWaterActual == 0) {
+                            $('.october-water-current-fy-actual').html('-');
+                        } else {
+                            $('.october-water-current-fy-actual').html(octoberWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconOctober);
+                        }
+
+
+                        if(novemberWaterTarget == 0) {
+                            $('.november-water-current-fy-target').html('-');
+                        } else {
+                            $('.november-water-current-fy-target').html(novemberWaterTarget);
+                        }
+
+                        if(novemberWaterActual == 0) {
+                            $('.november-water-current-fy-actual').html('-');
+                        } else {
+                            $('.november-water-current-fy-actual').html(novemberWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconNovember);
+                        }
+
+
+                        if(decemberWaterTarget == 0) {
+                            $('.december-water-current-fy-target').html('-');
+                        } else {
+                            $('.december-water-current-fy-target').html(decemberWaterTarget);
+                        }
+
+                        if(decemberWaterActual == 0) {
+                            $('.december-water-current-fy-actual').html('-');
+                        } else {
+                            $('.december-water-current-fy-actual').html(decemberWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconDecember);
+                        }
+
+
+                        if(januaryWaterTarget == 0) {
+                            $('.january-water-current-fy-target').html('-');
+                        } else {
+                            $('.january-water-current-fy-target').html(januaryWaterTarget);
+                        }
+
+                        if(januaryWaterActual == 0) {
+                            $('.january-water-current-fy-actual').html('-');
+                        } else {
+                            $('.january-water-current-fy-actual').html(januaryWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJanuary);
+                        }
+
+
+                        if(februaryWaterTarget == 0) {
+                            $('.february-water-current-fy-target').html('-');
+                        } else {
+                            $('.february-water-current-fy-target').html(februaryWaterTarget);
+                        }
+
+                        if(februaryWaterActual == 0) {
+                            $('.february-water-current-fy-actual').html('-');
+                        } else {
+                            $('.february-water-current-fy-actual').html(februaryWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconFebruary);
+                        }
+
+
+                        if(marchWaterTarget == 0) {
+                            $('.march-water-current-fy-target').html('-');
+                        } else {
+                            $('.march-water-current-fy-target').html(marchWaterTarget);
+                        }
+
+                        if(marchWaterActual == 0) {
+                            $('.march-water-current-fy-actual').html('-');
+                        } else {
+                            $('.march-water-current-fy-actual').html(marchWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconMarch);
+                        }
+
+                      var totalTarget =  aprilWaterTarget + mayWaterTarget + juneWaterTarget +  julyWaterTarget +  augustWaterTarget +  septemberWaterTarget +  octoberWaterTarget +  novemberWaterTarget +  decemberWaterTarget +  januaryWaterTarget +  februaryWaterTarget +  marchWaterTarget;
+                    
+                      if(totalTarget == 0) {
+                        $('.total-water-current-fy-target').html('-');
+                      } else {
+                          $('.total-water-current-fy-target').html(totalTarget);
+                      }
+
+                      var totalActual =  aprilWaterActual + mayWaterActual + juneWaterActual +  julyWaterActual +  augustWaterActual +  septemberWaterActual +  octoberWaterActual +  novemberWaterActual +  decemberWaterActual +  januaryWaterActual +  februaryWaterActual +  marchWaterActual;
+
+                      if(totalActual == 0) {
+                        $('.total-water-current-fy-actual').html('-');
+                      } else {
+                          $('.total-water-current-fy-actual').html(totalActual);
+                      }
+
+                    }
+                });
+            }
+
+
+
+            GetCurrentFYWaterData();
+
+
+            $('#selFiscalYearWater').on('change', function() {
+                $('.selectYearWater').val($(this).find(":selected").val());
+                $('.selectYearWater').val();
+
+                GetCurrentFYWaterData();
                     
                 dataTablePaperConsumptions.draw();
             });

@@ -200,6 +200,513 @@ class WaterConsumptionController extends Controller
 
 
     public function get_current_water_data(Request $request) {
+        if($request->fiscal_year == null){
+            $get_current_fiscal_year = FiscalYear::where('logdel', 0)
+            ->first();
 
+            $current_fy = $get_current_fiscal_year->fiscal_year;
+            $current_fy_id = $get_current_fiscal_year->id;
+            
+           
+            //========
+            $april_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 4)
+            ->sum('target');
+
+            $april_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 4)
+            ->sum('actual');
+
+            $icon_april = '';
+            if($april_water_consumption_target > $april_water_consumption_actual) {
+                $icon_april .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($april_water_consumption_target == $april_water_consumption_actual) {
+                $icon_april .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($april_water_consumption_target < $april_water_consumption_actual) {
+                $icon_april .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $may_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 5)
+            ->sum('target');
+
+            $may_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 5)
+            ->sum('actual');
+
+            $icon_may = '';
+            if($may_water_consumption_target > $may_water_consumption_actual) {
+                $icon_may .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($may_water_consumption_target == $may_water_consumption_actual) {
+                $icon_may .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($may_water_consumption_target < $may_water_consumption_actual) {
+                $icon_may .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $june_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 6)
+            ->sum('target');
+
+            $june_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 6)
+            ->sum('actual');
+
+            $icon_june = '';
+            if($june_water_consumption_target > $june_water_consumption_actual) {
+                $icon_june .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($june_water_consumption_target == $june_water_consumption_actual) {
+                $icon_june .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($june_water_consumption_target < $june_water_consumption_actual) {
+                $icon_june .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $july_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 7)
+            ->sum('target');
+
+            $july_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 7)
+            ->sum('actual');
+
+            $icon_july = '';
+            if($july_water_consumption_target > $july_water_consumption_actual) {
+                $icon_july .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($july_water_consumption_target == $july_water_consumption_actual) {
+                $icon_july .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($july_water_consumption_target < $july_water_consumption_actual) {
+                $icon_july .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $august_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 8)
+            ->sum('target');
+
+            $august_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 8)
+            ->sum('actual');
+
+            $icon_august = '';
+            if($august_water_consumption_target > $august_water_consumption_actual) {
+                $icon_august .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($august_water_consumption_target == $august_water_consumption_actual) {
+                $icon_august .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($august_water_consumption_target < $august_water_consumption_actual) {
+                $icon_august .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $september_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 9)
+            ->sum('target');
+
+            $september_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 9)
+            ->sum('actual');
+
+            $icon_september = '';
+            if($september_water_consumption_target > $september_water_consumption_actual) {
+                $icon_september .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($september_water_consumption_target == $september_water_consumption_actual) {
+                $icon_september .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($september_water_consumption_target < $september_water_consumption_actual) {
+                $icon_september .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $october_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 10)
+            ->sum('target');
+
+            $october_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 10)
+            ->sum('actual');
+
+            $icon_october = '';
+            if($october_water_consumption_target > $october_water_consumption_actual) {
+                $icon_october .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($october_water_consumption_target == $october_water_consumption_actual) {
+                $icon_october .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($october_water_consumption_target < $october_water_consumption_actual) {
+                $icon_october .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $november_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 11)
+            ->sum('target');
+
+            $november_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 11)
+            ->sum('actual');
+
+            $icon_november = '';
+            if($november_water_consumption_target > $november_water_consumption_actual) {
+                $icon_november .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($november_water_consumption_target == $november_water_consumption_actual) {
+                $icon_november .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($november_water_consumption_target < $november_water_consumption_actual) {
+                $icon_november .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+            //========
+            $december_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 12)
+            ->sum('target');
+
+            $december_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 12)
+            ->sum('actual');
+
+            $icon_december = '';
+            if($december_water_consumption_target > $december_water_consumption_actual) {
+                $icon_december .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($december_water_consumption_target == $december_water_consumption_actual) {
+                $icon_december .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($december_water_consumption_target < $december_water_consumption_actual) {
+                $icon_december .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+            
+            //========
+            $january_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 1)
+            ->sum('target');
+
+            $january_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 1)
+            ->sum('actual');
+
+            $icon_january = '';
+            if($january_water_consumption_target > $january_water_consumption_actual) {
+                $icon_january .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($january_water_consumption_target == $january_water_consumption_actual) {
+                $icon_january .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($january_water_consumption_target < $january_water_consumption_actual) {
+                $icon_january .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $february_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 2)
+            ->sum('target');
+
+            $february_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 2)
+            ->sum('actual');
+
+            $icon_february = '';
+            if($february_water_consumption_target > $february_water_consumption_actual) {
+                $icon_february .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($february_water_consumption_target == $february_water_consumption_actual) {
+                $icon_february .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($february_water_consumption_target < $february_water_consumption_actual) {
+                $icon_february .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $march_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 3)
+            ->sum('target');
+
+            $march_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 3)
+            ->sum('actual');
+
+            $icon_march = '';
+            if($march_water_consumption_target > $march_water_consumption_actual) {
+                $icon_march .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($march_water_consumption_target == $march_water_consumption_actual) {
+                $icon_march .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($march_water_consumption_target < $march_water_consumption_actual) {
+                $icon_march .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+        } else {
+            $get_current_fiscal_year = FiscalYear::where('fiscal_year', $request->fiscal_year)
+            ->first();
+
+            $current_fy = $get_current_fiscal_year->fiscal_year;
+            $current_fy_id = $get_current_fiscal_year->id;
+            
+           
+            //========
+            $april_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 4)
+            ->sum('target');
+
+            $april_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 4)
+            ->sum('actual');
+
+            $icon_april = '';
+            if($april_water_consumption_target > $april_water_consumption_actual) {
+                $icon_april .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($april_water_consumption_target == $april_water_consumption_actual) {
+                $icon_april .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($april_water_consumption_target < $april_water_consumption_actual) {
+                $icon_april .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $may_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 5)
+            ->sum('target');
+
+            $may_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 5)
+            ->sum('actual');
+
+            $icon_may = '';
+            if($may_water_consumption_target > $may_water_consumption_actual) {
+                $icon_may .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($may_water_consumption_target == $may_water_consumption_actual) {
+                $icon_may .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($may_water_consumption_target < $may_water_consumption_actual) {
+                $icon_may .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $june_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 6)
+            ->sum('target');
+
+            $june_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 6)
+            ->sum('actual');
+
+            $icon_june = '';
+            if($june_water_consumption_target > $june_water_consumption_actual) {
+                $icon_june .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($june_water_consumption_target == $june_water_consumption_actual) {
+                $icon_june .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($june_water_consumption_target < $june_water_consumption_actual) {
+                $icon_june .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $july_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 7)
+            ->sum('target');
+
+            $july_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 7)
+            ->sum('actual');
+
+            $icon_july = '';
+            if($july_water_consumption_target > $july_water_consumption_actual) {
+                $icon_july .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($july_water_consumption_target == $july_water_consumption_actual) {
+                $icon_july .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($july_water_consumption_target < $july_water_consumption_actual) {
+                $icon_july .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $august_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 8)
+            ->sum('target');
+
+            $august_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 8)
+            ->sum('actual');
+
+            $icon_august = '';
+            if($august_water_consumption_target > $august_water_consumption_actual) {
+                $icon_august .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($august_water_consumption_target == $august_water_consumption_actual) {
+                $icon_august .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($august_water_consumption_target < $august_water_consumption_actual) {
+                $icon_august .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $september_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 9)
+            ->sum('target');
+
+            $september_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 9)
+            ->sum('actual');
+
+            $icon_september = '';
+            if($september_water_consumption_target > $september_water_consumption_actual) {
+                $icon_september .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($september_water_consumption_target == $september_water_consumption_actual) {
+                $icon_september .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($september_water_consumption_target < $september_water_consumption_actual) {
+                $icon_september .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $october_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 10)
+            ->sum('target');
+
+            $october_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 10)
+            ->sum('actual');
+
+            $icon_october = '';
+            if($october_water_consumption_target > $october_water_consumption_actual) {
+                $icon_october .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($october_water_consumption_target == $october_water_consumption_actual) {
+                $icon_october .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($october_water_consumption_target < $october_water_consumption_actual) {
+                $icon_october .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $november_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 11)
+            ->sum('target');
+
+            $november_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 11)
+            ->sum('actual');
+
+            $icon_november = '';
+            if($november_water_consumption_target > $november_water_consumption_actual) {
+                $icon_november .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($november_water_consumption_target == $november_water_consumption_actual) {
+                $icon_november .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($november_water_consumption_target < $november_water_consumption_actual) {
+                $icon_november .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+            //========
+            $december_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 12)
+            ->sum('target');
+
+            $december_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 12)
+            ->sum('actual');
+
+            $icon_december = '';
+            if($december_water_consumption_target > $december_water_consumption_actual) {
+                $icon_december .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($december_water_consumption_target == $december_water_consumption_actual) {
+                $icon_december .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($december_water_consumption_target < $december_water_consumption_actual) {
+                $icon_december .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+            
+            //========
+            $january_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 1)
+            ->sum('target');
+
+            $january_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 1)
+            ->sum('actual');
+
+            $icon_january = '';
+            if($january_water_consumption_target > $january_water_consumption_actual) {
+                $icon_january .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($january_water_consumption_target == $january_water_consumption_actual) {
+                $icon_january .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($january_water_consumption_target < $january_water_consumption_actual) {
+                $icon_january .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $february_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 2)
+            ->sum('target');
+
+            $february_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 2)
+            ->sum('actual');
+
+            $icon_february = '';
+            if($february_water_consumption_target > $february_water_consumption_actual) {
+                $icon_february .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($february_water_consumption_target == $february_water_consumption_actual) {
+                $icon_february .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($february_water_consumption_target < $february_water_consumption_actual) {
+                $icon_february .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+
+
+            //========
+            $march_water_consumption_target = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 3)
+            ->sum('target');
+
+            $march_water_consumption_actual = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('month', 3)
+            ->sum('actual');
+
+            $icon_march = '';
+            if($march_water_consumption_target > $march_water_consumption_actual) {
+                $icon_march .= '<i class="fas fa-arrow-down text-green"></i>';
+            } elseif($march_water_consumption_target == $march_water_consumption_actual) {
+                $icon_march .= '<i class="fa fa-minus text-blue"></i>';
+            } elseif($march_water_consumption_target < $march_water_consumption_actual) {
+                $icon_march .= '<i class="fas fa-arrow-up text-red"></i>';
+            }
+        }
+
+          
+          return response()->json([
+            'currentYear' => $current_fy,
+            'iconApril' => $icon_april,
+            'iconMay' => $icon_may,
+            'iconJune' => $icon_june,
+            'iconJuly' => $icon_july,
+            'iconAugust' => $icon_august,
+            'iconSeptember' => $icon_september,
+            'iconOctober' => $icon_october,
+            'iconNovember' => $icon_november,
+            'iconDecember' => $icon_december,
+            'iconJanuary' => $icon_january,
+            'iconFebruary' => $icon_february,
+            'iconMarch' => $icon_march,
+            'aprilWaterTarget' => $april_water_consumption_target,
+            'aprilWaterActual' => $april_water_consumption_actual,
+            'mayWaterTarget' => $may_water_consumption_target,
+            'mayWaterActual' => $may_water_consumption_actual,
+            'juneWaterTarget' => $june_water_consumption_target,
+            'juneWaterActual' => $june_water_consumption_actual,
+            'julyWaterTarget' => $july_water_consumption_target,
+            'julyWaterActual' => $july_water_consumption_actual,
+            'augustWaterTarget' => $august_water_consumption_target,
+            'augustWaterActual' => $august_water_consumption_actual,
+            'septemberWaterTarget' => $september_water_consumption_target,
+            'septemberWaterActual' => $september_water_consumption_actual,
+            'octoberWaterTarget' => $october_water_consumption_target,
+            'octoberWaterActual' => $october_water_consumption_actual,
+            'novemberWaterTarget' => $november_water_consumption_target,
+            'novemberWaterActual' => $november_water_consumption_actual,
+            'decemberWaterTarget' => $december_water_consumption_target,
+            'decemberWaterActual' => $december_water_consumption_actual,
+            'januaryWaterTarget' => $january_water_consumption_target,
+            'januaryWaterActual' => $january_water_consumption_actual,
+            'februaryWaterTarget' => $february_water_consumption_target,
+            'februaryWaterActual' => $february_water_consumption_actual,
+            'marchWaterTarget' => $march_water_consumption_target,
+            'marchWaterActual' => $march_water_consumption_actual,
+          ]);
     }
 }

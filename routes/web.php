@@ -26,6 +26,12 @@ Route::get('/water_consumption', function () {
 })->name('water_consumption');
 
 
+Route::get('/paper_consumption', function () {
+    return view('paper_consumption');
+})->name('paper_consumption');
+
+
+
 // Route::get('/get_chart_data', 'ChartController@get_chart_data');
 
 //===== FISCAL YEAR CONTROLLER ======
@@ -47,11 +53,14 @@ Route::post('/insert_water_target', 'WaterConsumptionController@insert_water_tar
 Route::post('/insert_water_actual', 'WaterConsumptionController@insert_water_actual')->name('insert_water_actual');
 Route::get('/view_water_consumption', 'WaterConsumptionController@view_water_consumption')->name('view_water_consumption');
 Route::get('/get_water_target_by_id', 'WaterConsumptionController@get_water_target_by_id')->name('get_water_target_by_id');
-Route::get('/get_current_water_data', 'EnergyConsumptionController@get_current_water_data')->name('get_current_water_data');
+Route::get('/get_current_water_data', 'WaterConsumptionController@get_current_water_data')->name('get_current_water_data');
 
 
 //===== PAPER CONSUMPTION CONTROLLER ======
+Route::post('/insert_paper_target', 'PaperConsumptionController@insert_paper_target')->name('insert_paper_target');
 Route::get('/get_current_paper_data', 'PaperConsumptionController@get_current_paper_data')->name('get_current_paper_data');
+Route::get('/view_paper_consumption', 'PaperConsumptionController@view_paper_consumption')->name('view_paper_consumption');
+Route::get('/get_paper_target_by_id', 'PaperConsumptionController@get_paper_target_by_id')->name('get_paper_target_by_id');
 
 
 

@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 use App\MonthlyTargetPaperConsumption;
 use App\MonthlyActualPaperConsumption;
 use App\FiscalYear;
+use App\PaperConsumption;
+
+use DataTables;
+use Carbon\Carbon;
 
 class PaperConsumptionController extends Controller
 {
@@ -1102,4 +1108,165 @@ class PaperConsumptionController extends Controller
         'paperActualMarch' => $actual_march_ream
     ]);
     }
+
+    public function insert_paper_target(Request $request) {
+        date_default_timezone_set('Asia/Manila');
+        session_start();
+
+        $data = $request->all();
+
+        if (!isset($request->paper_id)) {
+            $rules = [
+                'department' => 'required',
+                'month' => 'required',
+                'paper_target' => 'required'
+            ];
+
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->passes()) {
+                if (PaperConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('department', $request->department)->exists()) {
+                    return response()->json(['result' => "2"]);
+                } else {
+                    $insert_paper_target = [
+                        'month' => $request->month,
+                        'target' => $request->paper_target,
+                        'fiscal_year_id' => $request->fiscal_year,
+                        'department' => $request->department,
+                        'updated_at' => date('Y-m-d H:i:s'),
+                        'created_at' => date('Y-m-d H:i:s'),
+                    ];
+
+                    PaperConsumption::insert(
+                        $insert_paper_target
+                    );
+                    return response()->json(['result' => "1"]);
+                }
+            } else {
+                return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+            }
+        } else {
+            $rules = [
+                'department' => 'required',
+                'month' => 'required',
+                'paper_target' => 'required'
+            ];
+
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->passes()) {
+                $update_paper_target = [
+                    'month' => $request->month,
+                    'target' => $request->paper_target,
+                    'fiscal_year_id' => $request->fiscal_year,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ];
+
+                if (isset($request->paper_id)) {
+                    PaperConsumption::where('id', $request->paper_id)->update(
+                        $update_paper_target
+                    );
+                }
+                return response()->json(['result' => "1"]);
+            } else {
+                return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+            }
+        }
+    }
+
+    public function view_paper_consumption() {
+        $paper_consumptions = PaperConsumption::with(['fiscal_year_id'])->get();
+
+        return DataTables::of($paper_consumptions)
+            ->addColumn('month', function ($paper_consumption) {
+                $result = '';
+
+                if ($paper_consumption->month == 1) {
+                    $result .= '<tr value="10">January<input class="month_name" type="hidden" style="width:0%;" value="10"> </tr>';
+                } elseif ($paper_consumption->month == 2) {
+                    $result .= '<tr value="11">February<input class="month_name" type="hidden" style="width:0%;" value="11"> </tr>';
+                } elseif ($paper_consumption->month == 3) {
+                    $result .= '<tr value="12">March<input class="month_name" type="hidden" style="width:0%;" value="12"> </tr>';
+                } elseif ($paper_consumption->month == 4) {
+                    $result .= '<tr value="1">April<input class="month_name" type="hidden" style="width:0%;" value="1"> </tr>';
+                } elseif ($paper_consumption->month == 5) {
+                    $result .= '<tr value="2">May<input class="month_name" type="hidden" style="width:0%;" value="2"> </tr>';
+                } elseif ($paper_consumption->month == 6) {
+                    $result .= '<tr value="3">June<input class="month_name" type="hidden" style="width:0%;" value="3"> </tr>';
+                } elseif ($paper_consumption->month == 7) {
+                    $result .= '<tr value="4">July<input class="month_name" type="hidden" style="width:0%;" value="4"> </tr>';
+                } elseif ($paper_consumption->month == 8) {
+                    $result .= '<tr value="5">August<input class="month_name" type="hidden" style="width:0%;" value="5"> </tr>';
+                } elseif ($paper_consumption->month == 9) {
+                    $result .= '<tr value="6">September<input class="month_name" type="hidden" style="width:0%;" value="6"> </tr>';
+                } elseif ($paper_consumption->month == 10) {
+                    $result .= '<tr value="7">October<input class="month_name" type="hidden" style="width:0%;" value="7"> </tr>';
+                } elseif ($paper_consumption->month == 11) {
+                    $result .= '<tr value="8">November<input class="month_name" type="hidden" style="width:0%;" value="8"> </tr>';
+                } elseif ($paper_consumption->month == 12) {
+                    $result .= '<tr value="9">December<input class="month_name" type="hidden" style="width:0%;" value="9"> </tr>';
+                }
+
+                return $result;
+            })
+            ->addColumn('year', function ($paper_consumption) {
+                $result = Carbon::parse($paper_consumption->created_at)->year;
+
+                return $result;
+            })
+            ->addColumn('action', function ($paper_consumption) {
+                $result = '';
+
+                $result = '<center><div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" id="dropdownCustom" aria-haspopup="true" aria-expanded="false" title="Action">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdownCustom">'; // dropdown-menu start
+                
+                $result .= '<button class="dropdown-item text-center actionEditPaperConsumptionTarget" type="button" paper-id="' . $paper_consumption->id . '" data-toggle="modal" data-target=".modalPaper" data-keyboard="false">Edit Target</button>';
+                
+                    if ($paper_consumption->actual == null) {
+                      
+                        $result .= '<button class="dropdown-item text-center actionAddPaperConsumption" type="button" paper-id="' . $paper_consumption->id . '"  data-toggle="modal" data-target="#modalpaperConsumption" data-keyboard="false">Add Actual</button>';
+
+                    } else {
+                        $result .= '<button class="dropdown-item text-center actionEditPaperConsumption" type="button" paper-id="' . $paper_consumption->id . '" data-toggle="modal" data-target="#modalpaperConsumption" data-keyboard="false">Edit Actual</button>';
+                    }
+                    $result .= '</div>'; // dropdown-menu end
+                    $result .= '</div>'; // div end
+                    
+                    '</center>';
+                return $result;
+
+            })
+            ->addColumn('status', function ($paper_consumption) {
+                $result = '';
+                $paper_target = $paper_consumption->target;
+                $paper_actual = $paper_consumption->actual;
+
+
+                if ($paper_actual == NULL) {
+                    $result .= '<center><span class="badge badge-pill badge-secondary">No Actual Consumption Data</span></center>';
+
+                } elseif($paper_actual > $paper_target) {
+                    $result .= '<center><span class="badge badge-pill badge-danger">Off Target</span></center>';
+                 
+                } else if ($paper_actual == $paper_target) {
+                    $result .= '<center><span class="badge badge-pill badge-primary">On Target</span></center>';
+
+                } else if ($paper_actual < $paper_target) {
+                    $result .= '<center><span class="badge badge-pill badge-success">Under</span></center>';
+
+                } 
+
+                return $result;
+            })
+            ->rawColumns(['month', 'year', 'action', 'status']) // to format the added columns(status & action) as html format
+            ->make(true);
+    }
+
+    public function get_paper_target_by_id(Request $request) {
+        $paper_target_details = PaperConsumption::where('id', $request->targetId)->get();
+        return response()->json(['result' => $paper_target_details]);
+}
 }
