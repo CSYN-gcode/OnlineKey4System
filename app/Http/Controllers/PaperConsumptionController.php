@@ -1218,26 +1218,23 @@ class PaperConsumptionController extends Controller
                 $result = '';
 
                 $result = '<center><div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" id="dropdownCustom" aria-haspopup="true" aria-expanded="false" title="Action">
+                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Action">
                     <i class="fas fa-cog"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right dropdownCustom">'; // dropdown-menu start
-                
-                $result .= '<button class="dropdown-item text-center actionEditPaperConsumptionTarget" type="button" paper-id="' . $paper_consumption->id . '" data-toggle="modal" data-target=".modalPaper" data-keyboard="false">Edit Target</button>';
-                
+                $result .= '<button class="dropdown-item text-center actionEditPaperConsumptionTarget" type="button" paper-id="' . $paper_consumption->id . '" data-toggle="modal" data-target="#modalPaperTarget" data-keyboard="false">Edit Target</button>';
                     if ($paper_consumption->actual == null) {
                       
-                        $result .= '<button class="dropdown-item text-center actionAddPaperConsumption" type="button" paper-id="' . $paper_consumption->id . '"  data-toggle="modal" data-target="#modalpaperConsumption" data-keyboard="false">Add Actual</button>';
+                        $result .= '<button class="dropdown-item text-center actionAddPaperConsumption" type="button" paper-id="' . $paper_consumption->id . '"  data-toggle="modal" data-target="#modalPaperConsumption" data-keyboard="false">Add Actual</button>';
 
                     } else {
-                        $result .= '<button class="dropdown-item text-center actionEditPaperConsumption" type="button" paper-id="' . $paper_consumption->id . '" data-toggle="modal" data-target="#modalpaperConsumption" data-keyboard="false">Edit Actual</button>';
+                        $result .= '<button class="dropdown-item text-center actionEditPaperConsumption" type="button" paper-id="' . $paper_consumption->id . '" data-toggle="modal" data-target="#modalPaperConsumption" data-keyboard="false">Edit Actual</button>';
                     }
                     $result .= '</div>'; // dropdown-menu end
                     $result .= '</div>'; // div end
                     
                     '</center>';
                 return $result;
-
             })
             ->addColumn('status', function ($paper_consumption) {
                 $result = '';
@@ -1268,5 +1265,34 @@ class PaperConsumptionController extends Controller
     public function get_paper_target_by_id(Request $request) {
         $paper_target_details = PaperConsumption::where('id', $request->targetId)->get();
         return response()->json(['result' => $paper_target_details]);
-}
+    }
+
+    public function insert_paper_actual(Request $request) {
+        date_default_timezone_set('Asia/Manila');
+        session_start();
+
+        $data = $request->all();
+
+            $rules = [
+                'paper_consumption' => 'required'
+            ];
+
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->passes()) {
+                $update_paper_actual = [
+                    'actual' => $request->paper_consumption,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ];
+
+                    PaperConsumption::where('id', $request->paper_id)->update(
+                        $update_paper_actual
+                    );
+            
+                return response()->json(['result' => "1"]);
+            } else {
+                return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+            }
+    }
+
 }

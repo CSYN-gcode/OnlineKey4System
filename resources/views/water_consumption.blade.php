@@ -163,9 +163,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="fiscal_year" id="fiscalYearId"
+                                    <input type="hidden" class="form-control" name="fiscal_year" id="fiscalYearId"
                                         style="width: 100%;" readonly> {{-- CURRENT FISCAL YEAR ID --}}
-                                    <input type="text" class="form-control" name="water_id" id="waterId"
+                                    <input type="hidden" class="form-control" name="water_id" id="waterId"
                                         style="width: 100%;" readonly> {{-- ENERGY CONSUMPTION ID --}}
                                 </div>
                             </div>

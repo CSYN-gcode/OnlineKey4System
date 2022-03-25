@@ -58,6 +58,7 @@ Route::get('/get_current_water_data', 'WaterConsumptionController@get_current_wa
 
 //===== PAPER CONSUMPTION CONTROLLER ======
 Route::post('/insert_paper_target', 'PaperConsumptionController@insert_paper_target')->name('insert_paper_target');
+Route::post('/insert_paper_actual', 'PaperConsumptionController@insert_paper_actual')->name('insert_paper_actual');
 Route::get('/get_current_paper_data', 'PaperConsumptionController@get_current_paper_data')->name('get_current_paper_data');
 Route::get('/view_paper_consumption', 'PaperConsumptionController@view_paper_consumption')->name('view_paper_consumption');
 Route::get('/get_paper_target_by_id', 'PaperConsumptionController@get_paper_target_by_id')->name('get_paper_target_by_id');

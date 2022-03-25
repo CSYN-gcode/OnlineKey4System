@@ -129,8 +129,8 @@
                                                     <th>Fiscal Year</th>
                                                     <th>Year</th>
                                                     <th>Department</th>
-                                                    <th class="text-white" style="background-color: rgb(21, 163, 245);">Target</th>
-                                                    <th class="text-white" style="background-color: rgb(9, 189, 33);">Actual</th>
+                                                    <th class="text-white" style="background-color: rgb(21, 163, 245);">Target (Ream)</th>
+                                                    <th class="text-white" style="background-color: rgb(9, 189, 33);">Actual (Ream)</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
 
@@ -212,7 +212,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Paper Consumption Target</label>
+                                    <label>Paper Consumption Target (Ream)</label>
                                     <input type="number" class="form-control" step="any" name="paper_target" id="txtAddPaperTarget">
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
 
 
     <!-- ADD ENERGY MONTHLY CONSUMPTION -->
-    <div class="modal fade" data-backdrop="static" id="modalPaperConsumption">
+    <div class="modal fade modalPaperConsumption" data-backdrop="static" id="modalPaperConsumption">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
@@ -541,11 +541,11 @@
                             toastr.error('Saving failed!');
 
                             if (response['error']['paper_consumption'] === undefined) {
-                                $("#txtAddPaperActual").removeClass('is-invalid');
-                                $("#txtAddPaperActual").attr('title', '');
+                                $("#txtAddPaperConsumption").removeClass('is-invalid');
+                                $("#txtAddPaperConsumption").attr('title', '');
                             } else {
-                                $("#txtAddPaperActual").addClass('is-invalid');
-                                $("#txtAddPaperActual").attr('title', response['error']['paper_consumption']);
+                                $("#txtAddPaperConsumption").addClass('is-invalid');
+                                $("#txtAddPaperConsumption").attr('title', response['error']['paper_consumption']);
                             }
                         } else if (response['result'] == 1) {
                             $("#modalPaperConsumption").modal('hide');
@@ -587,8 +587,8 @@
                             $('select[name="department"]', formAddPaperActual).val(paperTargetDetails[0].department).trigger('change');
                             $('select[name="month"]', formAddPaperActual).val(paperTargetDetails[0].month).trigger('change');
 
-                            $("#txtAddWaterTarget").val(paperTargetDetails[0].target);
-                            $("#txtAddWaterActual").val(paperTargetDetails[0].actual);
+                            $("#txtAddPaperTarget").val(paperTargetDetails[0].target);
+                            $("#txtAddPaperConsumption").val(paperTargetDetails[0].actual);
 
                             // $("#txtAddEnergyConsumption").val(energyTargetDetails[0].actual);
                             
@@ -644,23 +644,23 @@
 
             //===== EDIT WATER CONSUMPTION =====
             $("#tblPaperConsumption").on('click', '.actionEditPaperConsumptionTarget', function() {
-                // let id = $(this).attr('paper-id');
+                let id = $(this).attr('paper-id');
 
                 // console.log('asd');
                 // alert('asdsadasd');
-                // // $('.modalPaper').modal('show');
-                // $("input[name='paper_id'", $("#formAddPaperTarget")).val(id);
-                // $('#h4PaperConsumptionChangeTitle').html('<i class="fas fa-edit"></i>&nbsp;&nbsp; Edit Paper Consumption Target');
-                // $('select[name="month"]', $("#formAddPaperTarget")).prop('disabled', true);
-                // $('select[name="department"]', $("#formAddPaperTarget")).prop('disabled', true);
+                // $('.modalPaper').modal('show');
+                $("input[name='paper_id'", $("#formAddPaperTarget")).val(id);
+                $('#h4PaperConsumptionChangeTitle').html('<i class="fas fa-edit"></i>&nbsp;&nbsp; Edit Paper Consumption Target');
+                $('select[name="month"]', $("#formAddPaperTarget")).prop('disabled', true);
+                $('select[name="department"]', $("#formAddPaperTarget")).prop('disabled', true);
 
 
-                // $('div').find('input').removeClass('is-invalid');
-                // $("div").find('input').attr('title', '');
-                // $('div').find('select').removeClass('is-invalid');
-                // $("div").find('select').attr('title', '');
+                $('div').find('input').removeClass('is-invalid');
+                $("div").find('input').attr('title', '');
+                $('div').find('select').removeClass('is-invalid');
+                $("div").find('select').attr('title', '');
 
-                // GetPaperTargetById(id);
+                GetPaperTargetById(id);
             });
 
             $('#tblPaperConsumption').on('click', '.actionAddPaperConsumption', function() {
@@ -687,6 +687,26 @@
                 $('select[name="month"]', $("#formAddPaperActual")).prop('disabled', false);
                 $('select[name="department"]', $("#formAddPaperActual")).prop('disabled', false);
                 AddPaperConsumptionActual();
+            });
+
+
+            $('#tblPaperConsumption').on('click', '.actionEditPaperConsumption', function() {
+                let id = $(this).attr('paper-id');
+
+                $('select[name="month"]', $("#formAddPaperActual")).prop('disabled', true);
+                $('select[name="department"]', $("#formAddPaperActual")).prop('disabled', true);
+                // $('select[name="factory"]', $("#formAddWaterActual")).val(0).trigger('change');
+                $('input[name="paper_id"]', $("#formAddPaperActual")).val(id);
+
+                $('input[name="paper_consumption"]', $("#formAddPaperActual")).val('');
+                $('#h4PaperConsumptionActualChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Edit Paper Consumption Actual');
+
+                $('div').find('input').removeClass('is-invalid');
+                $("div").find('input').attr('title', '');
+                $('div').find('select').removeClass('is-invalid');
+                $("div").find('select').attr('title', '');
+
+                GetPaperTargetById(id);
             });
         });
    
