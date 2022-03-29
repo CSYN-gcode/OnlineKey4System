@@ -2177,10 +2177,7 @@
                 });
             }
 
-
-
             GetCurrentFYWaterData();
-
 
             $('#selFiscalYearWater').on('change', function() {
                 $('.selectYearWater').val($(this).find(":selected").val());
@@ -2193,7 +2190,6 @@
 
             GetCurrentFYPaperDataTS();
 
-
             $('#selFiscalYearPaperTS').on('change', function() {
                 $('.selectYearPaperTS').val($(this).find(":selected").val());
                 $('.selectYearPaperTS').val();
@@ -2203,6 +2199,41 @@
                 dataTablePaperConsumptionsTS.draw();
             });
 
+            GetCurrentFYPaperDataCN();
+
+            $('#selFiscalYearPaperCN').on('change', function() {
+                $('.selectYearPaperCN').val($(this).find(":selected").val());
+                $('.selectYearPaperCN').val();
+
+                GetCurrentFYPaperDataCN();
+                    
+                dataTablePaperConsumptionsCN.draw();
+            });
+
+            GetCurrentFYPaperDataPPS();
+
+            $('#selFiscalYearPaperPPS').on('change', function() {
+                $('.selectYearPaperPPS').val($(this).find(":selected").val());
+                $('.selectYearPaperPPS').val();
+
+                GetCurrentFYPaperDataPPS();
+                    
+                dataTablePaperConsumptionsPPS.draw();
+            });
+
+
+            GetCurrentFYPaperDataYF();
+
+            $('#selFiscalYearPaperYF').on('change', function() {
+                $('.selectYearPaperYF').val($(this).find(":selected").val());
+                $('.selectYearPaperYF').val();
+
+                GetCurrentFYPaperDataYF();
+                    
+                dataTablePaperConsumptionsYF.draw();
+            });
+
+      
 
              //===== DATATABLES OF ENERGY CONSUMPTION ================
              var dataTableEnergyConsumptions = $("#tblViewEnergyConsumption").DataTable({
@@ -2293,7 +2324,6 @@
                 "bInfo" : false,
             });
             //===== DATATABLES OF PAPER PPS CONSUMPTION END ================
-
         });
     </script>
 @endsection

@@ -1314,223 +1314,38 @@ class PaperConsumptionController extends Controller
            return response()->json(['result' => $paper_consumption_ts, 'currentYear' => $current_fy_year]);
 
 
-            // $counter = 0;
-            // $paper_consumption_ts = array();
-            // $months = array();
-            // // $paper_datas = array();
-            // $data = array();
+        } else {
+            $current_fy = FiscalYear::where('fiscal_year', $request->fiscal_year)
+            ->get();
+        
+            $current_fy_id = $current_fy[0]->id;
+            $current_fy_year = $current_fy[0]->fiscal_year;
 
-            // for($i = 0; $i < 4; $i++) {
-            //     $counter = $counter + 1;
-            //     // return $counter;
-            //     $paper_consumptions = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            //     // ->where('month', $counter)
-            //     ->where('department', $counter)
-            //     ->get();
+            $paper_consumption_ts = PaperConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('department', '3')
+            ->get();
 
-            //     foreach ($paper_consumptions as $paper_consumption) {
-            //         $test = 0;
-            //         $paper_consumption_ts[] = $paper_consumption->target;
-            //         $months[] = $paper_consumption->month;
-            //         $test = intval($paper_consumption->month);
-            //         $monthss = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-            //         // $monthss = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+           return response()->json(['result' => $paper_consumption_ts, 'currentYear' => $current_fy_year]);
+        }
+    }
 
-            //         // $dsa = array_diff($monthss, $months);
+    public function get_current_paper_data_cn(Request $request) {
+        date_default_timezone_set('Asia/Manila');
+        session_start();
 
-            //         // switch($paper_consumption->month){
-            //         //     case '1':{
-            //         //         if()
-            //         //     }
-            //         // }
+        if($request->fiscal_year == null) {
+            $current_fy = FiscalYear::where('logdel', 0)
+            ->get();
+        
+            $current_fy_id = $current_fy[0]->id;
+            $current_fy_year = $current_fy[0]->fiscal_year;
 
-            
-            //         if(in_array(1, $monthss)) {
-            //             if($test != 1) {
-            //                 $data['January'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['January'] =  'undefined';
-            //             }   
-            //         } 
+            //===== Column department == 1 (CN) ======//
+            $paper_consumption_cn = PaperConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('department', '1')
+            ->get();
 
-            //         if(in_array('2', $monthss) ) {
-            //             if($paper_consumption->month == 2) {
-            //                 $data['February'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['February'] =  'undefined';
-            //             }   
-            //         } 
-
-            //         if(in_array('3', $monthss)) {
-            //             if($paper_consumption->month == 3) {
-            //                 $data['March'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['March'] =  'undefined';
-            //             }   
-            //         } 
-
-            //         if(in_array('4', $monthss)) {
-            //             if($paper_consumption->month == 4) {
-            //                 $data['April'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['April'] =  'undefined';
-            //             }   
-            //         } 
-
-            //         if(in_array('5', $monthss)) {
-            //             if($paper_consumption->month == 5) {
-            //                 $data['May'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['May'] =  'undefined';
-            //             }   
-            //         } 
-
-            //         if(in_array('6', $monthss)) {
-            //             if($paper_consumption->month == 6) {
-            //                 $data['June'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['June'] =  'undefined';
-            //             }   
-            //         } 
-
-            //         if(in_array('7', $monthss)) {
-            //             if($paper_consumption->month == 7) {
-            //                 $data['July'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['July'] =  'undefined';
-            //             }   
-            //         } 
-
-            //         if(in_array('8', $monthss)) {
-            //             if($paper_consumption->month == 8) {
-            //                 $data['August'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['August'] =  'undefined';
-            //             }   
-            //         } 
-            //         if(in_array('9', $monthss)) {
-            //             if($paper_consumption->month == 8) {
-            //                 $data['September'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['September'] =  'undefined';
-            //             }   
-            //         } 
-            //         if(in_array('10', $monthss)) {
-            //             if($paper_consumption->month == 8) {
-            //                 $data['October'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['October'] =  'undefined';
-            //             }   
-            //         } 
-            //         if(in_array('11', $monthss)) {
-            //             if($paper_consumption->month == 8) {
-            //                 $data['November'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['November'] =  'undefined';
-            //             }   
-            //         } 
-            //         if(in_array('12', $monthss)) {
-            //             if($paper_consumption->month == 8) {
-            //                 $data['December'] =  $paper_consumption->target;
-            //             } else {
-            //                 $data['December'] =  'undefined';
-            //             }   
-            //         } 
-                    
-                    
-                    
-                    
-                    
-                    
-            //         // elseif($paper_consumption->month == 2) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['February'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['February'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 3) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['March'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['March'] =  'undefined';
-            //         //     }
-                      
-            //         // } elseif($paper_consumption->month == 4) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['April'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['April'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 5) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['May'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['May'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 6) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['June'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['June'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 7) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['July'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['July'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 8) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['August'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['August'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 9) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['September'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['September'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 10) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['October'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['October'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 11) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['November'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['November'] =  'undefined';
-            //         //     }
-            //         // } elseif($paper_consumption->month == 12) {
-            //         //     if(in_array($paper_consumption->month, $months)) {
-            //         //         $months['December'] = $paper_consumption->target;
-            //         //     } else {
-            //         //         $months['December'] =  'undefined';
-            //         //     }
-            //         // } 
-
-            //     }
-            // }
-
-
-            // return $dsa;
-            // if(in_array('5', $dsa)) {
-            //     return 1;
-            // } else {
-            //     return 2;
-            // }
-            // dump(
-
-            
-            // $month[] = ['target' => $months];
-           
-            // return response()->json([
-            //     'currentYear' => $current_fy_year,
-            //     // 'paper_data' => $arr,
-            //     'paper_data' => $data
-            // ]);
+           return response()->json(['result' => $paper_consumption_cn, 'currentYear' => $current_fy_year]);
 
 
         } else {
@@ -1539,21 +1354,81 @@ class PaperConsumptionController extends Controller
         
             $current_fy_id = $current_fy[0]->id;
             $current_fy_year = $current_fy[0]->fiscal_year;
+
+            $paper_consumption_cn = PaperConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('department', '1')
+            ->get();
+
+           return response()->json(['result' => $paper_consumption_cn, 'currentYear' => $current_fy_year]);
         }
-        
-
     }
 
-    public function get_current_paper_data_cn() {
+    public function get_current_paper_data_yf(Request $request) {
+        date_default_timezone_set('Asia/Manila');
+        session_start();
+
+        if($request->fiscal_year == null) {
+            $current_fy = FiscalYear::where('logdel', 0)
+            ->get();
         
+            $current_fy_id = $current_fy[0]->id;
+            $current_fy_year = $current_fy[0]->fiscal_year;
+
+            //===== Column department == 4 (YF) ======//
+            $paper_consumption_yf = PaperConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('department', '4')
+            ->get();
+
+           return response()->json(['result' => $paper_consumption_yf, 'currentYear' => $current_fy_year]);
+
+
+        } else {
+            $current_fy = FiscalYear::where('fiscal_year', $request->fiscal_year)
+            ->get();
+        
+            $current_fy_id = $current_fy[0]->id;
+            $current_fy_year = $current_fy[0]->fiscal_year;
+
+            $paper_consumption_yf = PaperConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('department', '4')
+            ->get();
+
+           return response()->json(['result' => $paper_consumption_yf, 'currentYear' => $current_fy_year]);
+        }
     }
 
-    public function get_current_paper_data_yf() {
-        
-    }
+    public function get_current_paper_data_pps(Request $request) {
+        date_default_timezone_set('Asia/Manila');
+        session_start();
 
-    public function get_current_paper_data_pps() {
+        if($request->fiscal_year == null) {
+            $current_fy = FiscalYear::where('logdel', 0)
+            ->get();
         
+            $current_fy_id = $current_fy[0]->id;
+            $current_fy_year = $current_fy[0]->fiscal_year;
+
+            //===== Column department == 2 (PPS) ======//
+            $paper_consumption_pps = PaperConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('department', '2')
+            ->get();
+
+           return response()->json(['result' => $paper_consumption_pps, 'currentYear' => $current_fy_year]);
+
+
+        } else {
+            $current_fy = FiscalYear::where('fiscal_year', $request->fiscal_year)
+            ->get();
+        
+            $current_fy_id = $current_fy[0]->id;
+            $current_fy_year = $current_fy[0]->fiscal_year;
+
+            $paper_consumption_pps = PaperConsumption::where('fiscal_year_id', $current_fy_id)
+            ->where('department', '2')
+            ->get();
+
+           return response()->json(['result' => $paper_consumption_pps, 'currentYear' => $current_fy_year]);
+        }
     }
 
 }
