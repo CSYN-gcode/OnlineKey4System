@@ -45,6 +45,7 @@ src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jqu
 <script src="{{ asset('public/js/my_js/Common.js?n=6') }}"></script>
 <script src="{{ asset('public/js/my_js/FiscalYear.js') }}"></script>
 <script src="{{ asset('public/js/my_js/EnergyConsumption.js?n=7') }}"></script>
+<script src="{{ asset('public/js/my_js/PaperConsumptionTS.js?n=1') }}"></script>
 {{-- <script src="{{ asset('public/js/my_js/CustomerClaim.js') }}"></script> --}}
 {{-- <script src="{{ asset('public/js/my_js/RapidXUser.js') }}"></script> --}}
 {{-- <script src="{{ asset('public/js/my_js/EmailRecipient.js') }}"></script> --}}

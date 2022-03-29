@@ -118,7 +118,7 @@
                                         </div>
                                     </div><br>
 
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" style="overflow: scroll; height: 500px;" >
                                         <table id="tblPaperConsumption"
                                             class="table table-md table-bordered table-striped table-hover text-center"
                                             style="width: 100%;">
@@ -166,9 +166,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="fiscal_year" id="fiscalYearId"
+                                    <input type="hidden" class="form-control" name="fiscal_year" id="fiscalYearId"
                                         style="width: 100%;" readonly> {{-- CURRENT FISCAL YEAR ID --}}
-                                    <input type="text" class="form-control" name="paper_id" id="paperId"
+                                    <input type="hidden" class="form-control" name="paper_id" id="paperId"
                                         style="width: 100%;" readonly> {{-- ENERGY CONSUMPTION ID --}}
                                 </div>
                             </div>
@@ -341,7 +341,7 @@
             var dataTablePaperConsumptions = $("#tblPaperConsumption").DataTable({
                 "processing": false,
                 "serverSide": true,
-                "responsive": true,
+                // "responsive": true,
                 // // "scrollX": true,
                 "ajax": {
                     url: "view_paper_consumption",

@@ -23,7 +23,7 @@
                     <div class="col-md-12 mt-3">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Dashboard - SG</h4>
+                                <h4>Dashboard</h4>
                             </div>
 
                             <div class="card-body">
@@ -37,7 +37,23 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" id="paper-tab" data-toggle="tab" href="#paper" role="tab" aria-controls="paper" aria-selected="false">Paper Consumption</a>
+                                        <a class="nav-link" id="paper-tab" data-toggle="tab" href="#paper" role="tab" aria-controls="paper" aria-selected="false">Paper Consumption - SG</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="paper-prod-ts-tab" data-toggle="tab" href="#paper-prod-ts" role="tab" aria-controls="paper-prod-ts" aria-selected="false">Paper Consumption - TS</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="paper-prod-cn-tab" data-toggle="tab" href="#paper-prod-cn" role="tab" aria-controls="paper-prod-cn" aria-selected="false">Paper Consumption - CN</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="paper-prod-yf-tab" data-toggle="tab" href="#paper-prod-yf" role="tab" aria-controls="paper-prod-yf" aria-selected="false">Paper Consumption - YF</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="paper-prod-pps-tab" data-toggle="tab" href="#paper-prod-pps" role="tab" aria-controls="paper-prod-pps" aria-selected="false">Paper Consumption - PPS</a>
                                     </li>
                                 </ul>
 
@@ -263,7 +279,7 @@
                                     </div>
 
                                     <div class="tab-pane fade" id="paper" role="tabpanel" aria-labelledby="paper-tab">
-                                        <h5 class="mt-3 ml-2">Paper Consumption</h5>
+                                        <h5 class="mt-3 ml-2">Paper Consumption - SG</h5>
                                         <div class="text-left mt-4 d-flex flex-row">
                                             <div class="form-group ml-3 col-2">
                                                 <label><strong>Fiscal Year :</strong></label>
@@ -277,7 +293,7 @@
                                             <table id="tblViewPaperConsumption" class="table table-sm table-bordered table-striped table-hover display nowrap" style="width: 100%;">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 6.66%;">Paper Consumption</th>
+                                                        <th style="width: 6.66%;">Paper Consumption - SG</th>
                                                         {{-- <th class="march-paper-past-fy"  style="width: 6.66%;"></th> --}}
                                                         <th class="april-paper-current-fy" style="width: 6.66%;"></th>
                                                         <th class="may-paper-current-fy" style="width: 6.66%;"></th>
@@ -370,6 +386,448 @@
                                             </table>
                                         </div>
                                     </div>
+
+
+                                    <div class="tab-pane fade" id="paper-prod-ts" role="tabpanel" aria-labelledby="paper-prod-ts-tab">
+                                        <h5 class="mt-3 ml-2">Paper Consumption - TS</h5>
+                                        <div class="text-left mt-4 d-flex flex-row">
+                                            <div class="form-group ml-3 col-2">
+                                                <label><strong>Fiscal Year :</strong></label>
+                                                    <select class="form-control select2bs4 selectYearPaperTS" name="fiscal_year" id="selFiscalYearPaperTS" style="width: 100%;">
+                                                        <!-- Code generated -->
+                                                    </select>
+                                            </div>
+                                        </div><br>
+                                
+                                        <div class="table-responsive">
+                                            <table id="tblViewPaperConsumptionTS" class="table table-sm table-bordered table-striped table-hover display nowrap" style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 6.66%;">Paper Consumption - TS</th>
+                                                        {{-- <th class="march-paper-past-fy"  style="width: 6.66%;"></th> --}}
+                                                        <th class="april-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="may-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="june-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="july-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="august-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="september-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="october-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="november-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="december-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="january-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="february-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="march-paper-ts-current-fy" style="width: 6.66%;"></th>
+                                                        <th style="width: 6.66%;">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Target</td>
+                                                        {{-- <td class="march-paper-past-fy-target" style="width: 6.66%;"></td> --}}
+                                                        <td class="april-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="may-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="june-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="july-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="august-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="september-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="october-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="november-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="december-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="january-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="february-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="march-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="total-paper-ts-current-fy-target" style="width: 6.66%;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Actual</td>
+                                                        {{-- <td class="march-paper-past-fy-actual" style="width: 6.66%;"></td> --}}
+                                                        <td class="april-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="may-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="june-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="july-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="august-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="september-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="october-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="november-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="december-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="january-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="february-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="march-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="total-paper-ts-current-fy-actual" style="width: 6.66%;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">|</td>
+                                                        {{-- <td style="width: 6.66%;"></td> --}}
+                                                        <td style="width: 6.66%;" class="april-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-ts-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-ts-actual-target"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Tricolor Chart Data</td>
+                                                        {{-- <td style="width: 6.66%;"></td> --}}
+                                                        <td style="width: 6.66%;" class="april-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-ts-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-ts-tricolor"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="tab-pane fade" id="paper-prod-cn" role="tabpanel" aria-labelledby="paper-prod-cn-tab">
+                                        <h5 class="mt-3 ml-2">Paper Consumption - CN</h5>
+                                        <div class="text-left mt-4 d-flex flex-row">
+                                            <div class="form-group ml-3 col-2">
+                                                <label><strong>Fiscal Year :</strong></label>
+                                                    <select class="form-control select2bs4 selectYearPaperCN" name="fiscal_year" id="selFiscalYearPaperCN" style="width: 100%;">
+                                                        <!-- Code generated -->
+                                                    </select>
+                                            </div>
+                                        </div><br>
+                                
+                                        <div class="table-responsive">
+                                            <table id="tblViewPaperConsumptionCN" class="table table-sm table-bordered table-striped table-hover display nowrap" style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 6.66%;">Paper Consumption - CN</th>
+                                                        {{-- <th class="march-paper-past-fy"  style="width: 6.66%;"></th> --}}
+                                                        <th class="april-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="may-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="june-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="july-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="august-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="september-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="october-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="november-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="december-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="january-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="february-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="march-paper-cn-current-fy" style="width: 6.66%;"></th>
+                                                        <th style="width: 6.66%;">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Target</td>
+                                                        {{-- <td class="march-paper-past-fy-target" style="width: 6.66%;"></td> --}}
+                                                        <td class="april-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="may-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="june-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="july-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="august-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="september-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="october-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="november-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="december-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="january-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="february-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="march-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="total-paper-cn-current-fy-target" style="width: 6.66%;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Actual</td>
+                                                        {{-- <td class="march-paper-past-fy-actual" style="width: 6.66%;"></td> --}}
+                                                        <td class="april-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="may-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="june-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="july-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="august-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="september-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="october-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="november-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="december-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="january-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="february-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="march-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="total-paper-cn-current-fy-actual" style="width: 6.66%;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">|</td>
+                                                        {{-- <td style="width: 6.66%;"></td> --}}
+                                                        <td style="width: 6.66%;" class="april-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-cn-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-cn-actual-target"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Tricolor Chart Data</td>
+                                                        {{-- <td style="width: 6.66%;"></td> --}}
+                                                        <td style="width: 6.66%;" class="april-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-cn-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-cn-tricolor"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="tab-pane fade" id="paper-prod-yf" role="tabpanel" aria-labelledby="paper-prod-yf-tab">
+                                        <h5 class="mt-3 ml-2">Paper Consumption - YF</h5>
+                                        <div class="text-left mt-4 d-flex flex-row">
+                                            <div class="form-group ml-3 col-2">
+                                                <label><strong>Fiscal Year :</strong></label>
+                                                    <select class="form-control select2bs4 selectYearPaperYF" name="fiscal_year" id="selFiscalYearPaperYF" style="width: 100%;">
+                                                        <!-- Code generated -->
+                                                    </select>
+                                            </div>
+                                        </div><br>
+                                
+                                        <div class="table-responsive">
+                                            <table id="tblViewPaperConsumptionYF" class="table table-sm table-bordered table-striped table-hover display nowrap" style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 6.66%;">Paper Consumption - YF</th>
+                                                        {{-- <th class="march-paper-past-fy"  style="width: 6.66%;"></th> --}}
+                                                        <th class="april-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="may-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="june-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="july-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="august-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="september-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="october-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="november-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="december-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="january-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="february-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="march-paper-yf-current-fy" style="width: 6.66%;"></th>
+                                                        <th style="width: 6.66%;">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Target</td>
+                                                        {{-- <td class="march-paper-past-fy-target" style="width: 6.66%;"></td> --}}
+                                                        <td class="april-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="may-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="june-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="july-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="august-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="september-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="october-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="november-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="december-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="january-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="february-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="march-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="total-paper-yf-current-fy-target" style="width: 6.66%;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Actual</td>
+                                                        {{-- <td class="march-paper-past-fy-actual" style="width: 6.66%;"></td> --}}
+                                                        <td class="april-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="may-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="june-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="july-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="august-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="september-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="october-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="november-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="december-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="january-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="february-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="march-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="total-paper-yf-current-fy-actual" style="width: 6.66%;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">|</td>
+                                                        {{-- <td style="width: 6.66%;"></td> --}}
+                                                        <td style="width: 6.66%;" class="april-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-yf-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-yf-actual-target"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Tricolor Chart Data</td>
+                                                        {{-- <td style="width: 6.66%;"></td> --}}
+                                                        <td style="width: 6.66%;" class="april-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-yf-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-yf-tricolor"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="tab-pane fade" id="paper-prod-pps" role="tabpanel" aria-labelledby="paper-prod-pps-tab">
+                                        <h5 class="mt-3 ml-2">Paper Consumption - PPS</h5>
+                                        <div class="text-left mt-4 d-flex flex-row">
+                                            <div class="form-group ml-3 col-2">
+                                                <label><strong>Fiscal Year :</strong></label>
+                                                    <select class="form-control select2bs4 selectYearPaperPPS" name="fiscal_year" id="selFiscalYearPaperPPS" style="width: 100%;">
+                                                        <!-- Code generated -->
+                                                    </select>
+                                            </div>
+                                        </div><br>
+                                
+                                        <div class="table-responsive">
+                                            <table id="tblViewPaperConsumptionPPS" class="table table-sm table-bordered table-striped table-hover display nowrap" style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 6.66%;">Paper Consumption - PPS</th>
+                                                        {{-- <th class="march-paper-past-fy"  style="width: 6.66%;"></th> --}}
+                                                        <th class="april-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="may-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="june-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="july-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="august-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="september-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="october-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="november-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="december-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="january-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="february-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th class="march-paper-pps-current-fy" style="width: 6.66%;"></th>
+                                                        <th style="width: 6.66%;">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Target</td>
+                                                        {{-- <td class="march-paper-past-fy-target" style="width: 6.66%;"></td> --}}
+                                                        <td class="april-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="may-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="june-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="july-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="august-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="september-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="october-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="november-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="december-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="january-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="february-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="march-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                        <td class="total-paper-pps-current-fy-target" style="width: 6.66%;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Actual</td>
+                                                        {{-- <td class="march-paper-past-fy-actual" style="width: 6.66%;"></td> --}}
+                                                        <td class="april-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="may-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="june-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="july-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="august-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="september-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="october-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="november-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="december-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="january-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="february-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="march-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                        <td class="total-paper-pps-current-fy-actual" style="width: 6.66%;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">|</td>
+                                                        {{-- <td style="width: 6.66%;"></td> --}}
+                                                        <td style="width: 6.66%;" class="april-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-pps-actual-target"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-pps-actual-target"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 6.66%;">Tricolor Chart Data</td>
+                                                        {{-- <td style="width: 6.66%;"></td> --}}
+                                                        <td style="width: 6.66%;" class="april-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="may-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="june-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="july-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="august-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="september-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="october-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="november-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="december-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="january-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="february-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="march-paper-pps-tricolor"></td>
+                                                        <td style="width: 6.66%;" class="total-paper-pps-tricolor"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -417,6 +875,10 @@
                         $(".selectYearEnergy").html(result);
                         $(".selectYearPaper").html(result);
                         $(".selectYearWater").html(result);
+                        $(".selectYearPaperTS").html(result);
+                        $(".selectYearPaperCN").html(result);
+                        $(".selectYearPaperYF").html(result);
+                        $(".selectYearPaperPPS").html(result);
                     }
                 });
             }
@@ -1729,6 +2191,18 @@
                 dataTablePaperConsumptions.draw();
             });
 
+            GetCurrentFYPaperDataTS();
+
+
+            $('#selFiscalYearPaperTS').on('change', function() {
+                $('.selectYearPaperTS').val($(this).find(":selected").val());
+                $('.selectYearPaperTS').val();
+
+                GetCurrentFYPaperDataTS();
+                    
+                dataTablePaperConsumptionsTS.draw();
+            });
+
 
              //===== DATATABLES OF ENERGY CONSUMPTION ================
              var dataTableEnergyConsumptions = $("#tblViewEnergyConsumption").DataTable({
@@ -1767,6 +2241,58 @@
                 "bInfo" : false,
             });
             //===== DATATABLES OF WATER CONSUMPTION END ================
+
+
+             //===== DATATABLES OF PAPER TS CONSUMPTION ================
+             var dataTablePaperConsumptionsTS = $("#tblViewPaperConsumptionTS").DataTable({
+                "processing": false,
+                "paging": false,
+                "searching": false,
+                "responsive": true,
+                "order": [0, 'desc'],
+                "bSort": false,
+                "bInfo" : false,
+            });
+            //===== DATATABLES OF PAPER TS CONSUMPTION END ================
+
+
+            //===== DATATABLES OF PAPER CN CONSUMPTION ================
+            var dataTablePaperConsumptionsCN = $("#tblViewPaperConsumptionCN").DataTable({
+                "processing": false,
+                "paging": false,
+                "searching": false,
+                "responsive": true,
+                "order": [0, 'desc'],
+                "bSort": false,
+                "bInfo" : false,
+            });
+            //===== DATATABLES OF PAPER CN CONSUMPTION END ================
+
+
+             //===== DATATABLES OF PAPER YF CONSUMPTION ================
+             var dataTablePaperConsumptionsYF = $("#tblViewPaperConsumptionYF").DataTable({
+                "processing": false,
+                "paging": false,
+                "searching": false,
+                "responsive": true,
+                "order": [0, 'desc'],
+                "bSort": false,
+                "bInfo" : false,
+            });
+            //===== DATATABLES OF PAPER YF CONSUMPTION END ================
+
+
+            //===== DATATABLES OF PAPER PPS CONSUMPTION ================
+            var dataTablePaperConsumptionsPPS = $("#tblViewPaperConsumptionPPS").DataTable({
+                "processing": false,
+                "paging": false,
+                "searching": false,
+                "responsive": true,
+                "order": [0, 'desc'],
+                "bSort": false,
+                "bInfo" : false,
+            });
+            //===== DATATABLES OF PAPER PPS CONSUMPTION END ================
 
         });
     </script>

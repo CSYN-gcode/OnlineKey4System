@@ -115,7 +115,7 @@
                                         </div>
                                     </div><br>
 
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" style="overflow: scroll; height: 500px;" >
                                         <table id="tblWaterConsumption"
                                             class="table table-md table-bordered table-striped table-hover text-center"
                                             style="width: 100%;">

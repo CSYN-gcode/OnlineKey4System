@@ -62,6 +62,10 @@ Route::post('/insert_paper_actual', 'PaperConsumptionController@insert_paper_act
 Route::get('/get_current_paper_data', 'PaperConsumptionController@get_current_paper_data')->name('get_current_paper_data');
 Route::get('/view_paper_consumption', 'PaperConsumptionController@view_paper_consumption')->name('view_paper_consumption');
 Route::get('/get_paper_target_by_id', 'PaperConsumptionController@get_paper_target_by_id')->name('get_paper_target_by_id');
+Route::get('/get_current_paper_data_ts', 'PaperConsumptionController@get_current_paper_data_ts')->name('get_current_paper_data_ts');
+Route::get('/get_current_paper_data_cn', 'PaperConsumptionController@get_current_paper_data_cn')->name('get_current_paper_data_cn');
+Route::get('/get_current_paper_data_yf', 'PaperConsumptionController@get_current_paper_data_yf')->name('get_current_paper_data_yf');
+Route::get('/get_current_paper_data_pps', 'PaperConsumptionController@get_current_paper_data_pps')->name('get_current_paper_data_pps');
 
 
 
