@@ -16,9 +16,16 @@ class CreateTblWaterConsumptions extends Migration
         Schema::create('tbl_water_consumptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('month');
-            $table->bigInteger('factory');
+            $table->bigInteger('factory_1_actual')->nullable();
+            $table->bigInteger('factory_1_manpower')->nullable();
+            // $table->bigInteger('factory_1_target')->nullable();
+            
+            // $table->bigInteger('factory_2_target')->nullable();
+            $table->bigInteger('factory_2_actual')->nullable();
+            $table->bigInteger('factory_2_manpower')->nullable();
+        
             $table->decimal('target', 5,2);
-            $table->decimal('actual', 5,2)->nullable();
+            // $table->decimal('actual', 5,2)->nullable();
             $table->bigInteger('logdel')->nullable()->default(0)->comment = "0-active, 1-inactive";
             $table->unsignedBigInteger('fiscal_year_id');
             $table->timestamps();

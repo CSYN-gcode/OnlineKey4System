@@ -92,7 +92,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="form-group ml-3 col-2">
+                                        {{-- <div class="form-group ml-3 col-2">
                                             <label><strong>Factory :</strong></label>
                                             <select class="form-control select2bs4 selectFactory" name="month_value"
                                                 id="selFactory" style="width: 100%;">
@@ -101,7 +101,7 @@
                                                 <option value="1">Factory 1</option>
                                                 <option value="2">Factory 2</option>
                                             </select>
-                                        </div>
+                                        </div> --}}
                                        
                                         <div style="margin-left: auto">
 
@@ -125,9 +125,13 @@
                                                     <th>Month</th>
                                                     <th>Fiscal Year</th>
                                                     <th>Year</th>
-                                                    <th>Factory</th>
                                                     <th class="text-white" style="background-color: rgb(21, 163, 245);">Target</th>
-                                                    <th class="text-white" style="background-color: rgb(9, 189, 33);">Actual</th>
+                                                    {{-- <th>Factory 1 - Actual</th> --}}
+                                                    <th>Factory 1 - Actual</th>
+                                                    <th>Factory 1 - Manpower</th>
+                                                    <th>Factory 2 - Actual</th>
+                                                    <th>Factory 2 - Manpower</th>
+                                                    <th class="text-white" style="background-color: rgb(12, 238, 12);"">Actual</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
 
@@ -170,7 +174,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            
+
+                            {{-- <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Factory</label>
                                     <select class="form-control select2bs4 selectFactory" type="text" name="factory"
@@ -181,7 +187,7 @@
                                         <
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -251,19 +257,6 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Factory</label>
-                                    <select class="form-control select2bs4 selectFactory" type="text" name="factory"
-                                        id="txtSelectAddFactory" style="width: 100%;">
-                                        <option value="0" disabled selected>Select Factory</option>
-                                        <option value="1">Factory 1</option>
-                                        <option value="2">Factory 2</option>
-                                        <
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <div class="form-group">
                                     <label>Month</label>
                                     <select class="form-control select2bs4 selectMonth" type="text" name="month"
                                         id="txtSelectAddWaterConsumption" style="width: 100%;">
@@ -284,10 +277,34 @@
                                 </div>
                             </div>
 
+                            <h5>Factory 1</h5>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Water Consumption Actual</label>
-                                    <input type="text" class="form-control" name="water_consumption" id="txtAddWaterConsumption">
+                                    <label>Water Consumption</label>
+                                    <input type="text" class="form-control" name="water_consumption_factory_1" id="txtAddWaterConsumptionFactory1">
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Manpower</label>
+                                    <input type="text" class="form-control" name="manpower_factory_1" id="txtAddManpowerFactory1">
+                                </div>
+                            </div>
+                            
+
+                            <h5>Factory 2</h5>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Water Consumption</label>
+                                    <input type="text" class="form-control" name="water_consumption_factory_2" id="txtAddWaterConsumptionFactory2">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Manpower</label>
+                                    <input type="text" class="form-control" name="manpower_factory_2" id="txtAddManpowerFactory2">
                                 </div>
                             </div>
                         </div>
@@ -318,9 +335,9 @@
             GetFiscalYearFilter($('.selectYearWater'));
 
 
-            $("#selFactory").on('change', function() {
-                dataTableWaterConsumptions.column(3).search($(this).val()).draw();
-            });
+            // $("#selFactory").on('change', function() {
+            //     dataTableWaterConsumptions.column(3).search($(this).val()).draw();
+            // });
 
             $("#selMonthWater").on('change', function() {
                 dataTableWaterConsumptions.column(0).search($(this).val()).draw();
@@ -356,15 +373,28 @@
                         // orderable: false
                     },
                     {
-                        "data": "factory",
-                        render: function(data) {
-                        return "Factory " + data
-                    },
-                        // orderable: false
+                        "data": "target",
+                        orderable: false,
+                        bSort: false
                     },
                     {
-                        "data": "target",
-                        // "render": $.fn.dataTable.render.number(',', 2, ''),
+                        "data": "factory_1_actual",
+                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        orderable: false
+                    },
+                    {
+                        "data": "factory_1_manpower",
+                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        orderable: false
+                    },
+                    {
+                        "data": "factory_2_actual",
+                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        orderable: false
+                    },
+                    {
+                        "data": "factory_2_manpower",
+                        "render": $.fn.dataTable.render.number(',', 2, ''),
                         orderable: false
                     },
                     {
@@ -383,7 +413,6 @@
                 ],
                 "order": [
                     [0, 'asc'],
-                    [3, 'asc'],
                     [1, 'desc']
                 ]
                 // "bSort": false,
@@ -397,11 +426,11 @@
                 $('input[name="water_id"]', $("#formAddWaterTarget")).val('');
                 $('input[name="water_target"]', $("#formAddWaterTarget")).val('');
                 $('select[name="month"]', $("#formAddWaterTarget")).val(0).trigger('change');
-                $('select[name="factory"]', $("#formAddWaterTarget")).val(0).trigger('change');
+                // $('select[name="factory"]', $("#formAddWaterTarget")).val(0).trigger('change');
                 $('#h4WaterConsumptionChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Water Consumption Target');
 
                 $('select[name="month"]', $("#formAddWaterTarget")).prop('disabled', false);
-                $('select[name="factory"]', $("#formAddWaterTarget")).prop('disabled', false);
+                // $('select[name="factory"]', $("#formAddWaterTarget")).prop('disabled', false);
                 // $('select[name="factory"]', $("#formAddWaterTarget")).val(0).trigger('change');
 
                 $('div').find('input').removeClass('is-invalid');
@@ -446,13 +475,13 @@
                         if (response['validation'] == 'hasError') {
                             toastr.error('Saving failed!');
 
-                            if (response['error']['factory'] === undefined) {
-                                $("#txtSelectAddFactory").removeClass('is-invalid');
-                                $("#txtSelectAddFactory").attr('title', '');
-                            } else {
-                                $("#txtSelectAddFactory").addClass('is-invalid');
-                                $("#txtSelectAddFactory").attr('title', response['error']['factory']);
-                            }
+                            // if (response['error']['factory'] === undefined) {
+                            //     $("#txtSelectAddFactory").removeClass('is-invalid');
+                            //     $("#txtSelectAddFactory").attr('title', '');
+                            // } else {
+                            //     $("#txtSelectAddFactory").addClass('is-invalid');
+                            //     $("#txtSelectAddFactory").attr('title', response['error']['factory']);
+                            // }
 
 
                             if (response['error']['month'] === undefined) {
@@ -525,13 +554,38 @@
                         if (response['validation'] == 'hasError') {
                             toastr.error('Saving failed!');
 
-                            if (response['error']['water_consumption'] === undefined) {
-                                $("#txtAddWaterActual").removeClass('is-invalid');
-                                $("#txtAddWaterActual").attr('title', '');
+                            if (response['error']['water_consumption_factory_1'] === undefined) {
+                                $("#txtAddWaterConsumptionFactory1").removeClass('is-invalid');
+                                $("#txtAddWaterConsumptionFactory1").attr('title', '');
                             } else {
-                                $("#txtAddWaterActual").addClass('is-invalid');
-                                $("#txtAddWaterActual").attr('title', response['error']['water_consumption']);
+                                $("#txtAddWaterConsumptionFactory1").addClass('is-invalid');
+                                $("#txtAddWaterConsumptionFactory1").attr('title', response['error']['water_consumption_factory_1']);
                             }
+
+                            if (response['error']['manpower_factory_1'] === undefined) {
+                                $("#txtAddManpowerFactory1").removeClass('is-invalid');
+                                $("#txtAddManpowerFactory1").attr('title', '');
+                            } else {
+                                $("#txtAddManpowerFactory1").addClass('is-invalid');
+                                $("#txtAddManpowerFactory1").attr('title', response['error']['manpower_factory_1']);
+                            }
+
+                            if (response['error']['water_consumption_factory_2'] === undefined) {
+                                $("#txtAddWaterConsumptionFactory2").removeClass('is-invalid');
+                                $("#txtAddWaterConsumptionFactory2").attr('title', '');
+                            } else {
+                                $("#txtAddWaterConsumptionFactory2").addClass('is-invalid');
+                                $("#txtAddWaterConsumptionFactory2").attr('title', response['error']['water_consumption_factory_2']);
+                            }
+
+                            if (response['error']['manpower_factory_2'] === undefined) {
+                                $("#txtAddManpowerFactory2").removeClass('is-invalid');
+                                $("#txtAddManpowerFactory2").attr('title', '');
+                            } else {
+                                $("#txtAddManpowerFactory2").addClass('is-invalid');
+                                $("#txtAddManpowerFactory2").attr('title', response['error']['manpower_factory_2']);
+                            }
+
                         } else if (response['result'] == 1) {
                             $("#modalWaterConsumption").modal('hide');
 
@@ -568,12 +622,15 @@
                         let waterTargetDetails = response['result'];
                         if (waterTargetDetails.length > 0) {
                             $('select[name="month"]', formAddWaterTarget).val(waterTargetDetails[0].month).trigger('change');
-                            $('select[name="factory"]', formAddWaterTarget).val(waterTargetDetails[0].factory).trigger('change');
-                            $('select[name="factory"]', formAddWaterActual).val(waterTargetDetails[0].factory).trigger('change');
+                            // $('select[name="factory"]', formAddWaterTarget).val(waterTargetDetails[0].factory).trigger('change');
+                            // $('select[name="factory"]', formAddWaterActual).val(waterTargetDetails[0].factory).trigger('change');
                             $('select[name="month"]', formAddWaterActual).val(waterTargetDetails[0].month).trigger('change');
 
                             $("#txtAddWaterTarget").val(waterTargetDetails[0].target);
-                            $("#txtAddWaterConsumption").val(waterTargetDetails[0].actual);
+                            $("#txtAddWaterConsumptionFactory1").val(waterTargetDetails[0].factory_1_actual );
+                            $("#txtAddManpowerFactory1").val(waterTargetDetails[0].factory_1_manpower );
+                            $("#txtAddWaterConsumptionFactory2").val(waterTargetDetails[0].factory_2_actual );
+                            $("#txtAddManpowerFactory2").val(waterTargetDetails[0].factory_2_manpower );
 
                             // $("#txtAddEnergyConsumption").val(energyTargetDetails[0].actual);
                             
@@ -623,7 +680,7 @@
             $("#formAddWaterTarget").submit(function(event) {
                 event.preventDefault(); // to stop the form submission
                 $('select[name="month"]', $("#formAddWaterTarget")).prop('disabled', false);
-                $('select[name="factory"]', $("#formAddWaterTarget")).prop('disabled', false);
+                // $('select[name="factory"]', $("#formAddWaterTarget")).prop('disabled', false);
                 AddWaterConsumptionTarget();
             });
 
@@ -634,7 +691,7 @@
                 $("input[name='water_id'", $("#formAddWaterTarget")).val(id);
                 $('#h4WaterConsumptionChangeTitle').html('<i class="fas fa-edit"></i>&nbsp;&nbsp; Edit Water Consumption Target');
                 $('select[name="month"]', $("#formAddWaterTarget")).prop('disabled', true);
-                $('select[name="factory"]', $("#formAddWaterTarget")).prop('disabled', true);
+                // $('select[name="factory"]', $("#formAddWaterTarget")).prop('disabled', true);
 
 
                 $('div').find('input').removeClass('is-invalid');
@@ -649,11 +706,14 @@
                 let id = $(this).attr('water-id');
 
                 $('select[name="month"]', $("#formAddWaterActual")).prop('disabled', true);
-                $('select[name="factory"]', $("#formAddWaterActual")).prop('disabled', true);
+                // $('select[name="factory"]', $("#formAddWaterActual")).prop('disabled', true);
                 // $('select[name="factory"]', $("#formAddWaterActual")).val(0).trigger('change');
                 $('input[name="water_id"]', $("#formAddWaterActual")).val(id);
 
-                $('input[name="water_consumption"]', $("#formAddWaterActual")).val('');
+                $('input[name="water_consumption_factory_1"]', $("#formAddWaterActual")).val('');
+                $('input[name="water_consumption_factory_2"]', $("#formAddWaterActual")).val('');
+                $('input[name="manpower_factory_1"]', $("#formAddWaterActual")).val('');
+                $('input[name="manpower_factory_2"]', $("#formAddWaterActual")).val('');
                 $('#h4WaterConsumptionActualChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Water Consumption Actual');
 
                 $('div').find('input').removeClass('is-invalid');
@@ -667,7 +727,7 @@
             $("#formAddWaterActual").submit(function(event) {
                 event.preventDefault(); // to stop the form submission
                 $('select[name="month"]', $("#formAddWaterActual")).prop('disabled', false);
-                $('select[name="factory"]', $("#formAddWaterActual")).prop('disabled', false);
+                // $('select[name="factory"]', $("#formAddWaterActual")).prop('disabled', false);
                 AddWaterConsumptionActual();
             });
 
@@ -675,11 +735,15 @@
                 let id = $(this).attr('water-id');
 
                 $('select[name="month"]', $("#formAddWaterActual")).prop('disabled', true);
-                $('select[name="factory"]', $("#formAddWaterActual")).prop('disabled', true);
+                // $('select[name="factory"]', $("#formAddWaterActual")).prop('disabled', true);
                 // $('select[name="factory"]', $("#formAddWaterActual")).val(0).trigger('change');
                 $('input[name="water_id"]', $("#formAddWaterActual")).val(id);
 
-                $('input[name="water_consumption"]', $("#formAddWaterActual")).val('');
+                
+                $('input[name="water_consumption_factory_1"]', $("#formAddWaterActual")).val('');
+                $('input[name="water_consumption_factory_2"]', $("#formAddWaterActual")).val('');
+                $('input[name="manpower_factory_1"]', $("#formAddWaterActual")).val('');
+                $('input[name="manpower_factory_2"]', $("#formAddWaterActual")).val('');
                 $('#h4WaterConsumptionActualChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Edit Water Consumption Actual');
 
                 $('div').find('input').removeClass('is-invalid');

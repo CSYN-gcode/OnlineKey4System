@@ -588,6 +588,11 @@ class EnergyConsumptionController extends Controller
             }   
             //======================================================== MARCH CURRENT YEAR
     
+
+            $energy_consumption_current_year = EnergyConsumption::where('fiscal_year_id', $current_fy_id)
+            ->get();
+
+            
             return response()->json([
                 'pastFY' => $past_fy,
                 'currentFY' => $current_fy,
@@ -630,6 +635,7 @@ class EnergyConsumptionController extends Controller
                 'februaryActualCurrentFy' => $february_actual_current_fy,
                 'marchTargetCurrentFy' => $march_target_current_fy,
                 'marchActualCurrentFy' => $march_actual_current_fy,
+                'energyConsumption' => $energy_consumption_current_year
             ]);
         }
         else {

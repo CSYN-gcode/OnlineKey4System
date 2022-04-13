@@ -142,26 +142,26 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
-                                                        <td></td>
+                                                        <td class="diff-energy-ave"></td>
                                                         {{-- <td></td> --}}
                                                     </tr>
 
                                                     
                                                     <tr>
                                                         <td>Tricolor Chart Data</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td class="energy-actual-tricolor-april"></td>
+                                                        <td class="energy-actual-tricolor-may"></td>
+                                                        <td class="energy-actual-tricolor-june"></td>
+                                                        <td class="energy-actual-tricolor-july"></td>
+                                                        <td class="energy-actual-tricolor-august"></td>
+                                                        <td class="energy-actual-tricolor-september"></td>
+                                                        <td class="energy-actual-tricolor-october"></td>
+                                                        <td class="energy-actual-tricolor-november"></td>
+                                                        <td class="energy-actual-tricolor-december"></td>
+                                                        <td class="energy-actual-tricolor-january"></td>
+                                                        <td class="energy-actual-tricolor-february"></td>
+                                                        <td class="energy-actual-tricolor-march"></td>
+                                                        <td class="energy-actual-tricolor-total"></td>
                                                         {{-- <td></td> --}}
                                                     </tr>
                                                 
@@ -916,14 +916,19 @@
                         //=========
                         var pastMarchTarget = response['marchTargetPastFy'];
                         var pastMarchActual = response['marchActualPastFy'];
+
                         var currentAprilTarget = response['aprilTargetCurrentFy'];
                         var currentAprilActual = response['aprilActualCurrentFy'];
+
                         var currentMayTarget = response['mayTargetCurrentFy'];
                         var currentMayActual = response['mayActualCurrentFy'];
+
                         var currentJuneTarget = response['juneTargetCurrentFy'];
                         var currentJuneActual = response['juneActualCurrentFy'];
+
                         var currentJulyTarget = response['julyTargetCurrentFy'];
                         var currentJulyActual = response['julyActualCurrentFy'];
+
                         var currentAugustTarget = response['augustTargetCurrentFy'];
                         var currentAugustActual = response['augustActualCurrentFy'];
                         var currentSeptemberTarget = response['septemberTargetCurrentFy'];
@@ -980,8 +985,12 @@
 
                         if(currentAprilActual == 0 || currentAprilActual == null) {
                             $('.april-actual').html('-'); 
+                            $('.energy-actual-tricolor-april').html('-');
+
                         } else if(currentAprilActual != null) {
                             $('.april-actual').html(currentAprilActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentApril);
+                            $('.energy-actual-tricolor-april').html(currentAprilActual);
+                            
                         }  
 
                         //=======
@@ -993,9 +1002,12 @@
 
                         if(currentMayActual == 0 || currentMayActual == null) {
                             $('.may-actual').html('-'); 
+                            $('.energy-actual-tricolor-may').html('-');
+
                             
                         } else if(currentMayActual != null){
                             $('.may-actual').html(currentMayActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentMay);
+                            $('.energy-actual-tricolor-may').html(currentMayActual);
                         }
 
                         //=======
@@ -1007,9 +1019,12 @@
 
                         if(currentJuneActual == 0 || currentJuneActual == null) {
                             $('.june-actual').html('-'); 
+                            $('.energy-actual-tricolor-june').html('-');
+
                             
                         } else if(currentJuneActual != null) {
                             $('.june-actual').html(currentJuneActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentJune);
+                            $('.energy-actual-tricolor-june').html(currentJuneActual);
                         }
 
                         //=======
@@ -1021,9 +1036,13 @@
 
                         if(currentJulyActual == 0 || currentJulyActual == null) {
                             $('.july-actual').html('-'); 
+                            $('.energy-actual-tricolor-july').html('-');
+
                             
                         } else if(currentJulyActual != null) {
                             $('.july-actual').html(currentJulyActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentJuly);
+                            $('.energy-actual-tricolor-july').html(currentJulyActual);
+
                         }
 
                         //=======
@@ -1035,9 +1054,11 @@
 
                         if(currentAugustActual == 0 || currentAugustActual == null) {
                             $('.august-actual').html('-'); 
+                            $('.energy-actual-tricolor-august').html('-');
                             
                         } else if(currentAugustActual != null) {
                             $('.august-actual').html(currentAugustActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentAugust);
+                            $('.energy-actual-tricolor-august').html(currentAugustActual);
                         }
 
                         //=======
@@ -1049,9 +1070,11 @@
 
                         if(currentSeptemberActual == 0 || currentSeptemberActual == null) {
                             $('.september-actual').html('-'); 
+                            $('.energy-actual-tricolor-september').html('-');
                             
                         } else if(currentSeptemberActual != null) {
                             $('.september-actual').html(currentSeptemberActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentSeptember);
+                            $('.energy-actual-tricolor-september').html(currentSeptemberActual);
                         }
 
                         //=======
@@ -1063,9 +1086,11 @@
 
                         if(currentOctoberActual == 0 || currentOctoberActual == null) {
                             $('.october-actual').html('-'); 
+                            $('.energy-actual-tricolor-october').html('-');
                             
                         } else if(currentOctoberActual != null) {
                             $('.october-actual').html(currentOctoberActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentOctober);
+                            $('.energy-actual-tricolor-october').html(currentOctoberActual);
                         }
 
                         //=======
@@ -1077,9 +1102,11 @@
 
                         if(currentNovemberActual == 0 || currentNovemberActual == null) {
                             $('.november-actual').html('-'); 
+                            $('.energy-actual-tricolor-november').html('-');
                             
                         } else if(currentNovemberActual != null) {
                             $('.november-actual').html(currentNovemberActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentNovember);
+                            $('.energy-actual-tricolor-november').html(currentNovemberActual);
                         }
 
                         //=======
@@ -1091,9 +1118,11 @@
 
                         if (currentDecemberActual == 0 || currentDecemberActual == null) {
                             $('.december-actual').html('-'); 
+                            $('.energy-actual-tricolor-december').html('-');
                         }
                         else if(currentDecemberActual != null) {
                             $('.december-actual').html(currentDecemberActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentDecember);
+                            $('.energy-actual-tricolor-december').html(currentDecemberActual);
                         //   console.log(currentDecemberActual);
                         } 
 
@@ -1106,9 +1135,11 @@
 
                         if(currentJanuaryActual == 0 || currentJanuaryActual == null) {
                             $('.january-actual').html('-'); 
+                            $('.energy-actual-tricolor-january').html('-');
                             
                         } else if(currentJanuaryActual != null) {
                             $('.january-actual').html(currentJanuaryActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentJanuary);
+                            $('.energy-actual-tricolor-january').html(currentJanuaryActual);
                         }
 
                         //=======
@@ -1120,9 +1151,11 @@
 
                         if(currentFebruaryActual == 0 || currentFebruaryActual == null) {
                             $('.february-actual').html('-'); 
+                            $('.energy-actual-tricolor-february').html('-');
                             
                         } else if(currentFebruaryActual != null) {
                             $('.february-actual').html(currentFebruaryActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentFebruary);
+                            $('.energy-actual-tricolor-february').html(currentFebruaryActual);
                         }
 
                          //=======
@@ -1134,8 +1167,10 @@
 
                         if(currentMarchActual == 0 || currentMarchActual == null) {
                             $('.march-actual').html('-'); 
+                            $('.energy-actual-tricolor-march').html('-');
                         } else if(currentMarchActual != null) {
                             $('.march-actual').html(currentMarchActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconCurrentMarch);
+                            $('.energy-actual-tricolor-march').html(currentMarchActual);
                         }
                         //===== CURRENT FY MONTHS =============
 
@@ -1193,13 +1228,41 @@
                       
                          var totalTargetNum = currentAprilTargetNum + currentMayTargetNum + currentJuneTargetNum + currentJulyTargetNum + currentAugustTargetNum + currentSeptemberTargetNum + currentOctoberTargetNum + currentNovemberTargetNum + currentDecemberTargetNum + currentJanuaryTargetNum + currentFebruaryTargetNum + currentMarchTargetNum;
 
-                         var totalTargetNumFormatted = totalTargetNum.toLocaleString('en');
 
-                        if(totalTargetNumFormatted != 0) {
-                            $('#total-target').html(totalTargetNumFormatted);
+                        var data = response['energyConsumption'];
+                        var targetCount = [];
+                        var actualCount = [];
+
+                        for(var x = 0; x < data.length; x++) {
+                            targetData = data[x].target;
+                            actualData = data[x].actual;
+                           
+                            targetCount.push(Number(targetData));
+                            actualCount.push(Number(actualData));
+                          
+                        }
+                        
+                        console.log(targetCount.length);
+
+                         var targetAve = totalTargetNum / targetCount.length;
+                         var targetAverage = targetAve.toLocaleString('en');
+
+                        var targetAverage = targetAve.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+                        //  var totalTargetNumFormatted = totalTargetNum.toLocaleString('en');
+
+                        // if(totalTargetNumFormatted != 0) {
+                        //     $('#total-target').html(totalTargetNumFormatted);
+                        // }
+                        // else {
+                        //     $('#total-target').html('-');
+                        // }
+                        // console.log(targetAve);
+
+                        if(targetAve != 0) {
+                            $('.total-target').html(targetAverage);
                         }
                         else {
-                            $('#total-target').html('-');
+                            $('.total-target').html('-');
                         }
 
                         var currentAprilActualNum = null;
@@ -1254,14 +1317,43 @@
 
                         var totalActualNum = currentAprilActualNum + currentMayActualNum + currentJuneActualNum + currentJulyActualNum + currentAugustActualNum + currentSeptemberActualNum + currentOctoberActualNum + currentNovemberActualNum + currentDecemberActualNum + currentJanuaryActualNum + currentFebruaryActualNum + currentMarchActualNum;
 
-                        var totalActualNumFormatted = totalActualNum.toLocaleString('en');
-                        // console.log(totalActualNumFormatted);
 
-                        if(totalActualNumFormatted != 0) {
-                            $('#total-actual').html(totalActualNumFormatted);
+                        var actualAve = totalActualNum / actualCount.length;
+
+                        // var totalActualNumFormatted = totalActualNum.toLocaleString('en');
+                        // var actualAve = actualAve.toFixed(0);
+                        var actualAverage = actualAve.toLocaleString('en');
+                        
+                        var aveDiff = targetAve - actualAve;
+                        var actualAverage = actualAve.toLocaleString('en');
+                        // var aveDiff = aveDiff.toLocaleString('en');
+                        var actualAverage = actualAve.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+
+                        var aveDiff = aveDiff.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+
+                        // var aveDiff = parseFloat(aveDiff).toFixed(2);
+                        
+                        // console.log(aveDiff);
+
+                        if(aveDiff != 0) {
+                            $('.diff-energy-ave').html(aveDiff);                           
+                        } else {
+                            $('.diff-energy-ave').html('-');                           
+                        }
+
+
+                        if(actualAve != 0) {
+                            $('#total-actual').html(actualAverage);
                         }
                         else {
                             $('#total-actual').html('-');
+                        }
+
+                        if(actualAve != 0) {
+                            $('.energy-actual-tricolor-total').html(actualAverage);
+                        }
+                        else {
+                            $('.energy-actual-tricolor-total').html('-');
                         }
                     },
 
@@ -1939,245 +2031,9 @@
                 dataTablePaperConsumptions.draw();
             });
 
-
-            function GetCurrentFYWaterData() {
-                $.ajax({
-                    type: "get",
-                    url: "get_current_water_data",
-                    data: {
-                        fiscal_year: $('#selFiscalYearWater').val()
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        var currentYear = Number(response['currentYear']);
-                        var nextYear = Number(response['currentYear'] + 1);
-                        var iconApril = response['iconApril']; 
-                        var iconMay = response['iconMay']; 
-                        var iconJune = response['iconJune']; 
-                        var iconJuly = response['iconJuly']; 
-                        var iconAugust = response['iconAugust']; 
-                        var iconSeptember = response['iconSeptember']; 
-                        var iconOctober = response['iconOctober']; 
-                        var iconNovember = response['iconNovember']; 
-                        var iconDecember = response['iconDecember']; 
-                        var iconJanuary = response['iconJanuary']; 
-                        var iconFebruary = response['iconFebruary']; 
-                        var iconMarch = response['iconMarch']; 
-                        var aprilWaterTarget = Number(response['aprilWaterTarget']);
-                        var aprilWaterActual = Number(response['aprilWaterActual']);
-                        var mayWaterTarget = Number(response['mayWaterTarget']);
-                        var mayWaterActual = Number(response['mayWaterActual']);
-                        var juneWaterTarget = Number(response['juneWaterTarget']);
-                        var juneWaterActual = Number(response['juneWaterActual']);
-                        var julyWaterTarget = Number(response['julyWaterTarget']);
-                        var julyWaterActual = Number(response['julyWaterActual']);
-                        var augustWaterTarget = Number(response['augustWaterTarget']);
-                        var augustWaterActual = Number(response['augustWaterActual']);
-                        var septemberWaterTarget = Number(response['septemberWaterTarget']);
-                        var septemberWaterActual = Number(response['septemberWaterActual']);
-                        var octoberWaterTarget = Number(response['octoberWaterTarget']);
-                        var octoberWaterActual = Number(response['octoberWaterActual']);
-                        var novemberWaterTarget = Number(response['novemberWaterTarget']);
-                        var novemberWaterActual = Number(response['novemberWaterActual']);
-                        var decemberWaterTarget = Number(response['decemberWaterTarget']);
-                        var decemberWaterActual = Number(response['decemberWaterActual']);
-                        var januaryWaterTarget = Number(response['januaryWaterTarget']);
-                        var januaryWaterActual = Number(response['januaryWaterActual']);
-                        var februaryWaterTarget = Number(response['februaryWaterTarget']);
-                        var februaryWaterActual = Number(response['februaryWaterActual']);
-                        var marchWaterTarget = Number(response['marchWaterTarget']);
-                        var marchWaterActual = Number(response['marchWaterActual']);
-
-
-                        $('.april-water-current-fy').html('April ' + currentYear);
-                        $('.may-water-current-fy').html('May ' + currentYear);
-                        $('.june-water-current-fy').html('June ' + currentYear);
-                        $('.july-water-current-fy').html('July ' + currentYear);
-                        $('.august-water-current-fy').html('August ' + currentYear);
-                        $('.september-water-current-fy').html('September ' + currentYear);
-                        $('.october-water-current-fy').html('October ' + currentYear);
-                        $('.november-water-current-fy').html('November ' + currentYear);
-                        $('.december-water-current-fy').html('December ' + currentYear);
-                        $('.january-water-current-fy').html('January ' + nextYear);
-                        $('.february-water-current-fy').html('February ' + nextYear);
-                        $('.march-water-current-fy').html('March ' + nextYear);
-
-                        if(aprilWaterTarget == 0) {
-                            $('.april-water-current-fy-target').html('-');
-                        } else {
-                            $('.april-water-current-fy-target').html(aprilWaterTarget);
-                        }
-
-                        if(aprilWaterActual == 0) {
-                            $('.april-water-current-fy-actual').html('-');
-                        } else {
-                            $('.april-water-current-fy-actual').html(aprilWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconApril);
-                        }
-
-
-                        if(mayWaterTarget == 0) {
-                            $('.may-water-current-fy-target').html('-');
-                        } else {
-                            $('.may-water-current-fy-target').html(mayWaterTarget);
-                        }
-
-                        if(mayWaterActual == 0) {
-                            $('.may-water-current-fy-actual').html('-');
-                        } else {
-                            $('.may-water-current-fy-actual').html(mayWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconMay);
-                        }
-
-
-                        if(juneWaterTarget == 0) {
-                            $('.june-water-current-fy-target').html('-');
-                        } else {
-                            $('.june-water-current-fy-target').html(juneWaterTarget);
-                        }
-
-                        if(juneWaterActual == 0) {
-                            $('.june-water-current-fy-actual').html('-');
-                        } else {
-                            $('.june-water-current-fy-actual').html(juneWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJune);
-                        }
-
-
-                        if(julyWaterTarget == 0) {
-                            $('.july-water-current-fy-target').html('-');
-                        } else {
-                            $('.july-water-current-fy-target').html(julyWaterTarget);
-                        }
-
-                        if(julyWaterActual == 0) {
-                            $('.july-water-current-fy-actual').html('-');
-                        } else {
-                            $('.july-water-current-fy-actual').html(julyWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJuly);
-                        }
-
-
-                        if(augustWaterTarget == 0) {
-                            $('.august-water-current-fy-target').html('-');
-                        } else {
-                            $('.august-water-current-fy-target').html(augustWaterTarget);
-                        }
-
-                        if(augustWaterActual == 0) {
-                            $('.august-water-current-fy-actual').html('-');
-                        } else {
-                            $('.august-water-current-fy-actual').html(augustWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconAugust);
-                        }
-
-
-                        if(septemberWaterTarget == 0) {
-                            $('.september-water-current-fy-target').html('-');
-                        } else {
-                            $('.september-water-current-fy-target').html(septemberWaterTarget);
-                        }
-
-                        if(septemberWaterActual == 0) {
-                            $('.september-water-current-fy-actual').html('-');
-                        } else {
-                            $('.september-water-current-fy-actual').html(septemberWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconSeptember);
-                        }
-
-
-                        if(octoberWaterTarget == 0) {
-                            $('.october-water-current-fy-target').html('-');
-                        } else {
-                            $('.october-water-current-fy-target').html(octoberWaterTarget);
-                        }
-
-                        if(octoberWaterActual == 0) {
-                            $('.october-water-current-fy-actual').html('-');
-                        } else {
-                            $('.october-water-current-fy-actual').html(octoberWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconOctober);
-                        }
-
-
-                        if(novemberWaterTarget == 0) {
-                            $('.november-water-current-fy-target').html('-');
-                        } else {
-                            $('.november-water-current-fy-target').html(novemberWaterTarget);
-                        }
-
-                        if(novemberWaterActual == 0) {
-                            $('.november-water-current-fy-actual').html('-');
-                        } else {
-                            $('.november-water-current-fy-actual').html(novemberWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconNovember);
-                        }
-
-
-                        if(decemberWaterTarget == 0) {
-                            $('.december-water-current-fy-target').html('-');
-                        } else {
-                            $('.december-water-current-fy-target').html(decemberWaterTarget);
-                        }
-
-                        if(decemberWaterActual == 0) {
-                            $('.december-water-current-fy-actual').html('-');
-                        } else {
-                            $('.december-water-current-fy-actual').html(decemberWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconDecember);
-                        }
-
-
-                        if(januaryWaterTarget == 0) {
-                            $('.january-water-current-fy-target').html('-');
-                        } else {
-                            $('.january-water-current-fy-target').html(januaryWaterTarget);
-                        }
-
-                        if(januaryWaterActual == 0) {
-                            $('.january-water-current-fy-actual').html('-');
-                        } else {
-                            $('.january-water-current-fy-actual').html(januaryWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconJanuary);
-                        }
-
-
-                        if(februaryWaterTarget == 0) {
-                            $('.february-water-current-fy-target').html('-');
-                        } else {
-                            $('.february-water-current-fy-target').html(februaryWaterTarget);
-                        }
-
-                        if(februaryWaterActual == 0) {
-                            $('.february-water-current-fy-actual').html('-');
-                        } else {
-                            $('.february-water-current-fy-actual').html(februaryWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconFebruary);
-                        }
-
-
-                        if(marchWaterTarget == 0) {
-                            $('.march-water-current-fy-target').html('-');
-                        } else {
-                            $('.march-water-current-fy-target').html(marchWaterTarget);
-                        }
-
-                        if(marchWaterActual == 0) {
-                            $('.march-water-current-fy-actual').html('-');
-                        } else {
-                            $('.march-water-current-fy-actual').html(marchWaterActual + '&nbsp;&nbsp;&nbsp;&nbsp;' + iconMarch);
-                        }
-
-                      var totalTarget =  aprilWaterTarget + mayWaterTarget + juneWaterTarget +  julyWaterTarget +  augustWaterTarget +  septemberWaterTarget +  octoberWaterTarget +  novemberWaterTarget +  decemberWaterTarget +  januaryWaterTarget +  februaryWaterTarget +  marchWaterTarget;
-                    
-                      if(totalTarget == 0) {
-                        $('.total-water-current-fy-target').html('-');
-                      } else {
-                          $('.total-water-current-fy-target').html(totalTarget);
-                      }
-
-                      var totalActual =  aprilWaterActual + mayWaterActual + juneWaterActual +  julyWaterActual +  augustWaterActual +  septemberWaterActual +  octoberWaterActual +  novemberWaterActual +  decemberWaterActual +  januaryWaterActual +  februaryWaterActual +  marchWaterActual;
-
-                      if(totalActual == 0) {
-                        $('.total-water-current-fy-actual').html('-');
-                      } else {
-                          $('.total-water-current-fy-actual').html(totalActual);
-                      }
-
-                    }
-                });
-            }
-
             GetCurrentFYWaterData();
+
+            // GetCurrentFYWaterData();
 
             $('#selFiscalYearWater').on('change', function() {
                 $('.selectYearWater').val($(this).find(":selected").val());
@@ -2185,7 +2041,7 @@
 
                 GetCurrentFYWaterData();
                     
-                dataTablePaperConsumptions.draw();
+                dataTableWaterConsumptions.draw();
             });
 
             GetCurrentFYPaperDataTS();

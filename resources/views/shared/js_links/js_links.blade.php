@@ -49,6 +49,7 @@ src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jqu
 <script src="{{ asset('public/js/my_js/PaperConsumptionCN.js?n=2') }}"></script>
 <script src="{{ asset('public/js/my_js/PaperConsumptionYF.js?n=3') }}"></script>
 <script src="{{ asset('public/js/my_js/PaperConsumptionPPS.js?n=4') }}"></script>
+<script src="{{ asset('public/js/my_js/WaterConsumption.js?n=2') }}"></script>
 {{-- <script src="{{ asset('public/js/my_js/CustomerClaim.js') }}"></script> --}}
 {{-- <script src="{{ asset('public/js/my_js/RapidXUser.js') }}"></script> --}}
 {{-- <script src="{{ asset('public/js/my_js/EmailRecipient.js') }}"></script> --}}
