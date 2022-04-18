@@ -8,14 +8,37 @@ function GetFiscalYear() {
             if (fiscalYear > 0) {
                 $('#fiscalYearId').val(fiscalYear);
                 $('#txtFiscalYearId').val(fiscalYear);
-                // $('#selFiscalYearEnergy').val(fiscalYear);
-
-                // $('#fiscalYearId').val(fiscalYear);
-                // $('#txtFiscalYearId').val(fiscalYear);
             }
             else {
                 $('#fiscalYearId').val(0);
             }
         }
     });
+}
+
+function TransitionFY() {
+    $.ajax({
+        url: "transition_fy",
+        method: "get",
+        dataType: "json",
+    });   
+}
+
+function GetCurrentFiscalYear() {
+    $.ajax({
+        url: "get_current_fy",
+        method: "get",
+        dataType: "json",
+        success: function (response) {
+            var fiscalYear = response['fiscal_year'];
+            var monthNow = response['current_month'];
+            if (fiscalYear > 0) {
+                $('#fiscalYear').html('FY: ' + fiscalYear);
+                $('#month').html('Current Month: ' + monthNow)
+            }
+            else {
+                $('#fiscalYear').html('');
+            }
+        }
+    });   
 }

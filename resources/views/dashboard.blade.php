@@ -1798,8 +1798,12 @@
                             if(totalDifference < 0) {
                                 $('.total-paper-actual-target').html(totalDifference);
                                 $('.total-paper-actual-target').css('color', 'red');
+                                $('.total-paper-tricolor').html(totalDifference);
+                                $('.total-paper-tricolor').css('color', 'red');
                             } else {
                                 $('.total-paper-actual-target').html(totalDifference);
+                                $('.total-paper-tricolor').html(totalDifference);
+
                             }
                         }
 
@@ -2010,11 +2014,11 @@
                         }
 
 
-                        if(totalTricolor != 0) {
-                            $('.total-paper-tricolor').html('-');
-                        } else {
-                            $('.total-paper-tricolor').html('-');
-                        }
+                        // if(totalTricolor != 0) {
+                        //     $('.total-paper-tricolor').html(totalDifference);
+                        // } else {
+                        //     $('.total-paper-tricolor').html('-');
+                        // }
  
                     }
                 });

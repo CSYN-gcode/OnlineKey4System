@@ -31,11 +31,17 @@ Route::get('/paper_consumption', function () {
 })->name('paper_consumption');
 
 
+Route::get('/fiscal_year', function () {
+    return view('fiscal_year');
+})->name('fiscal_year');
+
 
 // Route::get('/get_chart_data', 'ChartController@get_chart_data');
 
 //===== FISCAL YEAR CONTROLLER ======
 Route::get('/get_fiscal_year', 'FiscalYearController@get_fiscal_year')->name('get_fiscal_year');
+Route::get('/transition_fy', 'FiscalYearController@transition_fy')->name('transition_fy');
+Route::get('/get_current_fy', 'FiscalYearController@get_current_fy')->name('get_current_fy');
 
 
 //===== ENERGY CONSUMPTION CONTROLLER ======
