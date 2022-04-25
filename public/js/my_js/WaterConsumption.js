@@ -923,7 +923,9 @@ function GetCurrentFYWaterData() {
             var actualAverage = Number(waterConsumption) / factoryActual.length;
             var actualAverage = actualAverage.toFixed(2);
 
-            if(actualAverage != 0 && actualAverage != null) {
+            // console.log(factoryActual.length);
+
+            if(factoryActual.length != 0 && factoryActual.length != null) {
                 $('.total-water-current-fy-actual').html(actualAverage);
                 $('.total-water-tricolor').html(actualAverage);
             } else {
@@ -934,11 +936,11 @@ function GetCurrentFYWaterData() {
             
            var diffAverage = Number(average) - Number(actualAverage);
            var diffAverage = diffAverage.toFixed(2);
-        
-           if(diffAverage != 0 || diffAverage != null) {
-                $('.total-water-actual-target').html(diffAverage);
-           } else {
-                $('.total-water-actual-target').html(diffAverage);
+
+           if(factoryActual.length != 0 && factoryActual.length != null) {
+               $('.total-water-actual-target').html(diffAverage);
+            } else {
+                $('.total-water-actual-target').html('-');
            }
 
 

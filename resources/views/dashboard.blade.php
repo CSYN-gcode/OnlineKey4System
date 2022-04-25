@@ -1242,10 +1242,11 @@
                           
                         }
                         
-                        console.log(targetCount.length);
+                        // console.log(targetCount.length);
 
                          var targetAve = totalTargetNum / targetCount.length;
                          var targetAverage = targetAve.toLocaleString('en');
+                        //  console.log(totalTargetNum);
 
                         var targetAverage = targetAve.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
                         //  var totalTargetNumFormatted = totalTargetNum.toLocaleString('en');
@@ -1256,9 +1257,8 @@
                         // else {
                         //     $('#total-target').html('-');
                         // }
-                        // console.log(targetAve);
 
-                        if(targetAve != 0) {
+                        if(targetCount.length != 0) {
                             $('.total-target').html(targetAverage);
                         }
                         else {
@@ -1323,8 +1323,8 @@
                         // var totalActualNumFormatted = totalActualNum.toLocaleString('en');
                         // var actualAve = actualAve.toFixed(0);
                         var actualAverage = actualAve.toLocaleString('en');
-                        
                         var aveDiff = targetAve - actualAve;
+                        // console.log(aveDiff);
                         var actualAverage = actualAve.toLocaleString('en');
                         // var aveDiff = aveDiff.toLocaleString('en');
                         var actualAverage = actualAve.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
@@ -1335,21 +1335,21 @@
                         
                         // console.log(aveDiff);
 
-                        if(aveDiff != 0) {
+                        if(actualCount.length != 0) {
                             $('.diff-energy-ave').html(aveDiff);                           
                         } else {
                             $('.diff-energy-ave').html('-');                           
                         }
 
 
-                        if(actualAve != 0) {
+                        if(actualCount.length != 0) {
                             $('#total-actual').html(actualAverage);
                         }
                         else {
                             $('#total-actual').html('-');
                         }
 
-                        if(actualAve != 0) {
+                        if(actualCount.length != 0) {
                             $('.energy-actual-tricolor-total').html(actualAverage);
                         }
                         else {

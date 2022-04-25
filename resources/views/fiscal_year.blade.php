@@ -2,6 +2,7 @@
 @include('shared.css_links.css_links')
 <!DOCTYPE html>
 <html>
+    <title>Fiscal Year Transition - Do not close!</title>
 <body>
     {{-- <span id="fiscalYear"></span>
     <span id="month"></span> --}}
@@ -29,10 +30,12 @@
         function checkFY() {
 
             var date = new Date();
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         
-            var firstDayOfMonth = firstDay.getDate();
+            var firstDayOfMonth = date.getDate();
             var month = date.getMonth() + 1;
+
+            // console.log(firstDayOfMonth);
 
             var d = new Date();
             var current_time = d.toLocaleString("en-US", {
