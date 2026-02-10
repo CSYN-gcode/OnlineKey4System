@@ -9,9 +9,94 @@ use DataTables;
 use Carbon\Carbon;
 use App\WaterConsumption;
 use App\FiscalYear;
+use App\YearlyTarget;
 
 class WaterConsumptionController extends Controller
 {
+    //test
+    // public function get_water_fy_target()
+    // {
+    //     $yearly_target = YearlyTarget::where('materials', 'Water')->where('logdel', 0)->value('yearly_target');
+    //     $fiscal_year_id = YearlyTarget::where('materials', 'Water')->where('logdel', 0)->value('fiscal_year_id');
+    //     // return $test;
+
+    //     return view('water_consumption', ['yearly_target'=>$yearly_target, 'fiscal_year_id'=>$fiscal_year_id ]);
+    // }
+
+    public function get_fiscal_year_target() {
+        $water = YearlyTarget::where('materials', 'Water')->where('logdel', 0)->get();
+        $fiscal_year = FiscalYear::where('logdel', 0)->get();
+
+        return response()->json(['water' => $water, 'fiscal_year' => $fiscal_year]);
+    }
+    
+    // //eto
+    // public function insert_water_yearly_target(Request $request) {
+    //     date_default_timezone_set('Asia/Manila');
+    //     session_start();
+
+    //     $data = $request->all();
+
+    //     $yearly_target = explode(',', $request->yearly_target);
+    //     $yearly_target_int = (int)implode('', $yearly_target);
+
+
+    //     if (!isset($request->yearly_target_id)) {
+    //         $rules = [
+    //             'yearly_target' => 'required'
+    //         ];
+
+    //         $validator = Validator::make($data, $rules);
+
+    //         if ($validator->passes()) {
+    //             if (YearlyTarget::where('fiscal_year_id', $request->fiscal_year)->where('id', $request->yearly_target_id)->exists()) {
+    //                 return response()->json(['result' => "2"]);
+    //             } else {
+    //                 $insert_energy_yearly_target = [
+    //                     'yearly_target' => $yearly_target_int,
+    //                     'department' => 'N/A',
+    //                     'materials' => 'Water',
+    //                     'fiscal_year_id' => $request->fiscal_year,
+    //                     'updated_at' => date('Y-m-d H:i:s'),
+    //                     'created_at' => date('Y-m-d H:i:s'),
+    //                 ];
+
+    //                 YearlyTarget::insert(
+    //                     $insert_energy_yearly_target
+    //                 );
+    //                 return response()->json(['result' => "1"]);
+    //             }
+    //         } else {
+    //             return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+    //         }
+    //     } else {
+    //         $rules = [
+    //             'yearly_target' => 'required'
+    //         ];
+
+    //         $validator = Validator::make($data, $rules);
+
+    //         if ($validator->passes()) {
+    //             $update_energy_yearly_target = [
+    //                 'yearly_target' => $yearly_target_int,
+    //                 'department' => 'N/A',
+    //                 'materials' => 'Water',
+    //                 'fiscal_year_id' => $request->fiscal_year,
+    //                 'updated_at' => date('Y-m-d H:i:s'),
+    //             ];
+
+    //             if (isset($request->yearly_target_id)) {
+    //                 YearlyTarget::where('id', $request->yearly_target_id)->update(
+    //                     $update_energy_yearly_target
+    //                 );
+    //             }
+    //             return response()->json(['result' => "1"]);
+    //         } else {
+    //             return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+    //         }
+    //     }
+    // }
+
     public function insert_water_target(Request $request) {
         date_default_timezone_set('Asia/Manila');
         session_start();
@@ -28,7 +113,7 @@ class WaterConsumptionController extends Controller
             $validator = Validator::make($data, $rules);
 
             if ($validator->passes()) {
-                if (WaterConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->exists()) {
+                if (WaterConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('logdel', 0)->exists()) {
                     return response()->json(['result' => "2"]);
                 } else {
                     $insert_water_target = [
@@ -65,12 +150,17 @@ class WaterConsumptionController extends Controller
                     'updated_at' => date('Y-m-d H:i:s')
                 ];
 
+                $picked_data = WaterConsumption::where('id', $request->water_id)->get();
+                $picked_month = $picked_data[0]->month;
+
                 if (isset($request->water_id)) {
-                    WaterConsumption::where('id', $request->water_id)->update(
-                        $update_water_target
-                    );
+                    if (WaterConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->exists() && $request->month != $picked_month) {
+                        return response()->json(['result' => 0]);
+                    }else{
+                        WaterConsumption::where('id', $request->water_id)->update($update_water_target);
+                        return response()->json(['result' => "1"]);
+                    }
                 }
-                return response()->json(['result' => "1"]);
             } else {
                 return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
             }
@@ -78,7 +168,7 @@ class WaterConsumptionController extends Controller
     }
 
     public function view_water_consumption() {
-        $water_consumptions = WaterConsumption::with(['fiscal_year_id'])->get();
+        $water_consumptions = WaterConsumption::with(['fiscal_year_id'])->where('logdel',0)->get();
 
         return DataTables::of($water_consumptions)
             ->addColumn('month', function ($water_consumption) {
@@ -158,7 +248,7 @@ class WaterConsumptionController extends Controller
                 }
 
 
-                if (($water_actual_factory_1 == NULL && $water_actual_factory_1_manpower == NULL) && ($water_actual_factory_2 == NULL && $water_actual_factory_2_manpower == NULL)) {
+                if (($water_actual_factory_1 === NULL && $water_actual_factory_1_manpower === NULL) && ($water_actual_factory_2 === NULL && $water_actual_factory_2_manpower === NULL)) {
                     $result .= '<center><span class="badge badge-pill badge-secondary">No Actual Consumption Data</span></center>';
 
                 } elseif($water_actual_factory_1 == NULL && $water_actual_factory_1_manpower == NULL) {
@@ -220,6 +310,47 @@ class WaterConsumptionController extends Controller
         session_start();
 
         $data = $request->all();
+        
+        if (!isset($request->water_id)) {
+
+            $rules = [
+                'month' => 'required',
+                'water_consumption_factory_1' => 'required',
+                'manpower_factory_1' => 'required',
+                'water_consumption_factory_2' => 'required',
+                'manpower_factory_2' => 'required'
+            ];
+
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->passes()) {
+
+                if(WaterConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('logdel', 0)->whereNotNull('factory_1_actual')->whereNotNull('factory_2_actual')->exists()){
+                    return response()->json(['result' => "2"]);
+                }
+                else if(WaterConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('logdel', 0)->where('target', null)->exists()){
+                    return response()->json(['result' => "3"]);
+                }else if(WaterConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('logdel', 0)->whereNull('factory_1_actual')->whereNull('factory_2_actual')->exists()){
+                    $update_water_actual = [
+                        'factory_1_actual' => $request->water_consumption_factory_1,
+                        'factory_1_manpower' => $request->manpower_factory_1,
+                        'factory_2_actual' => $request->water_consumption_factory_2,
+                        'factory_2_manpower' => $request->manpower_factory_2,
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ];
+
+                     WaterConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('logdel', 0)->update($update_water_actual);
+
+                     return response()->json(['result' => "1"]);
+                }else{
+                    return response()->json(['result' => "3"]);
+                }
+                
+            } else {
+                return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+            }
+
+        } else {
 
             $rules = [
                 'water_consumption_factory_1' => 'required',
@@ -231,26 +362,32 @@ class WaterConsumptionController extends Controller
             $validator = Validator::make($data, $rules);
 
             if ($validator->passes()) {
-
-
                 $update_water_actual = [
-                    'factory_1_actual' => $request->water_consumption_factory_1,
-                    'factory_1_manpower' => $request->manpower_factory_1,
-                    'factory_2_actual' => $request->water_consumption_factory_2,
-                    'factory_2_manpower' => $request->manpower_factory_2,
-                    'updated_at' => date('Y-m-d H:i:s')
-                ];
+                        'factory_1_actual' => $request->water_consumption_factory_1,
+                        'factory_1_manpower' => $request->manpower_factory_1,
+                        'factory_2_actual' => $request->water_consumption_factory_2,
+                        'factory_2_manpower' => $request->manpower_factory_2,
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ];
 
-                    WaterConsumption::where('id', $request->water_id)->update(
-                        $update_water_actual
-                    );
-            
-                return response()->json(['result' => "1"]);
+                $picked_data = WaterConsumption::where('id', $request->water_id)->get();
+                $picked_month = $picked_data[0]->month;
+
+                // return $picked_month;
+
+                if (isset($request->water_id)) {
+                    if (WaterConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->exists() && $request->month != $picked_month) {
+                        return response()->json(['result' => 0]);
+                    }else{
+                        WaterConsumption::where('id', $request->water_id)->update($update_water_actual);
+                        return response()->json(['result' => "1"]);
+                    }
+                }
             } else {
                 return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
             }
+        }
     }
-
 
     public function get_current_water_data(Request $request) {
         if($request->fiscal_year == null){
@@ -260,7 +397,7 @@ class WaterConsumptionController extends Controller
             $current_fy = $get_current_fiscal_year->fiscal_year;
             $current_fy_id = $get_current_fiscal_year->id;
             
-            $water_consumption = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            $water_consumption = WaterConsumption::where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $water_consumption, 'currentYear' => $current_fy]);
@@ -496,7 +633,7 @@ class WaterConsumptionController extends Controller
             $current_fy = $get_current_fiscal_year->fiscal_year;
             $current_fy_id = $get_current_fiscal_year->id;
             
-            $water_consumption = WaterConsumption::where('fiscal_year_id', $current_fy_id)
+            $water_consumption = WaterConsumption::where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $water_consumption, 'currentYear' => $current_fy]);

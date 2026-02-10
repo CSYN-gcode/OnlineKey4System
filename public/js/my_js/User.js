@@ -1,3 +1,61 @@
+function GetDepartment() {
+    $.ajax({
+        url: "get_department",
+        method: "get",
+        dataType: "json",
+        success: function (response) {
+            var department = response['department'];
+            if (department > 0) {
+                $('#txtSelectTargetDepartment').val(department);
+                $('#txtSelectActualDepartment').val(department);
+            }
+            else {
+                $('#txtSelectTargetDepartment').val(0);
+                $('#txtSelectActualDepartment').val(0);
+            }
+        }
+    });
+}
+
+function GetDepartmentForInk() {
+    $.ajax({
+        url: "get_department_for_ink",
+        method: "get",
+        dataType: "json",
+        success: function (response) {
+            var department = response['department'];
+            if (department > 0) {
+                $('#txtSelectTargetDepartment').val(department);
+                $('#txtSelectActualDepartment').val(department);
+            }
+            else {
+                $('#txtSelectTargetDepartment').val(0);
+                $('#txtSelectActualDepartment').val(0);
+            }
+        }
+    });
+}
+
+// function GetEnergyEntryDetailsforEdit() {
+//     $.ajax({
+//         url: "get_department",
+//         method: "get",
+//         dataType: "json",
+//         success: function (response) {
+//             var department = response['department'];
+//             if (department > 0) {
+//                 $('#txtSelectAddDepartment').val(department);
+//                 $('#txtSelectEditDepartment').val(department);
+//             }
+//             else {
+//                 $('#txtSelectAddDepartment').val(0);
+//                 $('#txtSelectEditDepartment').val(0);
+//             }
+//         }
+//     });
+// }
+
+
 //============================== ADD USER ==============================
 function AddUser(){
     toastr.options = {
@@ -21,71 +79,254 @@ function AddUser(){
 	$.ajax({
         url: "add_user",
         method: "post",
-        data: $('#formAddUser').serialize(),
+        data: $('#addUserForm').serialize(),
         dataType: "json",
-        beforeSend: function(){
-            $("#iBtnAddUserIcon").addClass('fa fa-spinner fa-pulse');
+        beforeSend: function () {
+            $("#btnAddUserIcon").addClass('fa fa-spinner fa-pulse');
             $("#btnAddUser").prop('disabled', 'disabled');
         },
-        success: function(response){
-            if(response['validation'] == 'hasError'){
+        success: function (response) {
+            if (response['validation'] == 'hasError') {
                 toastr.error('Saving user failed!');
-                if(response['error']['name'] === undefined){
-                    $("#txtAddUserName").removeClass('is-invalid');
-                    $("#txtAddUserName").attr('title', '');
+                if (response['error']['name'] === undefined) {
+                    $("#idname").removeClass('is-invalid');
+                    $("#idname").attr('title', '');
                 }
-                else{
-                    $("#txtAddUserName").addClass('is-invalid');
-                    $("#txtAddUserName").attr('title', response['error']['name']);
+                else {
+                    $("#idname").addClass('is-invalid');
+                    $("#idname").attr('title', response['error']['name']);
                 }
-
-                if(response['error']['position'] === undefined){
-                    $("#txtAddUserPosition").removeClass('is-invalid');
-                    $("#txtAddUserPosition").attr('title', '');
+                if (response['error']['userLevel'] === undefined) {
+                    $("#selUserLevelId").removeClass('is-invalid');
+                    $("#selUserLevelId").attr('title', '');
                 }
-                else{
-                    $("#txtAddUserPosition").addClass('is-invalid');
-                    $("#txtAddUserPosition").attr('title', response['error']['position']);
+                else {
+                    $("#selUserLevelId").addClass('is-invalid');
+                    $("#selUserLevelId").attr('title', response['error']['userLevel']);
                 }
-
-                if(response['error']['username'] === undefined){
-                    $("#txtAddUserUserName").removeClass('is-invalid');
-                    $("#txtAddUserUserName").attr('title', '');
-                }
-                else{
-                    $("#txtAddUserUserName").addClass('is-invalid');
-                    $("#txtAddUserUserName").attr('title', response['error']['username']);
-                }
-
-                if(response['error']['user_level_id'] === undefined){
-                    $("#selAddUserLevel").removeClass('is-invalid');
-                    $("#selAddUserLevel").attr('title', '');
-                }
-                else{
-                    $("#selAddUserLevel").addClass('is-invalid');
-                    $("#selAddUserLevel").attr('title', response['error']['user_level_id']);
-                }
-            }else if(response['result'] == 1){
+            }
+            else if (response['result'] == 1) {
                 $("#modalAddUser").modal('hide');
-                $("#formAddUser")[0].reset();
-                $("#selAddUserLevel").select2('val', '0');
-                toastr.success('User was succesfully saved!');
-                dataTableUsers.draw(); // reload the tables after insertion
+                $("#addUserForm")[0].reset();
+
+                toastr.success('User added!');
+                dataTableusersTable.draw(); // reload the tables after insertion
+                // location.reload();
+                setTimeout(function(){
+                    location.reload();
+                },1000);
+            }
+            else if (response['result'] == 0) {
+                toastr.error('User already exists!');
             }
 
-            $("#iBtnAddUserIcon").removeClass('fa fa-spinner fa-pulse');
+            $("#btnAddUserIcon").removeClass('fa fa-spinner fa-pulse');
             $("#btnAddUser").removeAttr('disabled');
-            $("#iBtnAddUserIcon").addClass('fa fa-check');
+            $("#btnAddUserIcon").addClass('fa fa-check');
         },
-        error: function(data, xhr, status){
+        error: function (data, xhr, status) {
             toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
-            $("#iBtnAddUserIcon").removeClass('fa fa-spinner fa-pulse');
+            $("#btnAddUserIcon").removeClass('fa fa-spinner fa-pulse');
             $("#btnAddUser").removeAttr('disabled');
-            $("#iBtnAddUserIcon").addClass('fa fa-check');
+            $("#btnAddUserIcon").addClass('fa fa-check');
         }
     });
 }
 
+function DeactivateUser() {
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "3000",
+        "timeOut": "3000",
+        "extendedTimeOut": "3000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut",
+    };
+
+    $.ajax({
+        url: "deactivate_user",
+        method: "post",
+        data: $('#deactivateUserForm').serialize(),
+        dataType: "json",
+        beforeSend: function () {
+            $("#deactivateIcon").addClass('fa fa-spinner fa-pulse');
+            $("#btnDeactivateUser").prop('disabled', 'disabled');
+        },
+        success: function (response) {
+            let result = response['result'];
+            if (result == 1) {
+                dataTableusersTable.draw();
+                $("#modalDeactivateUser").modal('hide');
+                $("#deactivateUserForm")[0].reset();
+                toastr.success('User successfully deactivated!');
+            }
+            else {
+                toastr.warning('User already deactivated!');
+            }
+
+            $("#deactivateIcon").removeClass('fa fa-spinner fa-pulse');
+            $("#btnDeactivateUser").removeAttr('disabled');
+            $("#deactivateIcon").addClass('fa fa-check');
+        },
+        error: function (data, xhr, status) {
+            toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+            $("#deactivateIcon").removeClass('fa fa-spinner fa-pulse');
+            $("#btnDeactivateUser").removeAttr('disabled');
+            $("#deactivateIcon").addClass('fa fa-check');
+        }
+    });
+}
+
+function ActivateUser() {
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "3000",
+        "timeOut": "3000",
+        "extendedTimeOut": "3000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut",
+    };
+
+    $.ajax({
+        url: "activate_user",
+        method: "post",
+        data: $('#activateUserForm').serialize(),
+        dataType: "json",
+        beforeSend: function () {
+            $("#activateIcon").addClass('fa fa-spinner fa-pulse');
+            $("#btnActivateUser").prop('disabled', 'disabled');
+        },
+        success: function (response) {
+            let result = response['result'];
+            if (result == 1) {
+                $("#modalActivateUser").modal('hide');
+                $("#activateUserForm")[0].reset();
+                toastr.success('User successfully activated!');
+                dataTableusersTable.draw();
+            }
+            else {
+                toastr.warning('User already deactivated!');
+            }
+
+            $("#activateIcon").removeClass('fa fa-spinner fa-pulse');
+            $("#btnActivateUser").removeAttr('disabled');
+            $("#activateIcon").addClass('fa fa-check');
+        },
+        error: function (data, xhr, status) {
+            toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+            $("#activateIcon").removeClass('fa fa-spinner fa-pulse');
+            $("#btnActivateUser").removeAttr('disabled');
+            $("#activateIcon").addClass('fa fa-check');
+        }
+    });
+}
+
+function GetUserId(userId) {
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "3000",
+        "timeOut": "3000",
+        "extendedTimeOut": "3000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut",
+    };
+
+    $.ajax({
+        url: "get_id_edit_user",
+        method: "get",
+        data: {
+            user_id: userId
+        },
+        dataType: "json",
+        beforeSend: function () {
+
+        },
+        success: function (JsonObject) {
+            // let userData = response['user_data'];
+            if (JsonObject['user_data'].length > 0) {
+                $("#selEditUserAccessUserId").val(JsonObject['user_data'][0].rapidx_id);
+
+                if(JsonObject['user_data'][0].department == 1){
+                    $("#txtEditUserDepartmentId").val('BOD');
+                }else if(JsonObject['user_data'][0].department == 2){
+                    $("#txtEditUserDepartmentId").val('IAS');
+                }
+                else if(JsonObject['user_data'][0].department == 3){
+                    $("#txtEditUserDepartmentId").val('FIN');
+                }
+                else if(JsonObject['user_data'][0].department == 4){
+                    $("#txtEditUserDepartmentId").val('HRD');
+                }
+                else if(JsonObject['user_data'][0].department == 5){
+                    $("#txtEditUserDepartmentId").val('ESS');
+                }
+                else if(JsonObject['user_data'][0].department == 6){
+                    $("#txtEditUserDepartmentId").val('LOG');
+                }
+                else if(JsonObject['user_data'][0].department == 7){
+                    $("#txtEditUserDepartmentId").val('FAC');
+                }
+                else if(JsonObject['user_data'][0].department == 8){
+                    $("#txtEditUserDepartmentId").val('ISS');
+                }
+                else if(JsonObject['user_data'][0].department == 9){
+                    $("#txtEditUserDepartmentId").val('QAD');
+                }
+                else if(JsonObject['user_data'][0].department == 10){
+                    $("#txtEditUserDepartmentId").val('EMS');
+                }else if(JsonObject['user_data'][0].department == 11){
+                    $("#txtEditUserDepartmentId").val('TS');
+                }
+                else if(JsonObject['user_data'][0].department == 12){
+                    $("#txtEditUserDepartmentId").val('CN');
+                }
+                else if(JsonObject['user_data'][0].department == 13){
+                    $("#txtEditUserDepartmentId").val('YF');
+                }
+                else if(JsonObject['user_data'][0].department == 14){
+                    $("#txtEditUserDepartmentId").val('PPS');
+                }else{
+                    $("#txtEditUserDepartmentId").val('--undefined--');
+                }
+
+                $("#selEditUserLevelId").val(JsonObject['user_data'][0].user_level_id);
+            }
+            else {
+                toastr.warning('No Record Found!');
+            }
+        },
+        error: function (data, xhr, status) {
+            toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+        }
+    });
+}
 
 //============================== EDIT USER BY ID TO EDIT ==============================
 function GetUserByIdToEdit(userId){
@@ -115,7 +356,7 @@ function GetUserByIdToEdit(userId){
         },
         dataType: "json",
         beforeSend: function(){
-            
+
         },
         success: function(response){
             let user = response['user'];
@@ -134,6 +375,25 @@ function GetUserByIdToEdit(userId){
         }
     });
 }
+
+//============================== EDIT USER DATA FROM RAPIDX ==============================
+function GetUserDetails() {
+    $.ajax({
+        url: "get_user_details",
+        method: "get",
+        dataType: "json",
+        success: function (response) {
+            var rapidx_user_id = response['rapidx_user_id'];
+            if (rapidx_user_id > 0) {
+                $('#RapidxUserId').val(rapidx_user_id);
+            }
+            else {
+                $('#RapidxUserId').val(0);
+            }
+        }
+    });
+}
+//============================== EDIT USER DATA FROM RAPIDX END ==============================
 
 
 //============================== EDIT USER ==============================
@@ -159,7 +419,7 @@ function EditUser(){
     $.ajax({
         url: "edit_user",
         method: "post",
-        data: $('#formEditUser').serialize(),
+        data: $('#editUserForm').serialize(),
         dataType: "json",
         beforeSend: function(){
             $("#iBtnEditUserIcon").addClass('fa fa-spinner fa-pulse');
@@ -168,56 +428,44 @@ function EditUser(){
         success: function(response){
             if(response['validation'] == 'hasError'){
                 toastr.error('Updating User Failed!');
-
-                if(response['error']['name'] === undefined){
-                    $("#txtEditUserName").removeClass('is-invalid');
-                    $("#txtEditUserName").attr('title', '');
+                if (response['error']['name'] === undefined) {
+                    $("#idname").removeClass('is-invalid');
+                    $("#idname").attr('title', '');
                 }
-                else{
-                    $("#txtEditUserName").addClass('is-invalid');
-                    $("#txtEditUserName").attr('title', response['error']['name']);
+                else {
+                    $("#idname").addClass('is-invalid');
+                    $("#idname").attr('title', response['error']['name']);
                 }
-
-                if(response['error']['position'] === undefined){
-                    $("#txtEditUserPosition").removeClass('is-invalid');
-                    $("#txtEditUserPosition").attr('title', '');
+                if (response['error']['userLevel'] === undefined) {
+                    $("#selUserLevelId").removeClass('is-invalid');
+                    $("#selUserLevelId").attr('title', '');
                 }
-                else{
-                    $("#txtEditUserPosition").addClass('is-invalid');
-                    $("#txtEditUserPosition").attr('title', response['error']['position']);
-                }
-
-                if(response['error']['username'] === undefined){
-                    $("#txtEditUserUserName").removeClass('is-invalid');
-                    $("#txtEditUserUserName").attr('title', '');
-                }
-                else{
-                    $("#txtEditUserUserName").addClass('is-invalid');
-                    $("#txtEditUserUserName").attr('title', response['error']['username']);
-                }
-
-                if(response['error']['user_level_id'] === undefined){
-                    $("#selEditUserLevel").removeClass('is-invalid');
-                    $("#selEditUserLevel").attr('title', '');
-                }
-                else{
-                    $("#selEditUserLevel").addClass('is-invalid');
-                    $("#selEditUserLevel").attr('title', response['error']['user_level_id']);
+                else {
+                    $("#selUserLevelId").addClass('is-invalid');
+                    $("#selUserLevelId").attr('title', response['error']['userLevel']);
                 }
             }else{
                 if(response['result'] == 1){
                     $("#modalEditUser").modal('hide');
-                    $("#formEditUser")[0].reset();
+                    $("#editUserForm")[0].reset();
                     $("#selEditUserLevel").select2('val', '0');
-    
-                    dataTableUsers.draw();
+
+                    dataTableusersTable.draw();
                     toastr.success('User was succesfully updated!');
+
+                    // location.reload();
+                    setTimeout(function(){
+                        location.reload();
+                    },1000);
+                }
+                else if (response['result'] == 0) {
+                    toastr.error('User already exists!');
                 }else{
                     toastr.warning(response['tryCatchError'] + "<br>" +
                     'Try Catch Error');
                 }
             }
-            
+
             $("#iBtnEditUserIcon").removeClass('fa fa-spinner fa-pulse');
             $("#btnEditUser").removeAttr('disabled');
             $("#iBtnEditUserIcon").addClass('fa fa-check');
@@ -264,7 +512,7 @@ function DeleteUser(){
         success: function(response){
             let result = response['result'];
             if(result == 1){
-                dataTableUsers.draw();
+                dataTableusersTable.draw();
                 dataTableUsersArchive.draw();
                 $("#modalDeleteUser").modal('hide');
                 $("#formDeleteUser")[0].reset();
@@ -273,7 +521,7 @@ function DeleteUser(){
             else{
                 toastr.warning('No user found!');
             }
-            
+
             $("#iBtnDeleteUserIcon").removeClass('fa fa-spinner fa-pulse');
             $("#btnDeleteUser").removeAttr('disabled');
             $("#iBtnDeleteUserIcon").addClass('fa fa-check');
@@ -321,7 +569,7 @@ function RestoreUser(){
             let result = response['result'];
             if(result == 1){
                 dataTableUsersArchive.draw();
-                dataTableUsers.draw();
+                dataTableusersTable.draw();
                 $("#modalRestoreUser").modal('hide');
                 $("#formRestoreUser")[0].reset();
                 toastr.success('User successfully restored');
@@ -329,7 +577,7 @@ function RestoreUser(){
             else{
                 toastr.warning('Cannot restore the user');
             }
-            
+
             $("#iBtnRestoreUserIcon").removeClass('fa fa-spinner fa-pulse');
             $("#btnRestoreUser").removeAttr('disabled');
             $("#iBtnRestoreUserIcon").addClass('fa fa-check');
@@ -394,7 +642,7 @@ function SignIn(){
                     $("#txtSignInPassword").attr('title', response['error']['password']);
                     // toastr.error(response['error']['password']);
                 }
-            } 
+            }
             else{
                 if(response['result'] == 0){
                     toastr.error(response['error_message']);
@@ -677,7 +925,7 @@ function ChangeUserStatus(){
                 }
                 $("#modalChangeUserStat").modal('hide');
                 $("#formChangeUserStat")[0].reset();
-                dataTableUsers.draw();
+                dataTableusersTable.draw();
             }
 
             $("#iBtnChangeUserStatIcon").removeClass('fa fa-spinner fa-pulse');
@@ -730,7 +978,7 @@ function ResetUserPass(){
             else{
                 toastr.error('Resetting Password Failed!');
             }
-            
+
             $("#modalResetUserPassword").modal('hide');
             $("#iBtnResetUserPasswordIcon").removeClass('fa fa-spinner fa-pulse');
             $("#btnResetUserPassword").removeAttr('disabled');
@@ -774,7 +1022,7 @@ function CountUserByStatForDashboard(status){
         },
         dataType: "json",
         beforeSend: function(){
-            
+
         },
         success: function(JsonObject){
             if(JsonObject['user'].length > 0){

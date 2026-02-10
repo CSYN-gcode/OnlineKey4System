@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
+// use App\RapidXUser;
 // use App\Model\UserLevel;
 // use App\Model\OQCStamp;
 
@@ -46,8 +48,18 @@ class User extends Authenticatable
     //     return $this->hasOne(UserLevel::class, 'id', 'user_level_id');
     // }
 
-    // public function oqc_stamps()
+    public function rapidx_user_details()
+    {
+        return $this->hasOne(RapidXUser::class, 'id','rapidx_id');
+    }
+
+    public function user_level()
+    {
+        return $this->hasOne(UserLevel::class, 'user_level_id','user_level_id');
+    }
+
+    // public function rapidx_user_details()
     // {
-    //     return $this->hasMany(OQCStamp::class, 'user_id', 'id');
+    //     return $this->hasOne(RapidXDepartment::class, 'id','rapidx_id');
     // }
 }

@@ -15,8 +15,7 @@
 
 <!-- Select2 -->
 <link rel="stylesheet" href="{{ asset('public/template/plugins/select2/css/select2.min.css') }}">
-<link rel="stylesheet"
-    href="{{ asset('public/template/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/template/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
 {{-- Chart --}}
 <link rel="stylesheet" href="{{ asset('public/template/plugins/chart.js/Chart.min.css') }}">
@@ -31,7 +30,7 @@
 
 {{-- <link rel="stylesheet" href="{{ asset('public/template/plugins/daterangepicker/daterangepicker.css') }}"> --}}
 
-<link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+{{-- <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet"> --}}
 
 
 <link rel="stylesheet"
@@ -49,4 +48,4 @@
 
 <link href="{{ asset('public/css/flash.css') }}" rel="stylesheet">
 
-<link href="{{ asset('public/css/custom.css') }}" rel="stylesheet">
+<link href="{{ asset('public/css/custom.css?n=2') }}" rel="stylesheet">

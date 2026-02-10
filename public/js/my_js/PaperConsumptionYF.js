@@ -11,7 +11,7 @@ function GetCurrentFYPaperDataYF() {
             var nextYear = currentYear + 1;
 
             var data = response['result'];
-            // console.log(data);
+            console.log('gg');
             var datas = [];
             var targets = [];
             var actuals = [];
@@ -24,8 +24,7 @@ function GetCurrentFYPaperDataYF() {
                 targets.push(targetData);
                 actuals.push(actualData);
             }
-            // console.log(targets);
-
+      
             var sumTarget = targets.reduce(function(a, b){
                 return a + b;
             }, 0);
@@ -40,11 +39,11 @@ function GetCurrentFYPaperDataYF() {
                     // console.log('Second IF april');
 
                     var aprilTarget = 0;
-                    if(data[datas.findIndex(checkMonth)].target != null) {
+                     if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF april');
-                        aprilTarget = data[datas.findIndex(checkMonth)].target;
-
                          $('.april-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
+
+                         aprilTarget = data[datas.findIndex(checkMonth)].target;
                      } else {
                         // console.log('Third ELSE april');
                         $('.april-paper-yf-current-fy-target').html('-');
@@ -53,13 +52,17 @@ function GetCurrentFYPaperDataYF() {
                      var aprilActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF april');
+            
                         aprilActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilCummulative = sumTarget - aprilTarget + aprilActual;
-
+                        var aprilCummulative = aprilCummulative.toFixed(2);
+                        
                         var aprilDifference = aprilTarget - aprilActual;
+                        var aprilDifference = aprilDifference.toFixed(2);
 
                         $('.april-paper-yf-actual-target').html(aprilDifference);
+                        
                         $('.april-paper-yf-tricolor').html(aprilCummulative);
 
                         var icon = '';
@@ -70,27 +73,28 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.april-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE april');
                         $('.april-paper-yf-tricolor').html('-');
                         $('.april-paper-yf-current-fy-actual').html('-');
                      }
-
                 } else {
                     // console.log('Second ELSE april');
+                    // $('.april-paper-yf-actual-target').html('-');
                     $('.april-paper-yf-current-fy-target').html('-');
                     $('.april-paper-yf-current-fy-actual').html('-');
                 }
             } else {
                 // console.log('First ELSE april');
+                $('.april-paper-yf-actual-target').html('-');
                 $('.april-paper-yf-tricolor').html('-');
                 $('.april-paper-yf-current-fy-target').html('-');
                 $('.april-paper-yf-current-fy-actual').html('-');
             }
             //===== DATA FOR APRIL --- DASHBOARD =======//
-
+        
             //===== DATA FOR MAY --- DASHBOARD =======//
             if(jQuery.inArray(5, datas) != -1) {
                 // console.log('First IF may');
@@ -102,6 +106,7 @@ function GetCurrentFYPaperDataYF() {
                     var mayTarget = 0;
                      if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF may');
+
                         mayTarget = data[datas.findIndex(checkMonth)].target;
 
                          $('.may-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
@@ -113,14 +118,17 @@ function GetCurrentFYPaperDataYF() {
                      var mayActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF may');
+            
                         mayActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayTarget = aprilTarget + mayTarget;
                         var aprilMayActual = aprilActual + mayActual;
 
                         var mayCummulative = sumTarget - aprilMayTarget + aprilMayActual;
-
+                        var mayCummulative = mayCummulative.toFixed(2);
+                       
                         var mayDifference = mayTarget - mayActual;
+                        var mayDifference = mayDifference.toFixed(2);
 
                         $('.may-paper-yf-actual-target').html(mayDifference);
                         $('.may-paper-yf-tricolor').html(mayCummulative);
@@ -133,7 +141,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.may-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE may');
@@ -148,8 +156,9 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE may');
-                $('.may-paper-yf-current-fy-target').html('-');
+                $('.may-paper-yf-actual-target').html('-');
                 $('.may-paper-yf-tricolor').html('-');
+                $('.may-paper-yf-current-fy-target').html('-');
                 $('.may-paper-yf-current-fy-actual').html('-');
             }
             //===== DATA FOR MAY --- DASHBOARD =======//
@@ -166,6 +175,7 @@ function GetCurrentFYPaperDataYF() {
                      if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF june');
                         juneTarget = data[datas.findIndex(checkMonth)].target;
+
                          $('.june-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
                      } else {
                         // console.log('Third ELSE june');
@@ -175,14 +185,17 @@ function GetCurrentFYPaperDataYF() {
                      var juneActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF june');
+                        
                         juneActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayJuneTarget = aprilMayTarget + juneTarget;
                         var aprilMayJuneActual = aprilMayActual + juneActual;
 
                         var juneCummulative = sumTarget - aprilMayJuneTarget + aprilMayJuneActual;
+                        var juneCummulative = juneCummulative.toFixed(2);
 
                         var juneDifference = juneTarget - juneActual;
+                        var juneDifference = juneDifference.toFixed(2);
 
                         $('.june-paper-yf-actual-target').html(juneDifference);
                         $('.june-paper-yf-tricolor').html(juneCummulative);
@@ -195,7 +208,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.june-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE june');
@@ -210,6 +223,7 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE june');
+                $('.june-paper-yf-actual-target').html('-');
                 $('.june-paper-yf-tricolor').html('-');
                 $('.june-paper-yf-current-fy-target').html('-');
                 $('.june-paper-yf-current-fy-actual').html('-');
@@ -238,16 +252,18 @@ function GetCurrentFYPaperDataYF() {
                      var julyActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF july');
-
+            
                         julyActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayJuneJulyTarget = aprilMayJuneTarget + julyTarget;
                         var aprilMayJuneJulyActual = aprilMayJuneActual + julyActual;
 
                         var julyCummulative = sumTarget - aprilMayJuneJulyTarget + aprilMayJuneJulyActual;
+                        var julyCummulative = julyCummulative.toFixed(2);
 
                         var julyDifference = julyTarget - julyActual;
-                                    
+                        var julyDifference = julyDifference.toFixed(2);
+
                         $('.july-paper-yf-actual-target').html(julyDifference);
                         $('.july-paper-yf-tricolor').html(julyCummulative);
 
@@ -259,7 +275,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.july-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE july');
@@ -274,6 +290,7 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE july');
+                $('.july-paper-yf-actual-target').html('-');
                 $('.july-paper-yf-tricolor').html('-');
                 $('.july-paper-yf-current-fy-target').html('-');
                 $('.july-paper-yf-current-fy-actual').html('-');
@@ -292,7 +309,7 @@ function GetCurrentFYPaperDataYF() {
                      if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF august');
 
-                        augustTarget = data[datas.findIndex(checkMonth)].target;
+                        augustTarget = data[datas.findIndex(checkMonth)].target
 
                          $('.august-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
                      } else {
@@ -303,19 +320,20 @@ function GetCurrentFYPaperDataYF() {
                      var augustActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF august');
-
+            
                         augustActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayJuneJulyAugustTarget = aprilMayJuneJulyTarget + augustTarget;
                         var aprilMayJuneJulyAugustActual = aprilMayJuneJulyActual + augustActual;
                         
                         var augustCummulative = sumTarget - aprilMayJuneJulyAugustTarget + aprilMayJuneJulyAugustActual;
+                        var augustCummulative = augustCummulative.toFixed(2);
 
                         var augustDifference = augustTarget - augustActual;
+                        var augustDifference = augustDifference.toFixed(2);
 
                         $('.august-paper-yf-actual-target').html(augustDifference);
                         $('.august-paper-yf-tricolor').html(augustCummulative);
-
 
                         var icon = '';
                         if(data[datas.findIndex(checkMonth)].target > data[datas.findIndex(checkMonth)].actual) {
@@ -325,11 +343,11 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.august-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE august');
-                        $('.august-paper-yf-actual-target').html('-');
+                        $('.august-paper-yf-tricolor').html('-');
                         $('.august-paper-yf-current-fy-actual').html('-');
                      }
 
@@ -340,9 +358,10 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE august');
+                $('.august-paper-yf-actual-target').html('-');
+                $('.august-paper-yf-tricolor').html('-');
                 $('.august-paper-yf-current-fy-target').html('-');
                 $('.august-paper-yf-current-fy-actual').html('-');
-                $('.august-paper-yf-actual-target').html('-');
             }
             //===== DATA FOR AUGUST --- DASHBOARD =======//
 
@@ -359,6 +378,7 @@ function GetCurrentFYPaperDataYF() {
                         // console.log('Third IF september');
 
                         septemberTarget = data[datas.findIndex(checkMonth)].target;
+
                          $('.september-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
                      } else {
                         // console.log('Third ELSE september');
@@ -368,15 +388,17 @@ function GetCurrentFYPaperDataYF() {
                      var septemberActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF september');
-
+                        
                         septemberActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayJuneJulyAugustSeptemberTarget = aprilMayJuneJulyAugustTarget + septemberTarget;
                         var aprilMayJuneJulyAugustSeptemberActual = aprilMayJuneJulyAugustActual + septemberActual;
 
                         var septemberCummulative = sumTarget - aprilMayJuneJulyAugustSeptemberTarget + aprilMayJuneJulyAugustSeptemberActual;
+                        var septemberCummulative = septemberCummulative.toFixed(2);
 
                         var septemberDifference = septemberTarget - septemberActual;
+                        var septemberDifference = septemberDifference.toFixed(2);
 
                         $('.september-paper-yf-actual-target').html(septemberDifference);
                         $('.september-paper-yf-tricolor').html(septemberCummulative);
@@ -389,7 +411,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.september-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE september');
@@ -404,6 +426,7 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE september');
+                $('.september-paper-yf-actual-target').html('-');
                 $('.september-paper-yf-tricolor').html('-');
                 $('.september-paper-yf-current-fy-target').html('-');
                 $('.september-paper-yf-current-fy-actual').html('-');
@@ -433,19 +456,21 @@ function GetCurrentFYPaperDataYF() {
                      var octoberActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF october');
-
+                        
                         octoberActual = data[datas.findIndex(checkMonth)].actual;
 
-                        var aprilMayJuneJulyAugustSeptemberOctoberTarget = aprilMayJuneJulyAugustSeptemberTarget + octoberTarget; 
-                        var aprilMayJuneJulyAugustSeptemberOctoberActual = aprilMayJuneJulyAugustSeptemberActual + octoberActual; 
+                        var aprilMayJuneJulyAugustSeptemberOctoberTarget = aprilMayJuneJulyAugustSeptemberTarget + octoberTarget;
+                        var aprilMayJuneJulyAugustSeptemberOctoberActual = aprilMayJuneJulyAugustSeptemberActual + octoberActual;
 
                         var octoberCummulative = sumTarget - aprilMayJuneJulyAugustSeptemberOctoberTarget + aprilMayJuneJulyAugustSeptemberOctoberActual;
+                        var octoberCummulative = octoberCummulative.toFixed(2);
 
                         var octoberDifference = octoberTarget - octoberActual;
+                        var octoberDifference = octoberDifference.toFixed(2);
 
                         $('.october-paper-yf-actual-target').html(octoberDifference);
                         $('.october-paper-yf-tricolor').html(octoberCummulative);
-                        
+
                         var icon = '';
                         if(data[datas.findIndex(checkMonth)].target > data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-down text-green"></i>';
@@ -454,7 +479,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.october-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE october');
@@ -469,6 +494,7 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE october');
+                $('.october-paper-yf-actual-target').html('-');
                 $('.october-paper-yf-tricolor').html('-');
                 $('.october-paper-yf-current-fy-target').html('-');
                 $('.october-paper-yf-current-fy-actual').html('-');
@@ -486,8 +512,8 @@ function GetCurrentFYPaperDataYF() {
                     var novemberTarget = 0;
                      if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF november');
-
                         novemberTarget = data[datas.findIndex(checkMonth)].target;
+
                          $('.november-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
                      } else {
                         // console.log('Third ELSE november');
@@ -497,15 +523,16 @@ function GetCurrentFYPaperDataYF() {
                      var novemberActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF november');
-
                         novemberActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayJuneJulyAugustSeptemberOctoberNovemberTarget = aprilMayJuneJulyAugustSeptemberOctoberTarget + novemberTarget;
                         var aprilMayJuneJulyAugustSeptemberOctoberNovemberActual = aprilMayJuneJulyAugustSeptemberOctoberActual + novemberActual;
 
                         var novemberCummulative = sumTarget - aprilMayJuneJulyAugustSeptemberOctoberNovemberTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberActual;
+                        var novemberCummulative = novemberCummulative.toFixed(2);
 
                         var novemberDifference = novemberTarget - novemberActual;
+                        var novemberDifference = novemberDifference.toFixed(2);
 
                         $('.november-paper-yf-actual-target').html(novemberDifference);
                         $('.november-paper-yf-tricolor').html(novemberCummulative);
@@ -518,7 +545,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.november-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE november');
@@ -533,6 +560,7 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE november');
+                $('.november-paper-yf-actual-target').html('-');
                 $('.november-paper-yf-tricolor').html('-');
                 $('.november-paper-yf-current-fy-target').html('-');
                 $('.november-paper-yf-current-fy-actual').html('-');
@@ -550,8 +578,8 @@ function GetCurrentFYPaperDataYF() {
                     var decemberTarget = 0;
                      if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF december');
-
                         decemberTarget = data[datas.findIndex(checkMonth)].target;
+
                          $('.december-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
                      } else {
                         // console.log('Third ELSE december');
@@ -561,20 +589,20 @@ function GetCurrentFYPaperDataYF() {
                      var decemberActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF december');
-
+                        
                         decemberActual = data[datas.findIndex(checkMonth)].actual;
 
-                        var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberTarget = aprilMayJuneJulyAugustSeptemberOctoberNovemberTarget + decemberTarget;
-                        var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberActual = aprilMayJuneJulyAugustSeptemberOctoberNovemberActual + decemberActual;
+                        var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberTarget = aprilMayJuneJulyAugustSeptemberOctoberNovemberTarget + decemberTarget; 
+                        var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberActual = aprilMayJuneJulyAugustSeptemberOctoberNovemberActual + decemberActual; 
 
                         var decemberCummulative = sumTarget - aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberActual;
-
+                        var decemberCummulative = decemberCummulative.toFixed(2);
+                        
                         var decemberDifference = decemberTarget - decemberActual;
+                        var decemberDifference = decemberDifference.toFixed(2);
 
                         $('.december-paper-yf-actual-target').html(decemberDifference);
                         $('.december-paper-yf-tricolor').html(decemberCummulative);
-
-                    
 
                         var icon = '';
                         if(data[datas.findIndex(checkMonth)].target > data[datas.findIndex(checkMonth)].actual) {
@@ -584,7 +612,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.december-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE december');
@@ -599,11 +627,13 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE december');
+                $('.december-paper-yf-actual-target').html('-');
                 $('.december-paper-yf-tricolor').html('-');
                 $('.december-paper-yf-current-fy-target').html('-');
                 $('.december-paper-yf-current-fy-actual').html('-');
             }
             //===== DATA FOR DECEMBER --- DASHBOARD =======//
+
 
             //===== DATA FOR JANUARY --- DASHBOARD =======//
             if(jQuery.inArray(1, datas) != -1) {
@@ -612,34 +642,51 @@ function GetCurrentFYPaperDataYF() {
 
                  if(datas.findIndex(checkMonth) != -1) {
                     // console.log('Second IF January');
-
+                 
                     var januaryTarget = 0;
                      if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF January');
-
                         januaryTarget = data[datas.findIndex(checkMonth)].target;
-                         $('.january-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
+
+                        $('.january-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
+
+                            
                      } else {
                         // console.log('Third ELSE January');
                         $('.january-paper-yf-current-fy-target').html('-');
                      }
 
-                     var januaryActual = 0;
+                    // console.log(januaryActual);
+
+                    var januaryActual = 0;
+
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF January');
-
                         januaryActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryTarget = aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberTarget + januaryTarget;
                         var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryActual = aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberActual + januaryActual;
 
                         var januaryCummulative = sumTarget - aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryActual;
+                        var januaryCummulative = januaryCummulative.toFixed(2);
 
                         var januaryDifference = januaryTarget - januaryActual;
+                        var januaryDifference = januaryDifference.toFixed(2);
 
                         $('.january-paper-yf-actual-target').html(januaryDifference);
-                        $('.january-paper-yf-tricolor').html(januaryCummulative);
 
+                        var checkCummulative = januaryCummulative;
+
+                        checkCummulative =  checkCummulative.toString();
+
+                        if(checkCummulative != 'NaN') {
+                            // console.log('asd');
+                            $('.january-paper-yf-tricolor').html(januaryCummulative);
+                        } else {
+                            // console.log('asda');
+                            $('.january-paper-yf-tricolor').html('-');
+                        }
+                       
                         var icon = '';
                         if(data[datas.findIndex(checkMonth)].target > data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-down text-green"></i>';
@@ -648,10 +695,9 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.january-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
-                        // console.log('Fourth ELSE January');
                         $('.january-paper-yf-tricolor').html('-');
                         $('.january-paper-yf-current-fy-actual').html('-');
                      }
@@ -662,12 +708,16 @@ function GetCurrentFYPaperDataYF() {
                     $('.january-paper-yf-current-fy-actual').html('-');
                 }
             } else {
-                // console.log('First ELSE January');
+                console.log('First ELSE January');
+                $('.january-paper-yf-actual-target').html('-');
                 $('.january-paper-yf-tricolor').html('-');
                 $('.january-paper-yf-current-fy-target').html('-');
                 $('.january-paper-yf-current-fy-actual').html('-');
             }
             //===== DATA FOR JANUARY --- DASHBOARD =======//
+
+          
+
 
             //===== DATA FOR FEBRUARY --- DASHBOARD =======//
             if(jQuery.inArray(2, datas) != -1) {
@@ -680,31 +730,44 @@ function GetCurrentFYPaperDataYF() {
                     var februaryTarget = 0;
                      if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF february');
-
                         februaryTarget = data[datas.findIndex(checkMonth)].target;
+                        
                          $('.february-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
                      } else {
                         // console.log('Third ELSE february');
                         $('.february-paper-yf-current-fy-target').html('-');
+                       
                      }
 
                      var februaryActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF february');
-
+            
                         februaryActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryTarget = aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryTarget + februaryTarget;
-
                         var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryActual = aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryActual + februaryActual;
-
+                        
                         var februaryCummulative = sumTarget - aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryActual;
+                        var februaryCummulative = februaryCummulative.toFixed(2);
+
+                        var checkCummulative = februaryCummulative;
+
+                        checkCummulative =  checkCummulative.toString();
 
                         var februaryDifference = februaryTarget - februaryActual;
+                        var februaryDifference = februaryDifference.toFixed(2);
 
                         $('.february-paper-yf-actual-target').html(februaryDifference);
-                        $('.february-paper-yf-tricolor').html(februaryCummulative);
-                        
+
+                        if(checkCummulative != 'NaN') {
+                            // console.log('asd');
+                            $('.february-paper-yf-tricolor').html(februaryCummulative);
+                        } else {
+                            // console.log('asda');
+                            $('.february-paper-yf-tricolor').html('-');
+                        }
+
                         var icon = '';
                         if(data[datas.findIndex(checkMonth)].target > data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-down text-green"></i>';
@@ -713,7 +776,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.february-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE february');
@@ -728,6 +791,7 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE february');
+                $('.february-paper-yf-actual-target').html('-');
                 $('.february-paper-yf-tricolor').html('-');
                 $('.february-paper-yf-current-fy-target').html('-');
                 $('.february-paper-yf-current-fy-actual').html('-');
@@ -745,31 +809,43 @@ function GetCurrentFYPaperDataYF() {
                     var marchTarget = 0;
                      if(data[datas.findIndex(checkMonth)].target != null) {
                         // console.log('Third IF march');
-
                         marchTarget = data[datas.findIndex(checkMonth)].target;
+
                          $('.march-paper-yf-current-fy-target').html(data[datas.findIndex(checkMonth)].target);
                      } else {
                         // console.log('Third ELSE march');
-                        $('.march-paper-yf-current-fy-targe1.22t').html('-');
+                        $('.march-paper-yf-current-fy-target').html('-');
                      }
 
                      var marchActual = 0;
                      if(data[datas.findIndex(checkMonth)].actual != null) {
                         // console.log('Fourth IF march');
-
                         marchActual = data[datas.findIndex(checkMonth)].actual;
 
                         var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchTarget = aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryTarget + marchTarget;
-                        
+
                         var aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchActual = aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryActual + marchActual;
 
                         var marchCummulative = sumTarget - aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchTarget + aprilMayJuneJulyAugustSeptemberOctoberNovemberDecemberJanuaryFebruaryMarchActual;
+                        var marchCummulative = marchCummulative.toFixed(2);
+
+                        var checkCummulative = marchCummulative;
+
+                        checkCummulative =  checkCummulative.toString();
+
 
                         var marchDifference = marchTarget - marchActual;
+                        var marchDifference = marchDifference.toFixed(2);
                         
-                        $('.march-paper-yf-actual-target').html(marchDifference);
-                        $('.march-paper-yf-tricolor').html(marchCummulative);
+                        $('.march-paper-yf-actual-target').html(marchDifference); 
 
+                        if(checkCummulative != 'NaN') {
+                            // console.log('asd');
+                            $('.march-paper-yf-tricolor').html(marchCummulative);
+                        } else {
+                            // console.log('asda');
+                            $('.march-paper-yf-tricolor').html('-');
+                        }
 
                         var icon = '';
                         if(data[datas.findIndex(checkMonth)].target > data[datas.findIndex(checkMonth)].actual) {
@@ -779,7 +855,7 @@ function GetCurrentFYPaperDataYF() {
                         } else if (data[datas.findIndex(checkMonth)].target < data[datas.findIndex(checkMonth)].actual) {
                             icon = '<i class="fas fa-arrow-up text-red"></i>';
                         }
-
+ 
                          $('.march-paper-yf-current-fy-actual').html(data[datas.findIndex(checkMonth)].actual + '&nbsp;&nbsp;&nbsp;&nbsp;' + icon);
                      } else {
                         // console.log('Fourth ELSE march');
@@ -794,34 +870,43 @@ function GetCurrentFYPaperDataYF() {
                 }
             } else {
                 // console.log('First ELSE march');
+                $('.march-paper-yf-actual-target').html('-');
                 $('.march-paper-yf-tricolor').html('-');
                 $('.march-paper-yf-current-fy-target').html('-');
                 $('.march-paper-yf-current-fy-actual').html('-');
             }
             //===== DATA FOR MARCH --- DASHBOARD =======//
 
-            
-            if(sumTarget != 0 && sumTarget != null) {
-                $('.total-paper-yf-current-fy-target').html(sumTarget);
-            } else {
-                $('.total-paper-yf-current-fy-target').html('-');
-            }
 
+            if(sumTarget != 0 && sumTarget != null) {
+                var sumTarget = sumTarget.toFixed(2);
+                $('.total-paper-yf-current-fy-target').html(sumTarget); 
+            } else {
+                $('.total-paper-yf-current-fy-target').html('-'); 
+            }
 
             var sumActual = actuals.reduce(function(a, b){
                 return a + b;
             }, 0);
 
             if(sumActual != 0 && sumActual != null) {
-                $('.total-paper-yf-current-fy-actual').html(sumActual);
+                var sumActual = sumActual.toFixed(2);
+                $('.total-paper-yf-current-fy-actual').html(sumActual); 
             } else {
-                $('.total-paper-yf-current-fy-actual').html('-');
+                $('.total-paper-yf-current-fy-actual').html('-'); 
             }
 
-            var difference = sumTarget - sumActual;
+           var difference = sumTarget - sumActual;
+           var difference = difference.toFixed(2);
 
+           if(difference != 0) {
             $('.total-paper-yf-actual-target').html(difference);
             $('.total-paper-yf-tricolor').html(difference);
+        } else {
+            $('.total-paper-yf-actual-target').html('-');
+            $('.total-paper-yf-tricolor').html('-');
+            
+        }
 
             $('.april-paper-yf-current-fy').html('April ' + currentYear);
             $('.may-paper-yf-current-fy').html('May ' + currentYear);
@@ -834,7 +919,7 @@ function GetCurrentFYPaperDataYF() {
             $('.december-paper-yf-current-fy').html('December ' + currentYear);
             $('.january-paper-yf-current-fy').html('January ' + nextYear);
             $('.february-paper-yf-current-fy').html('February ' + nextYear);
-            $('.march-paper-yf-current-fy').html('March ' + nextYear);
+            $('.march-paper-yf-current-fy').html('March ' + nextYear); 
         }
     });
 }

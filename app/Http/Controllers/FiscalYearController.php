@@ -15,7 +15,7 @@ class FiscalYearController extends Controller
             ->get();
 
         $current_fiscal_year = $fiscal_year[0]->id;
-
+        
         return response()->json(['fiscal_year' => $current_fiscal_year]);
     }
 

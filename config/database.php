@@ -84,10 +84,10 @@ return [
         ],
 
 
-//         DB_CONNECTION_PAPER_CONSUMPTION=rapidx
-// DB_DATABASE_PAPER_CONSUMPTION=db_paper_consumption
-// DB_USERNAME_PAPER_CONSUMPTION=rapidx
-// DB_PASSWORD_PAPER_CONSUMPTION=Ne0nFutur3*
+            //DB_CONNECTION_PAPER_CONSUMPTION=rapidx
+            // DB_DATABASE_PAPER_CONSUMPTION=db_paper_consumption
+            // DB_USERNAME_PAPER_CONSUMPTION=rapidx
+            // DB_PASSWORD_PAPER_CONSUMPTION=Ne0nFutur3*
         'db_paper_consumption' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
@@ -107,6 +107,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+
 
         // 'mysql_subsystem' => [
         //     'driver' => 'mysql',

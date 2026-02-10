@@ -2,515 +2,435 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Model\OQCStamp;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\RapidXUser;
+use App\RapidXUserAccess;
+use App\RapidXDepartment;
+use App\User;
+use App\UserLevel;
 use DataTables;
-use Mail;
-use App\Jobs\SendUserPasswordJob;
-use Auth;
-use QrCode;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\CSVUserImport;
+
 
 class UserController extends Controller
 {
-    // Sign In
-    public function sign_in(Request $request){
-        $user_data = array(
-            'username' => $request->get('username'),
-            'password' => $request->get('password'),
-            'status' => "1"
-        );
+    
+    public function get_department()
+    {
+        session_start();
 
-        $validator = Validator::make($user_data, [
-            'username' => 'required',
-            'password' => 'required|alphaNum|min:8'
+        $rapidx_user_details = RapidXUser::where('id', $_SESSION['rapidx_user_id'])->get();
+
+        $rapidx_user_id = $rapidx_user_details[0]->id;
+        $rapidx_dept_id = $rapidx_user_details[0]->department_id;
+        
+        // test
+       // $rapidx_dept_id = 14;
+
+        $user_details = User::where('rapidx_id', $_SESSION['rapidx_user_id'])->get();
+
+        $user_id = $user_details[0]->rapidx_id;
+        $user_level_id = $user_details[0]->user_level_id;
+
+        // department id from rapidx
+        $ts_department = RapidXDepartment::where('department_name', 'like', 'TS%')->pluck('department_id')->toArray();
+        $cn_department = RapidXDepartment::where('department_name', 'like', 'CN%')->pluck('department_id')->toArray();
+        $yf_department = RapidXDepartment::where('department_name', 'like', 'YF%')->pluck('department_id')->toArray();
+        $pps_department = RapidXDepartment::where('department_name', 'like', 'PPS%')->pluck('department_id')->toArray();
+
+        if(in_array($rapidx_dept_id, $cn_department)){
+            $dep = 1;
+        }
+        else if(in_array($rapidx_dept_id, $pps_department)){
+            $dep = 2;
+        }
+        else if(in_array($rapidx_dept_id, $ts_department)){
+            $dep = 3;
+        }
+        else if(in_array($rapidx_dept_id, $yf_department)){
+            $dep = 4;
+        }else if($user_level_id == 2 || $user_level_id == 4){
+
+        }
+        
+        return response()->json(['department' => $dep]);
+    }
+
+    public function get_department_for_ink()
+    {
+        session_start();
+
+        $rapidx_user_details = RapidXUser::where('id', $_SESSION['rapidx_user_id'])->get();
+
+        $rapidx_user_id = $rapidx_user_details[0]->id;
+        $rapidx_dept_id = $rapidx_user_details[0]->department_id;
+        
+        // test
+       // $rapidx_dept_id = 14;
+
+        $user_details = User::where('rapidx_id', $_SESSION['rapidx_user_id'])->get();
+
+        $user_id = $user_details[0]->rapidx_id;
+        $user_level_id = $user_details[0]->user_level_id;
+
+        // department id from rapidx
+        $BOD = RapidXDepartment::where('department_name', 'like', 'Board of Directors%')->pluck('department_id')->toArray(); 
+        $IAS = RapidXDepartment::where('department_name', 'like', 'IAS%')->pluck('department_id')->toArray(); 
+        $FIN = RapidXDepartment::where('department_name', 'like', 'FIN%')->pluck('department_id')->toArray(); 
+        $HRD = RapidXDepartment::where('department_name', 'like', 'HRD%')->pluck('department_id')->toArray(); 
+        $ESS = RapidXDepartment::where('department_name', 'like', 'ESS%')->pluck('department_id')->toArray(); 
+        $LOG = RapidXDepartment::where('department_name', 'like', 'LOG%')->pluck('department_id')->toArray(); 
+        $FAC = RapidXDepartment::where('department_name', 'like', 'FAC%')->pluck('department_id')->toArray(); 
+        $ISS = RapidXDepartment::where('department_name', 'like', 'ISS%')->pluck('department_id')->toArray();
+        $QAD = RapidXDepartment::where('department_name', 'like', 'QAD%')->pluck('department_id')->toArray(); 
+        $EMS = RapidXDepartment::where('department_name', 'like', 'EMS%')->pluck('department_id')->toArray();
+        $ts_department = RapidXDepartment::where('department_name', 'like', 'TS%')->pluck('department_id')->toArray();
+        $cn_department = RapidXDepartment::where('department_name', 'like', 'CN%')->pluck('department_id')->toArray();
+        $yf_department = RapidXDepartment::where('department_name', 'like', 'YF%')->pluck('department_id')->toArray();
+        $pps_department = RapidXDepartment::where('department_name', 'like', 'PPS%')->pluck('department_id')->toArray();
+
+        if(in_array($rapidx_dept_id, $BOD)){
+            $dep = 1;
+        }
+        else if(in_array($rapidx_dept_id, $IAS)){
+            $dep = 2;
+        }
+        else if(in_array($rapidx_dept_id, $FIN)){
+            $dep = 3;
+        }
+        else if(in_array($rapidx_dept_id, $HRD)){
+            $dep = 4;
+        }
+        else if(in_array($rapidx_dept_id, $ESS)){
+            $dep = 5;
+        }
+        else if(in_array($rapidx_dept_id, $LOG)){
+            $dep = 6;
+        }
+        else if(in_array($rapidx_dept_id, $FAC)){
+            $dep = 7;
+        }
+        else if(in_array($rapidx_dept_id, $ISS)){
+            $dep = 8;
+        }
+        else if(in_array($rapidx_dept_id, $QAD)){
+            $dep = 9;
+        }
+        else if(in_array($rapidx_dept_id, $EMS)){
+            $dep = 10;
+        }
+        else if(in_array($rapidx_dept_id, $ts_department)){
+            $dep = 11;
+        }
+        else if(in_array($rapidx_dept_id, $cn_department)){
+            $dep = 12;
+        }
+        else if(in_array($rapidx_dept_id, $yf_department)){
+            $dep = 13;
+        }
+        else if(in_array($rapidx_dept_id, $pps_department)){
+            $dep = 14;
+        }
+        
+        return response()->json(['department' => $dep]);
+    }
+
+    public function view_users()
+    {
+        // $users = User::with(['rapidx_user_details.department'])->get();
+
+        $users = User::with(['rapidx_user_details.department'])
+                ->join('tbl_user_levels', 'tbl_user_levels.user_level_id', '=', 'tbl_users.user_level_id')
+                ->get();
+
+        return DataTables::of($users)
+            ->addColumn('name', function ($user) {
+                $result = $user->rapidx_user_details->name;
+
+                return $result;
+            })
+            ->addColumn('department_name', function ($user) {
+                $result = $user->rapidx_user_details->department->department_name;
+
+                return $result;
+            })
+            ->addColumn('user_level', function ($user) {
+
+                // $user_level = User::with(['user_level'])->get();
+                $result = $user->user_level_name;
+
+                return $result;
+            })
+            ->addColumn('status', function ($user) {
+                $result = "";
+                if ($user->status == 0) {
+                    $result .= '<center><span class="badge badge-pill badge-success">Active</span></center>';
+                } else {
+                    $result .= '<center><span class="badge badge-pill badge-secondary">Inactive</span></center>';
+                }
+                return $result;
+            })
+            ->addColumn('action', function ($user) {
+                $result = "";
+                $result .= '<button class="btn btn-primary text-center actionEditUser" user-id="' . $user->id . '" data-toggle="modal" data-target="#modalEditUser" data-keyboard="false"><i class="fas fa-edit"></i> Edit</button>&nbsp;';
+
+                if ($user->status == 0) {
+                    $result .= '<button class="btn btn-danger text-center actionDeactivateUser" user-id="' . $user->id . '" data-toggle="modal" data-target="#modalDeactivateUser" data-keyboard="false">Deactivate</button>';
+                } else {
+                    $result .= '<button class="btn btn-success text-center actionActivateUser" user-id="' . $user->id . '" data-toggle="modal" data-target="#modalActivateUser" data-keyboard="false">Activate</button>';
+                }
+                return $result;
+            })
+            ->rawColumns(['user_level','name','department','status', 'action'])
+            ->make(true);
+    }
+
+    public function add_user(Request $request)
+    {
+        date_default_timezone_set('Asia/Manila');
+        session_start();
+
+        $data = $request->all();
+        $password = "pmi12345";
+
+        $validator = Validator::make($data, [
+            'user_id' => ['required'],
+            'department_id' => ['required'],
+            'userLevel' => 'required'
         ]);
 
-        if($validator->passes()){
-            if(Auth::attempt($user_data)){
-                if(Auth::user()->is_password_changed == 0){
-                    return response()->json(['result' => "2"]);
-                }
-                else{
-                    return response()->json(['result' => "1"]);
-                }
+        if ($validator->fails()) {
+            return response()->json(['validation' => 'hasError', 'error' => $validator->messages()]);
+        } else {
+            if (User::where('rapidx_id', $request->user_id)->exists()) {
+                // if ($request->user_access_id != $request->user_id) {
+                return response()->json(['result' => 0]);
+                // }
+            } else {
+                User::insert([
+                    'rapidx_id' => $request->user_id,
+                    'department' => $request->department_id,
+                    'user_level_id' => $request->userLevel,
+                    // 'user_access' => 0,
+                    'status' => 0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                DB::commit();
+                return response()->json(['result' => 1]);
             }
-            else{
-                return response()->json(['result' => "0", 'error_message' => 'Login Failed!', 'error' => $validator->messages()]);
-            }
-        }
-        else{
-            return response()->json(['result' => "0", 'error' => $validator->messages()]);
         }
     }
 
-    // Sign Out
-    public function sign_out(Request $request){
-        Auth::logout();
+    public function deactivate_user(Request $request)
+    {
+        date_default_timezone_set('Asia/Manila');
+        session_start();
+
+        $data = $request->all();
+
+        User::where('id', $request->user_id)
+            ->update([
+                'status' => 1
+            ]);
+
         return response()->json(['result' => "1"]);
     }
 
-    // Change Password
-    public function change_pass(Request $request){        
+    public function activate_user(Request $request)
+    {
         date_default_timezone_set('Asia/Manila');
-        $user_data = array(
-            'username' => $request->username,
-            'password' => $request->password,
-            'new_password' => $request->new_password,
-            'confirm_password' => $request->confirm_password,
-        );
+        session_start();
 
-        $validator = Validator::make($user_data, [
-            'username' => 'required',
-            'password' => 'required|alphaNum|min:8',
-            'new_password' => 'required|alphaNum|min:8|required_with:confirm_password|same:confirm_password',
-            'confirm_password' => 'required|alphaNum|min:8'
-        ]);
+        $data = $request->all();
 
-        if($validator->passes()){
+        User::where('id', $request->user_id)->update([ 'status' => 0 ]);
 
-            if(Auth::attempt($user_data)){
-                try{
-                    User::where('id', Auth::user()->id)
-                        ->increment('update_version', 1, 
-                            [
-                                'is_password_changed' => 1,
-                                'password' => Hash::make($request->new_password),
-                                'last_updated_by' => Auth::user()->id,
-                                'updated_at' => date('Y-m-d H:i:s'),
-                            ]
-                        );
-                    DB::commit();
-                    return response()->json(['result' => "1"]);
-                }
-                catch(\Exception $e) {
-                    DB::rollback();
-                    // throw $e;
-                    return response()->json(['result' => "0"]);
-                }  
-                
-                return response()->json(['result' => 1]);
-            }
-            else{
-                return response()->json(['result' => "0", 'error' => 'Login Failed!']);
-            }
-        }
-        else{
-            return response()->json(['result' => "0", 'error' => $validator->messages()]);
-        }
+        return response()->json(['result' => "1"]);
     }
 
-    // Change User Status
-    public function change_user_stat(Request $request){        
+    public function get_id_edit_user(Request $request)
+    {
+        $user_data = User::where('id', $request->user_id)->get();
+
+        return response()->json(['user_data' => $user_data]);
+    }
+
+    public function edit_user(Request $request)
+    {
         date_default_timezone_set('Asia/Manila');
+        session_start();
 
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'user_id' => 'required',
-            'status' => 'required',
+            'user_access_id' => 'required',
+            'user_id' => ['required'],
+            'department_id' => ['required'],
+            'user_level_id' => ['required'],
         ]);
 
-        if($validator->passes()){
-            try{
-                User::where('id', $request->user_id)
-                    ->increment('update_version', 1, 
-                        [
-                            'status' => $request->status,
-                            'last_updated_by' => Auth::user()->id,
-                            'updated_at' => date('Y-m-d H:i:s'),
-                        ]
-                    );
-                DB::commit();
-                return response()->json(['result' => "1"]);
-            }
-            catch(\Exception $e) {
-                DB::rollback();
-                // throw $e;
-                return response()->json(['result' => "0"]);
-            }  
-            
-            return response()->json(['result' => 1]);
-        }
-        else{
-            return response()->json(['result' => "0", 'error' => $validator->messages()]);
-        }
-    }
+        $user_rapidx_id = User::where('id', $request->user_access_id)->get();
+        $rapidx_id = $user_rapidx_id[0]->rapidx_id;
 
-    // Reset Password
-    public function reset_password(Request $request){        
-        date_default_timezone_set('Asia/Manila');
-
-        // $password = 'pmi1234' . Str::random(10);
-        $password = 'pmi12345';
-
-        try{
-            User::where('id', $request->user_id)
-                ->increment('update_version', 1, 
-                    [
-                        'is_password_changed' => 0,
-                        'password' => Hash::make($password),
-                        'last_updated_by' => Auth::user()->id,
-                        'updated_at' => date('Y-m-d H:i:s'),
-                    ]
-                );
-
-            $has_email = 0;
-            $user = User::where('id', $request->user_id)->get();
-
-            if(count($user) > 0 && $user[0]->email != ""){
-                $has_email = 1;
-                // $has_email = 0;
-                $subject = 'PATS User Reset Password';
-                $email = $user[0]->email;
-                $message = 'This is a notification from PATS. Your PATS user password account was successfully reset.';
-
-                dispatch(new SendUserPasswordJob($subject, $message, $user[0]->username, $password, $email));
-            }
-            DB::commit();
-            return response()->json(['result' => "1", 'user' => $user, 'has_email' => $has_email, 'password' => $password]);
-        }
-        catch(\Exception $e) {
-            DB::rollback();
-            // throw $e;
-            return response()->json(['result' => "0"]);
-        } 
-    }
-
-    //View Users
-	public function view_users(){
-    	$users = User::with([
-                    'user_level',
-                ])
-                ->get();
-
-        return DataTables::of($users)
-            ->addColumn('label1', function($user){
-                $result = "";
-
-                if($user->status == 1){
-                    $result .= '<span class="badge badge-pill badge-success">Active</span>';
-                }
-                else{
-                    $result .= '<span class="badge badge-pill badge-danger">Inactive</span>';
-                }
-
-                return $result;
-            })
-            ->addColumn('action1', function($user){
-                $result = '<center><div class="btn-group">
-                          <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Action">
-                            <i class="fa fa-cog"></i> 
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-right">';
-                if($user->status == 1){
-                	$result .= '<button class="dropdown-item aEditUser" type="button" user-id="' . $user->id . '" style="padding: 1px 1px; text-align: center;" data-toggle="modal" data-target="#modalEditUser" data-keyboard="false">Edit</button>';
-
-                    $result .= '<button class="dropdown-item aChangeUserStat" type="button" user-id="' . $user->id . '" status="2" style="padding: 1px 1px; text-align: center;" data-toggle="modal" data-target="#modalChangeUserStat" data-keyboard="false">Deactivate</button>';
-
-                    $result .= '<button class="dropdown-item aResetUserPass" user-id="' . $user->id . '" type="button" style="padding: 1px 1px; text-align: center;" data-toggle="modal" data-target="#modalResetUserPass" data-keyboard="false">Reset Password</button>';
-
-                    // $result .= '<button class="dropdown-item aGenUserBarcode" user-id="' . $user->id . '" employee-id="' . $user->employee_id . '" type="button" style="padding: 1px 1px; text-align: center;" data-toggle="modal" data-target="#modalGenUserBarcode">Generate Barcode</button>';
-                }
-                else{
-                    $result .= '<button class="dropdown-item aChangeUserStat" type="button" style="padding: 1px 1px; text-align: center;" user-id="' . $user->id . '" status="1" data-toggle="modal" data-target="#modalChangeUserStat" data-keyboard="false">Activate</button>';
-                }
-                            
-                $result .= '</div>
-                        </div></center>';
-
-                return $result;
-            })
-            ->addColumn('checkbox', function($user){
-                return '<center><input type="checkbox" class="chkUser" user-id="' . $user->id . '"></center>';
-            })
-            ->rawColumns(['label1', 'action1', 'checkbox'])
-            ->make(true);
-    }
-
-    // Add User
-    public function add_user(Request $request){
-        date_default_timezone_set('Asia/Manila');
-
-        $data = $request->all();
-
-        $email = '';
-        $has_email = 0;
-        // $password = 'pmi1234' . Str::random(10);
-        $password = 'pmi12345';
-
-        $rules = [
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            'user_level_id' => 'required|string|max:255',
-        ];
-
-        if(isset($request->with_email)){
-            $rules['email'] = 'required|string|max:255|unique:users';
-            $has_email = 1;
-            // $has_email = 0;
-        }
-
-        $validator = Validator::make($data, $rules);
+        // return $rapidx_id;
 
         if ($validator->fails()) {
-            return response()->json(['result' => '0', 'error' => $validator->messages()]);
-        }
-        else{
-            DB::beginTransaction();
+            return response()->json(['validation' => 'hasError', 'error' => $validator->messages()]);
+        } else {
+            if (User::where('rapidx_id', $request->user_id)->exists() && $request->user_id != $rapidx_id ) {
+                // if ($request->user_access_id !== $request->user_id) {
+                return response()->json(['result' => 0]);
+                // }
+            } else {
+                User::where('id', $request->user_access_id)
+                    ->update([
+                        'rapidx_id' => $request->user_id,
+                        'department' => $request->department_id,
+                        'user_level_id' => $request->user_level_id,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                    ]);
 
-            // try{
-                $user_id = User::insertGetId([
-                    'name' => $request->name,
-                    'username' => $request->username,
-                    'email' => $request->email,
-                    'password' => Hash::make($password),
-                    'is_password_changed' => 0,
-                    'status' => 1,
-                    'user_level_id' => $request->user_level_id,
-                    'created_by' => Auth::user()->id,
-                    'last_updated_by' => Auth::user()->id,
-                    'update_version' => 1,
-                    'updated_at' => date('Y-m-d H:i:s'),
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-
-                if(isset($request->send_email)){
-                    $subject = 'PATS User Registration';
-                    $email = $request->email;
-                    $message = 'This is a notification from PATS. Your PATS user account was successfully registered.';
-
-                    dispatch(new SendUserPasswordJob($subject, $message, $request->username, $password, $email));
-                }
-
-                DB::commit();
-
-                return response()->json(['result' => "1", 'password' => $password, 'has_email' => $has_email, 'username' => $request->username]);
-            // }
-            // catch(\Exception $e) {
-            //     DB::rollback();
-            //     // throw $e;
-            //     return response()->json(['result' => "0"]);
-            // }
+                return response()->json(['result' => 1]);
+            }
         }
     }
 
-    // Get User By Id
-    public function get_user_by_id(Request $request){
-        $user = User::where('id', $request->user_id)->get();
-
-        return response()->json(['user' => $user]);
+    public function get_user_level(Request $request){
+		// $user_levels;
+		// if($request->user_level_stat == 0){
+		// 	$user_levels = User::all();
+		// }
+		// else{
+			$user_levels = UserLevel::all();
+		// }
+		return response()->json(['user_levels' => $user_levels]);
     }
 
-    public function get_user_list(Request $request){
-        $users = User::all();
+    public function get_user_department() {
+        session_start();
 
+        $rapidx_user_details = RapidXUser::where('id', $_SESSION['rapidx_user_id'])->get();
+
+        $rapidx_user_id = $rapidx_user_details[0]->id; 
+        $rapidx_dept = $rapidx_user_details[0]->department->department_name;
+        $rapidx_dept_id = $rapidx_user_details[0]->department_id;
+        
+        $user_details = User::where('rapidx_id', $_SESSION['rapidx_user_id'])->where('status', 0)->get();
+
+        $user_id = $user_details[0]->rapidx_id;
+        $user_level_id = $user_details[0]->user_level_id;
+        $user_status = $user_details[0]->status; 
+        
+        $user_access = RapidXUserAccess::where('user_id', $user_id)->get();
+
+        $accesses = array();
+        for($i = 0; $i < count($user_access); $i++) {
+            $accesses[] = $user_access[$i]->module_id; 
+        }
+
+        // test
+       // $rapidx_dept_id = 14;
+
+        // DEPARTMENT ID == 30 (FACILITY SECTION), DEPARTMENT ID == 48 (ISS), DEPARTMENT ID == 1 (ISS SOFTWARE), DEPARTMENT ID == 2 (ISS HARDWARE), DEPARTMENT ID == 54 (SECRETARIAT), DEPARTMENT ID == 54 (TS WHSE) 
+
+        $authorized_departments = [1, 2, 30, 48, 54, 18];
+
+        $BOD = RapidXDepartment::where('department_name', 'like', 'Board of Directors%')->pluck('department_id')->toArray(); 
+        $IAS = RapidXDepartment::where('department_name', 'like', 'IAS%')->pluck('department_id')->toArray(); 
+        $FIN = RapidXDepartment::where('department_name', 'like', 'FIN%')->pluck('department_id')->toArray(); 
+        $HRD = RapidXDepartment::where('department_name', 'like', 'HRD%')->pluck('department_id')->toArray(); 
+        $ESS = RapidXDepartment::where('department_name', 'like', 'ESS%')->pluck('department_id')->toArray(); 
+        $LOG = RapidXDepartment::where('department_name', 'like', 'LOG%')->pluck('department_id')->toArray(); 
+        $FAC = RapidXDepartment::where('department_name', 'like', 'FAC%')->pluck('department_id')->toArray(); 
+        $ISS = RapidXDepartment::where('department_name', 'like', 'ISS%')->pluck('department_id')->toArray();
+        $QAD = RapidXDepartment::where('department_name', 'like', 'QAD%')->pluck('department_id')->toArray(); 
+        $EMS = RapidXDepartment::where('department_name', 'like', 'EMS%')->pluck('department_id')->toArray();
+
+        $sg_array = array_merge($BOD,$IAS,$FIN,$HRD,$ESS,$LOG,$ISS,$QAD,$EMS);
+
+        $ts_department = RapidXDepartment::where('department_name', 'like', 'TS%')->pluck('department_id')->toArray();
+        $cn_department = RapidXDepartment::where('department_name', 'like', 'CN%')->pluck('department_id')->toArray();
+        $yf_department = RapidXDepartment::where('department_name', 'like', 'YF%')->pluck('department_id')->toArray();
+        $pps_department = RapidXDepartment::where('department_name', 'like', 'PPS%')->pluck('department_id')->toArray();
+
+        $prod_wo_pps_array = array_merge($ts_department,$cn_department,$yf_department);
+        $prod_pps_array = array_merge($pps_department);
+
+        // return $pps_department;
+
+        Session::put('support_group', $sg_array);
+        Session::put('production_wo_pps', $prod_wo_pps_array);
+        Session::put('production_pps', $prod_pps_array);
+        Session::put('facility_section', $FAC);
+
+        Session::put('department_id', $rapidx_dept_id);
+        Session::put('departments', $authorized_departments);
+        Session::put('user_level', $user_level_id);
+
+        // return Session::get('departments');
+
+        // if(!in_array(Session::get('department_id'), Session::get('departments'))) {
+        //     return 'true';
+        // } else {
+        //     return 'false';
+        // }
+
+        // return Session::get('departments');
+        // AUTHORIZED == 0, NOT AUTHORIZED == 1
+
+        if(in_array(16, $accesses)) {
+            Session::put('authorized', 0);
+        } else {
+            Session::put('authorized', 1);
+        }
+
+        return response()->json([
+                                'support_group' => Session::get('support_group'),
+                                'production_wo_pps' => Session::get('production_wo_pps'),
+                                'production_pps' => Session::get('production_pps'),
+                                'facility_section' => Session::get('facility_section'),
+                                'department_id' => Session::get('department_id'),
+                                'departments_authorized' => Session::get('departments'),
+                                'user_level_id' => Session::get('user_level'),
+                                'auth' => Session::get('authorized')
+                            ]);
+    }
+
+    // public function get_user_details()
+    // {
+    //     session_start();
+
+    //     $rapidx_user = RapidXUser::where('id', $_SESSION['rapidx_user_id'])->get();
+
+    //     $rapidx_user_id = $rapidx_user[0]->id;
+        
+    //     return response()->json(['rapidx_user_id' => $rapidx_user_id]);
+    // }
+
+    public function get_users_by_stat(Request $request)
+    {
+        $users;
+        if ($request->user_stat == 0) {
+            $users = RapidXUser::on('rapidx')->get();
+        } else {
+            $users = RapidXUser::on('rapidx')->where('user_stat', $request->user_stat)->get();
+        }
         return response()->json(['users' => $users]);
     }
 
-    // Get User By Batch
-    public function get_user_by_batch(Request $request){
-        $users;
+    // public function get_UserDepartment(Request $request)
+    // {
+    //     $user_department = User::all();
+    //     // $user_department_id = $user_department->department;
 
-        if($request->user_id == 0){
-            $users = User::all();
-        }
-        else{
-            $users = User::whereIn('id', $request->user_id)->get();
-        }
-        $qrcode = [];
+    //     // return $user_department;
 
-        if($users->count() > 0){
-            for($index = 0; $index < $users->count(); $index++){
-                $qrcode[] = "data:image/png;base64," . base64_encode(QrCode::format('png')
-                                    ->size(200)->errorCorrection('H')
-                                    ->generate($users[$index]->employee_id));
-            }
-        }
-
-        return response()->json(['users' => $users, 'qrcode' => $qrcode]);
-    }
-
-    // Get User By Status
-    public function get_user_by_stat(Request $request){
-        $user = User::where('status', $request->status)->get();
-        return response()->json(['user' => $user]);
-    }
-
-    // Edit User
-    public function edit_user(Request $request){
-        date_default_timezone_set('Asia/Manila');
-
-        $data = $request->all();
-
-        // $password = 'pmi1234' . Str::random(10);
-        $password = 'pmi12345';
-
-        if(isset($request->with_email)){
-            $validator = Validator::make($data, [
-                'name' => 'required|string|max:255|unique:users,name,'. $request->user_id,
-                'username' => 'required|string|max:255|unique:users,username,'. $request->user_id,
-                'email' => 'required|string|max:255|unique:users,email,'. $request->user_id,
-                'user_level_id' => 'required|string|max:255|',
-            ]);
-        }
-        else{
-            $validator = Validator::make($data, [
-                'name' => 'required|string|max:255|unique:users,name,'. $request->user_id,
-                'username' => 'required|string|max:255|unique:users,username,'. $request->user_id,
-                'user_level_id' => 'required|string|max:255|',
-            ]);
-        }
-
-        if ($validator->fails()) {
-            return response()->json(['result' => '0', 'error' => $validator->messages()]);
-        }
-        else{
-            DB::beginTransaction();
-
-            try{
-                User::where('id', $request->user_id)
-                ->increment('update_version', 1,
-                [
-                    'name' => $request->name,
-                    'username' => $request->username,
-                    'email' => $request->email,
-                    'user_level_id' => $request->user_level_id,
-                    'last_updated_by' => Auth::user()->id,
-                    'update_version' => 1,
-                    'updated_at' => date('Y-m-d H:i:s'),
-                ]);
-                
-                DB::commit();
-
-                return response()->json(['result' => "1"]);
-            }
-            catch(\Exception $e) {
-                DB::rollback();
-                // throw $e;
-                return response()->json(['result' => "0"]);
-            }
-        }
-    }
-
-    public function generate_user_qrcode(Request $request){
-        // action: 1-Add, 2-Edit, 3-Generate Only
-        
-        // $user = [];
-        // if($request->action == "1" || $request->action == "3"){
-        //     $user = User::where('employee_id', $request->qrcode)->get();
-        // }
-        // else if($request->action == "2"){
-        //     $user = User::where('employee_id', $request->qrcode)
-        //                 ->where('id', '!=', $request->user_id)
-        //                 ->get();   
-        // }
-
-        // $user = User::where('id', $request->user_id)->get();
-
-        // $qrcode = $user[0]->barcode;
-
-        try{
-            if(isset($request->qrcode)){
-                $user = User::where('employee_id', $request->qrcode)->get();
-
-                $qrcode = QrCode::format('png')
-                        ->size(200)->errorCorrection('H')
-                        ->generate($request->qrcode);
-
-                return response()->json(['result' => "1", 'qrcode' => "data:image/png;base64," . base64_encode($qrcode), 'user' => $user]);
-            }
-            else{
-                return response()->json(['result' => "0"]);
-            }
-        }
-        catch(\Exception $e){
-            return response()->json(['result' => "0"]);
-        }
-
-        // if(count($user) <= 0){
-        //     try{
-        //         if(isset($request->qrcode)){
-        //             $qrcode = QrCode::format('png')
-        //                     ->size(200)->errorCorrection('H')
-        //                     ->generate($request->qrcode);
-
-        //             return response()->json(['result' => "1", 'qrcode' => "data:image/png;base64," . base64_encode($qrcode)]);
-        //         }
-        //         else{
-        //             return response()->json(['result' => "0"]);
-        //         }
-        //     }
-        //     catch(\Exception $e){
-        //         return response()->json(['result' => "0"]);
-        //     }
-        // }
-        // else{
-        //     return response()->json(['result' => "2"]);
-        // }
-    }
-
-    public function import_user(Request $request)
-    {
-        $collections = Excel::toCollection(new CSVUserImport, request()->file('import_file'));
-
-        // $password = 'pmi1234' . Str::random(10);
-        $password = 'pmi12345';
-        $user_level_id = 3;
-
-        DB::beginTransaction();
-        try{
-            for($index = 1; $index < count($collections[0]); $index++){
-                if($collections[0][$index][4] == 0){
-                    $user_level_id = 2;
-                }
-                else{
-                    $user_level_id = 3;
-                }
-
-                $user_id = User::insertGetId([
-                    'name' => $collections[0][$index][0],
-                    'username' => $collections[0][$index][1],
-                    'email' => $collections[0][$index][2],
-                    'employee_id' => $collections[0][$index][3],
-                    'password' => Hash::make($password),
-                    'position' => $collections[0][$index][4],
-                    'user_level_id' => $user_level_id,
-                    'is_password_changed' => 0,
-                    'status' => 1,
-                    'created_by' => Auth::user()->id,
-                    'last_updated_by' => Auth::user()->id,
-                    'update_version' => 1,
-                    'updated_at' => date('Y-m-d H:i:s'),
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-
-                if(trim($collections[0][$index][5]) != ""){
-                    OQCStamp::insert([
-                        'user_id' => $user_id,
-                        'oqc_stamp' => $collections[0][$index][5],
-                        'created_by' => Auth::user()->id,
-                        'last_updated_by' => Auth::user()->id,
-                        'update_version' => 1,
-                        'updated_at' => date('Y-m-d H:i:s'),
-                        'created_at' => date('Y-m-d H:i:s')
-                    ]);
-                }
-            }
-
-            DB::commit();
-
-            return response()->json(['result' => "1"]);
-        }    
-        catch(\Exception $e) {
-            DB::rollback();
-            return response()->json(['result' => $e]);
-        }
-    }
+    //     return response()->json(['user_department' => $user_department]);
+    // }
 }

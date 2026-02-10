@@ -4,23 +4,106 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 
 use DataTables;
 use Carbon\Carbon;
 use App\EnergyConsumption;
 use App\FiscalYear;
+use App\YearlyTarget;
 
 class EnergyConsumptionController extends Controller
 {
+    //test
+    // public function get_energy_fy_target()
+    // {
+    //     $yearly_target = YearlyTarget::where('materials', 'Energy')->where('logdel', 0)->value('yearly_target');
+    //     $fiscal_year_id = YearlyTarget::where('materials', 'Energy')->where('logdel', 0)->value('fiscal_year_id');
+    //     // return $test;
+
+    //     return view('energy_consumption', ['yearly_target'=>$yearly_target, 'fiscal_year_id'=>$fiscal_year_id ]);
+    // }
+
+    public function get_fiscal_year_target() {
+        $energy = YearlyTarget::where('materials', 'Energy')->where('logdel', 0)->get();
+        $fiscal_year = FiscalYear::where('logdel', 0)->get();
+        return response()->json(['energy' => $energy, 'fiscal_year' => $fiscal_year]);
+    }
+    
+    //eto
+    // public function insert_energy_yearly_target(Request $request) {
+    //     date_default_timezone_set('Asia/Manila');
+    //     session_start();
+
+    //     $data = $request->all();
+
+    //     $yearly_target = explode(',', $request->yearly_target);
+    //     $yearly_target_int = (int)implode('', $yearly_target);
+
+
+    //     if (!isset($request->yearly_target_id)) {
+    //         $rules = [
+    //             'yearly_target' => 'required'
+    //         ];
+
+    //         $validator = Validator::make($data, $rules);
+
+    //         if ($validator->passes()) {
+    //             if (YearlyTarget::where('fiscal_year_id', $request->fiscal_year)->where('id', $request->yearly_target_id)->exists()) {
+    //                 return response()->json(['result' => "2"]);
+    //             } else {
+    //                 $insert_energy_yearly_target = [
+    //                     'yearly_target' => $yearly_target_int,
+    //                     'department' => 'N/A',
+    //                     'materials' => 'Energy',
+    //                     'fiscal_year_id' => $request->fiscal_year,
+    //                     'updated_at' => date('Y-m-d H:i:s'),
+    //                     'created_at' => date('Y-m-d H:i:s'),
+    //                 ];
+
+    //                 YearlyTarget::insert(
+    //                     $insert_energy_yearly_target
+    //                 );
+    //                 return response()->json(['result' => "1"]);
+    //             }
+    //         } else {
+    //             return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+    //         }
+    //     } else {
+    //         $rules = [
+    //             'yearly_target' => 'required'
+    //         ];
+
+    //         $validator = Validator::make($data, $rules);
+
+    //         if ($validator->passes()) {
+    //             $update_energy_yearly_target = [
+    //                 'yearly_target' => $yearly_target_int,
+    //                 'department' => 'N/A',
+    //                 'materials' => 'Energy',
+    //                 'fiscal_year_id' => $request->fiscal_year,
+    //                 'updated_at' => date('Y-m-d H:i:s'),
+    //             ];
+
+    //             if (isset($request->yearly_target_id)) {
+    //                 YearlyTarget::where('id', $request->yearly_target_id)->update(
+    //                     $update_energy_yearly_target
+    //                 );
+    //             }
+    //             return response()->json(['result' => "1"]);
+    //         } else {
+    //             return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+    //         }
+    //     }
+    // }
+
     public function insert_energy_target(Request $request) {
         date_default_timezone_set('Asia/Manila');
         session_start();
 
         $data = $request->all();
 
-        $energy_target = explode(',', $request->energy_target);
-        $energy_target_int = (int)implode('', $energy_target);
+        // $energy_target = explode(',', $request->energy_target);
+        // $energy_target_int = (int)implode('', $energy_target);
 
 
         if (!isset($request->energy_id)) {
@@ -32,12 +115,12 @@ class EnergyConsumptionController extends Controller
             $validator = Validator::make($data, $rules);
 
             if ($validator->passes()) {
-                if (EnergyConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->exists()) {
+                if (EnergyConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('logdel', 0)->exists()) {
                     return response()->json(['result' => "2"]);
                 } else {
                     $insert_energy_target = [
                         'month' => $request->month,
-                        'target' => $energy_target_int,
+                        'target' => $request->energy_target,
                         'fiscal_year_id' => $request->fiscal_year,
                         'updated_at' => date('Y-m-d H:i:s'),
                         'created_at' => date('Y-m-d H:i:s'),
@@ -62,17 +145,22 @@ class EnergyConsumptionController extends Controller
             if ($validator->passes()) {
                 $update_energy_target = [
                     'month' => $request->month,
-                    'target' => $energy_target_int,
+                    'target' => $request->energy_target,
                     'fiscal_year_id' => $request->fiscal_year,
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ];
 
+                $picked_data = EnergyConsumption::where('id', $request->energy_id)->get();
+                $picked_month = $picked_data[0]->month;
+
                 if (isset($request->energy_id)) {
-                    EnergyConsumption::where('id', $request->energy_id)->update(
-                        $update_energy_target
-                    );
+                    if (EnergyConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->exists() && $request->month != $picked_month) {
+                        return response()->json(['result' => 0]);
+                    }else{
+                        EnergyConsumption::where('id', $request->energy_id)->update($update_energy_target);
+                        return response()->json(['result' => "1"]);
+                    }
                 }
-                return response()->json(['result' => "1"]);
             } else {
                 return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
             }
@@ -85,11 +173,48 @@ class EnergyConsumptionController extends Controller
 
         $data = $request->all();
 
-        $energy_actual = explode(',', $request->energy_consumption);
-        $energy_actual_int = (int)implode('', $energy_actual);
+        // $energy_actual = explode(',', $request->energy_consumption);
+        // $energy_actual_int = (int)implode('', $energy_actual);
+
+        // return $request->energy_consumption;
+
+        if (!isset($request->energy_consumption_id)) {
 
             $rules = [
-               
+                'month_consumption' => 'required',
+                'energy_consumption' => 'required'
+            ];
+
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->passes()) {
+
+                if(EnergyConsumption::where('fiscal_year_id', $request->fiscal_year_consumption)->where('month', $request->month_consumption)->where('logdel', 0)->whereNotNull('actual')->exists() ){
+                    return response()->json(['result' => "2"]);
+                }
+                else if(EnergyConsumption::where('fiscal_year_id', $request->fiscal_year_consumption)->where('month', $request->month_consumption)->where('logdel', 0)->where('target', null)->exists()){
+                    return response()->json(['result' => "3"]);
+                }elseif(EnergyConsumption::where('fiscal_year_id', $request->fiscal_year_consumption)->where('month', $request->month_consumption)->where('logdel', 0)->whereNull('actual')->exists()){
+                    $update_energy_actual = [
+                        'actual' => $request->energy_consumption,
+                        'updated_at' => date('Y-m-d H:i:s')
+                        ];
+
+                        EnergyConsumption::where('fiscal_year_id', $request->fiscal_year_consumption)->where('month', $request->month_consumption)->where('logdel', 0)->update($update_energy_actual);
+                
+                    return response()->json(['result' => "1"]);
+                }else{
+                    return response()->json(['result' => "3"]);
+                }
+            
+                
+            } else {
+                return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+            }
+        }else {
+
+            $rules = [
+                'month_consumption' => 'required',
                 'energy_consumption' => 'required'
             ];
 
@@ -97,22 +222,31 @@ class EnergyConsumptionController extends Controller
 
             if ($validator->passes()) {
                 $update_energy_actual = [
-                    'actual' => $energy_actual_int,
+                    'actual' => $request->energy_consumption,
                     'updated_at' => date('Y-m-d H:i:s')
-                ];
+                    ];
 
-                    EnergyConsumption::where('id', $request->energy_consumption_id)->update(
-                        $update_energy_actual
-                    );
-            
-                return response()->json(['result' => "1"]);
+                $picked_data = EnergyConsumption::where('id', $request->energy_consumption_id)->get();
+                $picked_month = $picked_data[0]->month;
+
+                // return $picked_month;
+
+                if (isset($request->energy_consumption_id)) {
+                    if (EnergyConsumption::where('fiscal_year_id', $request->fiscal_year_consumption)->where('month', $request->month_consumption)->exists() && $request->month_consumption != $picked_month) {
+                        return response()->json(['result' => 0]);
+                    }else{
+                        EnergyConsumption::where('id', $request->energy_consumption_id)->update($update_energy_actual);
+                        return response()->json(['result' => "1"]);
+                    }
+                }
             } else {
                 return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
             }
+        }
     }
 
     public function view_energy_consumption() {
-        $energy_consumptions = EnergyConsumption::with(['fiscal_year_id'])->get();
+        $energy_consumptions = EnergyConsumption::with(['fiscal_year_id'])->where('logdel', 0)->get();
 
         return DataTables::of($energy_consumptions)
             ->addColumn('month', function ($energy_consumption) {
@@ -158,7 +292,7 @@ class EnergyConsumptionController extends Controller
                     <i class="fas fa-cog"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right dropdownCustom">'; // dropdown-menu start
-                $result .= '<button class="dropdown-item text-center actionEditEnergyConsumptionTarget" type="button" energy-id="' . $energy_consumption->id . '" data-toggle="modal" data-target="#modalEnergyTarget" data-keyboard="false">Edit Target</button>';
+                $result .= '<button class="dropdown-item text-center actionEditEnergyConsumptionTarget" type="button" energy-id="' . $energy_consumption->id . '" get_fiscal_year_id="'.$energy_consumption->fiscal_year_id.'" data-toggle="modal" data-target="#modalEnergyTarget" data-keyboard="false">Edit Target</button>';
                     if ($energy_consumption->actual == null) {
                       
                         $result .= '<button class="dropdown-item text-center actionAddEnergyConsumption" type="button" energy-id="' . $energy_consumption->id . '"  data-toggle="modal" data-target="#modalEnergyConsumption" data-keyboard="false">Add Actual</button>';
@@ -178,7 +312,7 @@ class EnergyConsumptionController extends Controller
                 $energy_actual = $energy_consumption->actual;
 
 
-                if ($energy_actual == NULL) {
+                if ($energy_actual === NULL) {
                     $result .= '<center><span class="badge badge-pill badge-secondary">No Actual Consumption Data</span></center>';
 
                 } elseif($energy_actual > $energy_target) {
@@ -233,55 +367,55 @@ class EnergyConsumptionController extends Controller
             // ->get();
     
             $march_energy_consumption_past_year = EnergyConsumption::where('month', 3)
-            ->where('fiscal_year_id', $past_fy_id)
+            ->where('fiscal_year_id', $past_fy_id)->where('logdel', 0)
             ->get();
     
             $april_energy_consumption_current_year = EnergyConsumption::where('month', 4)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $may_energy_consumption_current_year = EnergyConsumption::where('month', 5)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $june_energy_consumption_current_year = EnergyConsumption::where('month', 6)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $july_energy_consumption_current_year = EnergyConsumption::where('month', 7)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $august_energy_consumption_current_year = EnergyConsumption::where('month', 8)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
                 
             $september_energy_consumption_current_year = EnergyConsumption::where('month', 9)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
                 
             $october_energy_consumption_current_year = EnergyConsumption::where('month', 10)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $november_energy_consumption_current_year = EnergyConsumption::where('month', 11)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
               
             $december_energy_consumption_current_year = EnergyConsumption::where('month', 12)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
             
             $january_energy_consumption_current_year = EnergyConsumption::where('month', 1)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
                 
             $february_energy_consumption_current_year = EnergyConsumption::where('month', 2)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
                  
             $march_energy_consumption_current_year = EnergyConsumption::where('month', 3)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
             
             
@@ -650,63 +784,62 @@ class EnergyConsumptionController extends Controller
             $past_fy = $current_fy - 1;
             $past_fy_id = $current_fy_id - 1;
             
-            $check_data = EnergyConsumption::where('fiscal_year_id', $current_fy_id)
+            $check_data = EnergyConsumption::where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
-
            
             // $year = EnergyConsumption::where('fiscal_year_id', $current_fy)
             // ->get();
     
             $march_energy_consumption_past_year = EnergyConsumption::where('month', 3)
-            ->where('fiscal_year_id', $past_fy_id)
+            ->where('fiscal_year_id', $past_fy_id)->where('logdel', 0)
             ->get();
     
             $april_energy_consumption_current_year = EnergyConsumption::where('month', 4)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $may_energy_consumption_current_year = EnergyConsumption::where('month', 5)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $june_energy_consumption_current_year = EnergyConsumption::where('month', 6)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $july_energy_consumption_current_year = EnergyConsumption::where('month', 7)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $august_energy_consumption_current_year = EnergyConsumption::where('month', 8)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
                 
             $september_energy_consumption_current_year = EnergyConsumption::where('month', 9)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
                 
             $october_energy_consumption_current_year = EnergyConsumption::where('month', 10)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
     
             $november_energy_consumption_current_year = EnergyConsumption::where('month', 11)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
               
             $december_energy_consumption_current_year = EnergyConsumption::where('month', 12)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
             
             $january_energy_consumption_current_year = EnergyConsumption::where('month', 1)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
                 
             $february_energy_consumption_current_year = EnergyConsumption::where('month', 2)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
                  
             $march_energy_consumption_current_year = EnergyConsumption::where('month', 3)
-            ->where('fiscal_year_id', $current_fy_id)
+            ->where('fiscal_year_id', $current_fy_id)->where('logdel', 0)
             ->get();
             
             
@@ -1012,6 +1145,9 @@ class EnergyConsumptionController extends Controller
             $march_actual_current_fy =  number_format($march_actual_current_fy);
             }   
             //======================================================== MARCH CURRENT YEAR
+
+            $energy_consumption_selected_year = EnergyConsumption::where('fiscal_year_id', $current_fy_id)
+            ->get();
     
             return response()->json([
                 'chckData' => $check_data,
@@ -1056,6 +1192,7 @@ class EnergyConsumptionController extends Controller
                 'februaryActualCurrentFy' => $february_actual_current_fy,
                 'marchTargetCurrentFy' => $march_target_current_fy,
                 'marchActualCurrentFy' => $march_actual_current_fy,
+                'energyConsumption' => $energy_consumption_selected_year
             ]);
         }
     }   

@@ -46,7 +46,7 @@ $user_level = 0;
                     You will see the module_id on the table inside modules(table) under db_rapidx(database) since Customer Claim Database System id is 11
                     you are free to change below module_id equals to your module_id
                 -->
-                @if ($_SESSION['rapidx_user_accesses'][$index]['module_id'] == 11)
+                @if ($_SESSION['rapidx_user_accesses'][$index]['module_id'] == 16)
                     <!-- 11-Customer Claim Database System Module -->
                     @php
                         $isAuthorized = true;
@@ -90,7 +90,7 @@ $user_level = 0;
 </head>
 
 <body class="hold-transition sidebar-mini">
-    <div class="modal" tabindex="-1" role="dialog" id="modalOnGoing">
+    {{-- <div class="modal" tabindex="-1" role="dialog" id="modalOnGoing">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
@@ -109,7 +109,8 @@ $user_level = 0;
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+
     <div class="wrapper">
         @include('shared.pages.admin_header')
         @include('shared.pages.super_user_nav')
@@ -118,10 +119,411 @@ $user_level = 0;
         @yield('content_page')
         @include('shared.pages.admin_footer')
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            LoadSession();
+            
+            function LoadSession() {
+                $.ajax({
+                    url: 'get_user_department',
+                    method: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        result = '';
+                        let departmentID = response['department_id'];
+                        let departments = response['departments_authorized'];
+
+                        let support_group = response['support_group'];
+                        let production_wo_pps = response['production_wo_pps'];
+                        let production_pps = response['production_pps'];
+                        let facility_section = response['facility_section'];
+                        let userlevelID = response['user_level_id'];
+                        let auth = response['auth'];
+
+                        console.log(departmentID);
+                        console.log(departments);
+                        console.log(auth);
+
+                        if(auth != 1) {
+                            // user_level_id = 4 || SUPER ADMIN
+                            if(userlevelID == 4){
+                                console.log('in array');
+                                //OVERALL (FILTERING FEATURE)
+                                $('#department_filter').css('display', 'block');
+                                $('#pps_dep_filter_target').css('display', 'block');
+                                $('#pps_dep_filter_actual').css('display', 'block');
+
+                                //DASHBOARD BLADE
+                                $('#energy-dash').css('display', 'block');
+                                $('#water-dash').css('display', 'block');
+                                $('#ink-dash').css('display', 'block');
+                                $('#paper-dash').css('display', 'block');
+                                $('#energy-nav').css('display', 'block');
+                                $('#water-nav').css('display', 'block');
+                                $('#ink-sg-nav').css('display', 'block');
+                                $('#ink-prod-nav').css('display', 'block');
+                                $('#paper-nav').css('display', 'block');
+
+                                //SUPER-USER NAV BLADE
+                                
+                                $('#user_header').css('display', 'block');
+                                $('#user_settings').css('display', 'block');
+                                $('#dashboard-header').css('display', 'block');
+                                $('#dashboard-energy').css('display', 'block');
+                                $('#dashboard-water').css('display', 'block');
+                                $('#dashboard-ink').css('display', 'block');
+                                $('#dashboard-paper').css('display', 'block');
+                                $('#energyNav').css('display', 'block');
+                                $('#waternav').css('display', 'block');
+                                $('#inknav_sg').css('display', 'block');
+                                $('#inknav_prod').css('display', 'block');
+                                $('#papernav').css('display', 'block');
+                                $('#reportsnav').css('display', 'block');
+                                $('#reports_header').css('display', 'block');
+
+                                //ENERGY DASHBOARD
+                                $('#energyConsumption').css('display', 'block');
+                                //WATER DASHBOARD
+                                $('.waterConsumption').css('display', 'block');
+                                //INK DASHBOARD
+                                $("#ink_bod-tab").addClass('active');
+                                $("#ink_bod").addClass('show active');
+                                $('.inkConsumptionBOD').css('display', 'block');
+                                $('.inkConsumptionIAS').css('display', 'block');
+                                $('.inkConsumptionFIN').css('display', 'block');
+                                $('.inkConsumptionHRD').css('display', 'block');
+                                $('.inkConsumptionESS').css('display', 'block');
+                                $('.inkConsumptionLOG').css('display', 'block');
+                                $('.inkConsumptionFAC').css('display', 'block');
+                                $('.inkConsumptionISS').css('display', 'block');
+                                $('.inkConsumptionQAD').css('display', 'block');
+                                $('.inkConsumptionEMS').css('display', 'block');
+                                $('.inkConsumptionTS').css('display', 'block');
+                                $('.inkConsumptionCN').css('display', 'block');
+                                $('.inkConsumptionYF').css('display', 'block');
+                                $('.inkConsumptionPPS').css('display', 'block');
+                                //PAPER DASHBOARD
+                                $("#paper-tab").addClass('active');
+                                $("#paper").addClass('show active');
+                                $('.paperConsumptionSG').css('display', 'block');
+                                $('.paperConsumptionTS').css('display', 'block');
+                                $('.paperConsumptionYF').css('display', 'block');
+                                $('.paperConsumptionPPS').css('display', 'block');
+                                $('.paperConsumptionCN').css('display', 'block');
+
+                                // INK CONSUMPTION
+                                $('.ink_admin_addtarget').css('display', 'inline-block');
+                                $('.ink_admin_addactual').css('display', 'inline-block');
+                                // $('.ink_user_addtarget').css('display', 'inline-block');
+                                // $('.ink_user_addactual').css('display', 'inline-block');
+
+                                // PAPER CONSUMPTION PROD
+                                $('.paper_admin_addtarget').css('display', 'inline-block');
+                                $('.paper_admin_addactual').css('display', 'inline-block');
+                                // $('.paper_user_addtarget').css('display', 'inline-block');
+                                // $('.paper_user_addactual').css('display', 'inline-block');
+
+                                // ENABLE TARGET EDITIING
+                                // $('#edit-target').css('display', 'block');
+                                // column.visible(false);
+                                
+                            }
+                            // user_level_id = 3 || ADMIN
+                            else if(userlevelID == 3){
+                                console.log('in array');
+                                //OVERALL (FILTERING FEATURE)
+                                $('#department_filter').css('display', 'block');
+                                
+                                //DASHBOARD BLADE
+                                $('#energy-dash').css('display', 'block');
+                                $('#water-dash').css('display', 'block');
+                                $('#ink-dash').css('display', 'block');
+                                $('#paper-dash').css('display', 'block');
+                                $('#energy-nav').css('display', 'block');
+                                $('#water-nav').css('display', 'block');
+                                $('#ink-sg-nav').css('display', 'block');
+                                $('#ink-prod-nav').css('display', 'block');
+                                $('#paper-nav').css('display', 'block');
+
+                                //SUPER-USER NAV BLADE
+                                $('#dashboard-header').css('display', 'block');
+                                $('#dashboard-energy').css('display', 'block');
+                                $('#dashboard-water').css('display', 'block');
+                                $('#dashboard-ink').css('display', 'block');
+                                $('#dashboard-paper').css('display', 'block');
+                                $('#energyNav').css('display', 'block');
+                                $('#waternav').css('display', 'block');
+                                $('#inknav_sg').css('display', 'block');
+                                $('#inknav_prod').css('display', 'block');
+                                $('#papernav').css('display', 'block');
+                                $('#reportsnav').css('display', 'block');
+                                $('#reports_header').css('display', 'block');
+
+                                //ENERGY DASHBOARD
+                                $('#energyConsumption').css('display', 'block');
+                                //WATER DASHBOARD
+                                $('.waterConsumption').css('display', 'block');
+                                //INK DASHBOARD
+                                $("#ink_bod-tab").addClass('active');
+                                $("#ink_bod").addClass('show active');
+                                $('.inkConsumptionBOD').css('display', 'block');
+                                $('.inkConsumptionIAS').css('display', 'block');
+                                $('.inkConsumptionFIN').css('display', 'block');
+                                $('.inkConsumptionHRD').css('display', 'block');
+                                $('.inkConsumptionESS').css('display', 'block');
+                                $('.inkConsumptionLOG').css('display', 'block');
+                                $('.inkConsumptionFAC').css('display', 'block');
+                                $('.inkConsumptionISS').css('display', 'block');
+                                $('.inkConsumptionQAD').css('display', 'block');
+                                $('.inkConsumptionEMS').css('display', 'block');
+                                $('.inkConsumptionTS').css('display', 'block');
+                                $('.inkConsumptionCN').css('display', 'block');
+                                $('.inkConsumptionYF').css('display', 'block');
+                                $('.inkConsumptionPPS').css('display', 'block');
+                                //PAPER DASHBOARD
+                                $("#paper-tab").addClass('active');
+                                $("#paper").addClass('show active');
+                                $('.paperConsumptionSG').css('display', 'block');
+                                $('.paperConsumptionTS').css('display', 'block');
+                                $('.paperConsumptionYF').css('display', 'block');
+                                $('.paperConsumptionPPS').css('display', 'block');
+                                $('.paperConsumptionCN').css('display', 'block');
+
+                                // INK CONSUMPTION PROD
+                                $('.ink_admin_addtarget').css('display', 'inline-block');
+                                $('.ink_admin_addactual').css('display', 'inline-block');
+                                // $('.ink_user_addtarget').css('display', 'inline-block');
+                                // $('.ink_user_addactual').css('display', 'inline-block');
+
+                                // PAPER CONSUMPTION PROD
+                                $('.paper_admin_addtarget').css('display', 'inline-block');
+                                $('.paper_admin_addactual').css('display', 'inline-block');
+                                // $('.paper_user_addtarget').css('display', 'inline-block');
+                                // $('.paper_user_addactual').css('display', 'inline-block');
+                            }
+                            // user_level_id = 2 || SEMI-ADMIN FOR PRODUCTION
+                            else if(userlevelID == 2){
+                                console.log('in array');
+                                //OVERALL (FILTERING FEATURE)
+                                $('#department_filter').css('display', 'block');
+                                $('#pps_dep_filter_target').css('display', 'none');
+                                $('#pps_dep_filter_actual').css('display', 'none');
+                                
+
+                                //DASHBOARD BLADE
+                                $('#ink-dash').css('display', 'block');
+                                $('#paper-dash').css('display', 'block');
+                                $('#ink-prod-nav').css('display', 'block');
+                                $('#paper-nav').css('display', 'block');
+
+                                //SUPER-USER NAV BLADE
+                                $('#dashboard-ink').css('display', 'block');
+                                $('#dashboard-paper').css('display', 'block');
+                                $('#inknav_prod').css('display', 'block');
+                                $('#papernav').css('display', 'block');
+
+                                //PAPER CONSUMPTION
+                                $("#paper-prod-ts-tab").addClass('active');
+                                $("#paper-prod-ts").addClass('show active');
+                                $('.paperConsumptionTS').css('display', 'block');
+                                $('.paperConsumptionYF').css('display', 'block');
+                                $('.paperConsumptionPPS').css('display', 'block');
+                                $('.paperConsumptionCN').css('display', 'block');
+                                
+                                //INK CONSUMPTION
+                                $("#ink_ts-tab").addClass('active');
+                                $("#ink_ts").addClass('show active');
+                                $('.inkConsumptionTS').css('display', 'block');
+                                $('.inkConsumptionCN').css('display', 'block');
+                                $('.inkConsumptionYF').css('display', 'block');
+                                $('.inkConsumptionPPS').css('display', 'block');
+
+                                // INK CONSUMPTION PROD
+                                $('.ink_admin_addtarget').css('display', 'inline-block');
+                                $('.ink_admin_addactual').css('display', 'inline-block');
+
+                                // PAPER CONSUMPTION PROD
+                                $('.paper_admin_addtarget').css('display', 'inline-block');
+                                $('.paper_admin_addactual').css('display', 'inline-block');
+
+                                var dataTableInkConsumptions = $("#tblInkConsumption").DataTable();
+                                //hide the action column
+                                dataTableInkConsumptions.column(8).visible(false);
+
+                                var dataTablePaperConsumptions = $('#tblPaperConsumption').DataTable();
+                                //hide the action column
+                                dataTablePaperConsumptions.column(8).visible(false);
+                            }
+                            else if(userlevelID == 1 && jQuery.inArray(departmentID, facility_section) != -1){
+                                console.log('in array');
+
+                                //SUPER-USER NAV BLADE
+                                $('#dashboard-header').css('display', 'block');
+                                $('#dashboard-energy').css('display', 'block');
+                                $('#dashboard-water').css('display', 'block');
+                                $('#energyNav').css('display', 'block');
+                                $('#waternav').css('display', 'block');
+                                $('#inknav_sg').css('display', 'block');
+
+                                //DASHBOARD BLADE
+                                $('#energy-nav').css('display', 'block');
+                                $('#water-nav').css('display', 'block');
+                                $('#ink-sg-nav').css('display', 'block');
+
+                                // INK CONSUMPTION PROD
+                                $('.ink_user_addtarget').css('display', 'inline-block');
+                                $('.ink_user_addactual').css('display', 'inline-block');
+
+                                var dataTableEnergyConsumptions = $("#tblEnergyConsumption").DataTable();
+                                //hide the action column
+                                dataTableEnergyConsumptions.column(6).visible(false);
+
+                                var dataTableWaterConsumptions = $("#tblWaterConsumption").DataTable();
+                                //hide the action column
+                                dataTableWaterConsumptions.column(10).visible(false);
+
+                                var dataTableInkConsumptions = $('#tblInkConsumption').DataTable();
+                                //show the action column
+                                dataTableInkConsumptions.column(8).visible(false);
+                                
+                            }
+                            else if(userlevelID == 1 && jQuery.inArray(departmentID, support_group) != -1){
+                                console.log('sg in array');
+                                
+                                //DASHBOARD BLADE
+                                $('#ink-sg-nav').css('display', 'block');
+
+                                //SUPER-USER NAV BLADE
+                                $('#inknav_sg').css('display', 'block');
+
+                                //INK CONSUMPTION
+                                $("#ink_qad-tab").addClass('active');
+                                $("#ink_qad").addClass('show active');
+                                $('.inkConsumptionSG').css('display', 'block');
+
+                                // INK CONSUMPTION PROD
+                                $('.ink_user_addtarget').css('display', 'inline-block');
+                                $('.ink_user_addactual').css('display', 'inline-block');
+
+                                var dataTableInkConsumptions = $('#tblInkConsumption').DataTable();
+                                //show the action column
+                                dataTableInkConsumptions.column(8).visible(false);
+                            }
+                            else if(userlevelID == 1 && jQuery.inArray(departmentID, production_wo_pps) != -1){
+
+                                console.log('prod in array');
+                                
+                                //DASHBOARD BLADE
+                                $('#ink-prod-nav').css('display', 'block');
+                                $('#paper-nav').css('display', 'block');
+
+                                //SUPER-USER NAV BLADE
+                                $('#inknav_prod').css('display', 'block');
+                                $('#papernav').css('display', 'block');
+                                //PAPER CONSUMPTION
+                                $('.paperConsumptionTS').css('display', 'block');
+                                //INK CONSUMPTION
+                                $("#ink_ts-tab").addClass('active');
+                                $("#ink_ts").addClass('show active');
+                                $('.inkConsumptionTS').css('display', 'block');
+
+                                // INK CONSUMPTION PROD
+                                $('.ink_user_addtarget').css('display', 'inline-block');
+                                $('.ink_user_addactual').css('display', 'inline-block');
+
+                                // PAPER CONSUMPTION PROD
+                                $('.paper_user_addtarget').css('display', 'inline-block');
+                                $('.paper_user_addactual').css('display', 'inline-block');
+
+                                var dataTablePaperConsumptions = $('#tblPaperConsumption').DataTable();
+                                //hide the action column
+                                dataTablePaperConsumptions.column(8).visible(false);
+
+                                var dataTableInkConsumptions = $("#tblInkConsumption").DataTable();
+                                //hide the action column
+                                dataTableInkConsumptions.column(8).visible(false);
+
+                            }else if(userlevelID == 1 && jQuery.inArray(departmentID, production_pps) != -1){
+
+                                console.log('prod in array');
+                                
+                                //DASHBOARD BLADE
+                                $('#ink-prod-nav').css('display', 'block');
+
+                                //SUPER-USER NAV BLADE
+                                $('#inknav_prod').css('display', 'block');
+
+                                //INK CONSUMPTION
+                                $("#ink_ts-tab").addClass('active');
+                                $("#ink_ts").addClass('show active');
+                                $('.inkConsumptionTS').css('display', 'block');
+
+                                // INK CONSUMPTION PROD
+                                $('.ink_user_addtarget').css('display', 'inline-block');
+                                $('.ink_user_addactual').css('display', 'inline-block');
+
+                                var dataTableInkConsumptions = $("#tblInkConsumption").DataTable();
+                                //hide the action column
+                                dataTableInkConsumptions.column(8).visible(false);
+                            }
+                        }
+                       
+                    }
+                });
+            }
+        });
+    </script>
 
     <!-- JS LINKS -->
 
 </body>
+
+{{-- @if (Session::get('authorized') == 0)
+    @if (in_array(Session::get('department_id'), Session::get('departments')))
+    <script type="text/javascript">
+        setInterval(() => {
+            console.log('admin');
+            
+            $('#energyConsumption').css('display', 'block');
+            $('.waterConsumption').css('display', 'block');
+            $('.paperConsumptionSG').css('display', 'block');
+            $('.inkConsumption').css('display', 'block');
+            $('.paperConsumptionTS').css('display', 'block');
+            $('.paperConsumptionYF').css('display', 'block');
+            $('.paperConsumptionPPS').css('display', 'block');
+            $('.paperConsumptionCN').css('display', 'block');
+            // $('#paperConsumptionTS').addClass('active');
+
+            $('#waternav').css('display', 'block');
+            $('#energyNav').css('display', 'block');
+            $('#inknav').css('display', 'block');
+        }, 500);
+          
+       
+    </script>
+
+        @else 
+            <script type="text/javascript">
+               setInterval(() => {
+                console.log('not admin');
+                    $('#energyConsumption').css('display', 'none');
+                    $('.waterConsumption').css('display', 'none');
+                    $('.paperConsumptionSG').css('display', 'none');
+                    $('.inkConsumption').css('display', 'none');
+                    $('.paperConsumptionTS').css('display', 'block');
+                    $('.paperConsumptionYF').css('display', 'block');
+                    $('.paperConsumptionPPS').css('display', 'block');
+                    $('.paperConsumptionCN').css('display', 'block');
+                    // $('#paperConsumptionTS').addClass('active');
+
+                    $('#waternav').css('display', 'none');
+                    $('#energyNav').css('display', 'none');
+                    $('#inknav').css('display', 'none');
+               }, 500);
+                      
+            </script>
+    @endif 
+@endif --}}
 
 </html>
 @else

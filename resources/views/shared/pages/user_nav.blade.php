@@ -29,7 +29,7 @@
                 </li>
 
                 <li class="nav-header font-weight-bold">Consumption Management</li>
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview" id="energyNav" style="display: none;">
                     <a href="{{ route('energy_consumption') }}" data-toggle="modal" data-target="#modalOnGoing"
                         class="nav-link">
                         <i class="fas fa-charging-station"></i> &nbsp;
@@ -37,7 +37,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview" id="waternav" style="display: none;">
                     <a href="{{ route('water_consumption') }}" class=" nav-link">
                         <i class="fas fa-tint"></i> &nbsp;&nbsp;&nbsp;
                         <p>Water Consumption</p>
@@ -50,8 +50,6 @@
                         <p>Paper Consumption - PROD</p>
                     </a>
                 </li>
-
-
             </ul>
         </nav>
     </div><!-- Sidebar -->

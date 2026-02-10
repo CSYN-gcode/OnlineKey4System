@@ -17,6 +17,7 @@ class CreateTblPaperConsumptions extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('fiscal_year_id');
             $table->bigInteger('target');
+            // $table->decimal('target', 7, 2);
             $table->bigInteger('actual');
             $table->bigInteger('department');
             $table->bigInteger('month');

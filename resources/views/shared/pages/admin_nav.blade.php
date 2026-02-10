@@ -29,25 +29,40 @@
                 </li>
 
                 <li class="nav-header font-weight-bold">Consumption Management</li>
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview" id="energyNav" style="display: none;">
                     <a href="{{ route('energy_consumption') }}" class="nav-link">
                         <i class="fas fa-charging-station"></i> &nbsp;
                         <p>Energy Consumption</p>
                     </a>
                 </li>
 
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview" id="waternav" style="display: none;">
                     <a href="{{ route('water_consumption') }}" class="nav-link">
                         <i class="fas fa-tint"></i> &nbsp;&nbsp;&nbsp;
                         <p>Water Consumption</p>
                     </a>
                 </li>
 
-
                 <li class="nav-item has-treeview">
                     <a href="{{ route('paper_consumption') }}" class="nav-link">
                         <i class="fas fa-file"></i> &nbsp;&nbsp;&nbsp;
                         <p>Paper Consumption - PROD</p>
+                    </a>
+                </li>
+                
+                <li class="nav-item has-treeview" id="inknav" style="display: none;">
+                    <a href="{{ route('ink_consumption') }}" class="nav-link">
+                    <i class="fas fa-fill-drip"></i> &nbsp;&nbsp;&nbsp;
+                        <p>Ink Consumption</p>
+                    </a>
+                </li>
+
+                <li class="nav-item has-treeview" id="reportsnav">
+                    <a class="nav-link" data-widget="pushmenu" href="#">
+                    <a href="{{ route('reports') }}" class="nav-link">
+                    <i class="fas fa-file-chart-line"></i> &nbsp;&nbsp;&nbsp;
+                        <p>Reports</p>
+                    </a>
                     </a>
                 </li>
             </ul>

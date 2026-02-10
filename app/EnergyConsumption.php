@@ -13,4 +13,9 @@ class EnergyConsumption extends Model
     {
         return $this->hasOne(FiscalYear::class, 'id', 'fiscal_year_id');
     }
+
+    public function fiscal_year()
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
 }

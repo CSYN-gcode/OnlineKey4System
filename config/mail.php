@@ -29,7 +29,9 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.googlemail.com'),
+    // 'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    // 'host' => env('MAIL_HOST', '192.168.3.254'),
+    'host' => env('MAIL_HOST', 'mail3.pricon.ph'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,8 +44,11 @@ return [
     |
     */
 
+ // 'port' => env('MAIL_PORT', 587),
+    // 'port' => env('MAIL_PORT', 25),
     'port' => env('MAIL_PORT', 465),
-
+   
+    
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
@@ -56,8 +61,10 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'pmiissnotif@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'PATS Notification'),
+        // 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        // 'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'issinfoservice@pricon.ph'),
+        'name' => env('MAIL_FROM_NAME', 'Key 4 Notification'),
     ],
 
     /*
@@ -71,6 +78,8 @@ return [
     |
     */
 
+    // 'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    // 'encryption' => env('MAIL_ENCRYPTION', 'null'),
     'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
     /*

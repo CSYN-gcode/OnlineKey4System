@@ -45,7 +45,107 @@
         @include('shared.js_links.js_links')
         @yield('js_content')
         @include('shared.pages.common')
+        <script type="text/javascript">
+            $(document).ready(function () {
+            LoadSession();
+            
+            function LoadSession() {
+                $.ajax({
+                    url: 'get_user_department',
+                    method: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        result = '';
+                        let departmentID = response['department_id'];
+                        let departments = response['departments_authorized'];
+                        let auth = response['auth'];
+
+                        console.log(departmentID);
+                        console.log(departments);
+                        console.log(auth);
+
+                        if(auth != 1) {
+                            if(jQuery.inArray(departmentID, departments) != -1) {
+                                console.log('in array');
+
+                                $('#energyConsumption').css('display', 'block');
+                                $('.waterConsumption').css('display', 'block');
+                                $('.paperConsumptionSG').css('display', 'block');
+                                
+                                $('.paperConsumptionTS').css('display', 'block');
+                                $('.paperConsumptionYF').css('display', 'block');
+                                $('.paperConsumptionPPS').css('display', 'block');
+                                $('.paperConsumptionCN').css('display', 'block');
+
+                                $('#waternav').css('display', 'block');
+                                $('#energyNav').css('display', 'block');
+                            } else {
+                                $('#energyConsumption').css('display', 'none');
+                                $('.waterConsumption').css('display', 'none');
+                                $('.paperConsumptionSG').css('display', 'none');
+                                
+                                $('.paperConsumptionTS').css('display', 'block');
+                                $('.paperConsumptionYF').css('display', 'block');
+                                $('.paperConsumptionPPS').css('display', 'block');
+                                $('.paperConsumptionCN').css('display', 'block');
+                                // $('#paperConsumptionTS').addClass('active');
+
+                                $('#waternav').css('display', 'none');
+                                $('#energyNav').css('display', 'block');
+                            }
+                        }
+                        
+                    }
+                });
+            }
+        });
+        </script>
     </body>
+
+{{-- @if (Session::get('authorized') == 0)
+    @if (in_array(Session::get('department_id'), Session::get('departments')))
+    <script type="text/javascript">
+        setInterval(() => {
+            console.log('admin');
+            $('#energyConsumption').css('display', 'block');
+            $('.waterConsumption').css('display', 'block');
+            $('.paperConsumptionSG').css('display', 'block');
+            
+            $('.paperConsumptionTS').css('display', 'block');
+            $('.paperConsumptionYF').css('display', 'block');
+            $('.paperConsumptionPPS').css('display', 'block');
+            $('.paperConsumptionCN').css('display', 'block');
+            // $('#paperConsumptionTS').addClass('active');
+
+            $('#waternav').css('display', 'block');
+            $('#energyNav').css('display', 'block');
+        }, 500);
+          
+       
+    </script>
+
+        @else 
+            <script type="text/javascript">
+               setInterval(() => {
+                console.log('not admin');
+                
+                    $('#energyConsumption').css('display', 'none');
+                    $('.waterConsumption').css('display', 'none');
+                    $('.paperConsumptionSG').css('display', 'none');
+                    
+                    $('.paperConsumptionTS').css('display', 'block');
+                    $('.paperConsumptionYF').css('display', 'block');
+                    $('.paperConsumptionPPS').css('display', 'block');
+                    $('.paperConsumptionCN').css('display', 'block');
+                    // $('#paperConsumptionTS').addClass('active');
+
+                    $('#waternav').css('display', 'none');
+                    $('#energyNav').css('display', 'none');
+               }, 500);
+                      
+            </script>
+    @endif 
+@endif --}}
 
     </html>
 @else

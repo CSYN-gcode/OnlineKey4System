@@ -28,7 +28,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active">Energy Consumption</li>
-                            <li class="breadcrumb-item"><a href="{{ route('water_consumption') }}">Water Consumption</a></li>
+                            {{-- <!-- <li class="breadcrumb-item"><a href="{{ route('water_consumption') }}">Water Consumption</a></li> --> --}}
                         </ol>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                                 {{-- <div class="tab-content" id="myTabContent"> --}}
 
                                 {{-- <div class="tab-pane fade show active" id="monthly-target" role="tabpanel" aria-labelledby="monthly-target-tab"> --}}
-                                <div class="text-left mt-4 d-flex flex-row">
+                                <div class="text-left mt-4  d-flex flex-row" id="TEST">
                                     <div class="form-group ml-3 col-2">
                                         <label><strong>Fiscal Year :</strong></label>
                                         <select class="form-control select2bs4 selectYearEnergy" name="fiscal_year"
@@ -72,24 +72,71 @@
                                             <!-- Code generated -->
                                         </select>
                                     </div>
-                                    <div class="form-group ml-3 col-2">
+                                    {{-- <div class="form-group ml-3 col-2">
                                         <label><strong>Month :</strong></label>
                                         <select class="form-control select2bs4 selectMonthEnergy" name="month_value"
                                             id="selMonthEnergy" style="width: 100%;">
                                             <!-- Code generated -->
                                         </select>
+                                    </div> --}}
+                                    <div class="form-group ml-3 col-2">
+                                        <label><strong>Month :</strong></label>
+                                        <select class="form-control select2bs4 selectMonthEnergy" name="month_value"
+                                            id="selMonthEnergy" style="width: 100%;">
+                                            <option value="0" disabled selected>Select Month</option>
+                                            <option value="" >All</option>
+                                            <option value="January">January</option>
+                                            <option value="February">February</option>
+                                            <option value="March">March</option>
+                                            <option value="April">April</option>
+                                            <option value="May">May</option>
+                                            <option value="June">June</option>
+                                            <option value="July">July</option>
+                                            <option value="August">August</option>
+                                            <option value="September">September</option>
+                                            <option value="October">October</option>
+                                            <option value="November">November</option>
+                                            <option value="December">December</option>
+                                        </select>
                                     </div>
-
+                                    {{-- Spacing --}}
+                                    {{-- <div class="form-group ml-3 col-2">
+                                       // CURRENT FISCAL YEAR ID
+                                        <input type="hidden" class="form-control" name="fiscal_year" id="fiscalYearId1" value="{{ $fiscal_year_id }}" style="width: 100%;" readonly> 
+                                        
+                                        <label><strong>Current FY | Yearly Target :</strong></label>
+                                        @if (isset($yearly_target)) 
+                                            @php
+                                            $val = $yearly_target;
+                                            @endphp
+                                        @else
+                                            @php
+                                             $val = 'NO DATA, PLEASE INSERT!';
+                                            @endphp
+                                        @endif
+                                        <input type="text" class="form-control" style="width: 100%;" value="{{ $val }}" readonly>
+                                    </div> --}}
+                                
                                     <div style="margin-left: auto">
 
+                                        {{-- @if (isset($fiscal_year_id)) 
+                                            <button class="btn btn-warning" data-toggle="modal" data-target="#modalYearlyTarget"
+                                            id="btnShowEditEnergyYearlyTarget"><i class="fa fa-plus fa-md"></i> Edit Fiscal Year
+                                            Target</button> &nbsp;
+                                        @else
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#modalYearlyTarget"
+                                            id="btnShowAddEnergyYearlyTarget"><i class="fa fa-plus fa-md"></i> Add Fiscal Year
+                                            Target</button> &nbsp;
+                                        @endif --}}
+                                        
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#modalEnergyTarget"
                                             id="btnShowEnergyTarget"><i class="fa fa-plus fa-md"></i> Add Monthly
                                             Target</button> &nbsp;
 
-                                        {{-- <button class="btn btn-primary" data-toggle="modal"
+                                        <button class="btn btn-primary" data-toggle="modal"
                                             data-target="#modalEnergyConsumption" id="btnShowEnergyActual"><i
-                                                class="fa fa-plus fa-md"></i> Add Actual Consumption</button> --}}
-                                    </div>
+                                                class="fa fa-plus fa-md"></i> Add Actual Consumption</button>
+                                        </div>
                                 </div><br>
 
                                 <div class="table-responsive" style="overflow: scroll; height: 500px;" >
@@ -101,8 +148,8 @@
                                                 <th>Month</th>
                                                 <th>Fiscal Year</th>
                                                 <th>Year</th>
-                                                <th class="text-white" style="background-color: rgb(21, 163, 245);">Target</th>
-                                                <th class="text-white" style="background-color: rgb(9, 189, 33);">Actual</th>
+                                                <th class="text-white" style="background-color: rgb(21, 163, 245);">Target(KWH per 1K)</th>
+                                                <th class="text-white" style="background-color: rgb(9, 189, 33);">Actual(KWH per 1K)</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
 
@@ -120,6 +167,53 @@
             </div>
         </section>
     </div>
+    
+    <!-- ADD ENERGY YEARLY TARGET -->
+    {{-- <div class="modal fade" data-backdrop="static" id="modalYearlyTarget">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h4 class="modal-title" id="YearlyConsumptionChangeTitle"><i class="fas fa-plus"></i>&nbsp; Add Energy Yearly Target</h4>
+                    <button type="button" style="color: #fff;" class="close" data-dismiss="modal"
+                        aria-label="Close" id="closeModalAddId">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formAddEnergyYearlyTarget">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="fiscal_year" id="fiscalYearId2"
+                                        style="width: 100%;" readonly> 
+                                        CURRENT FISCAL YEAR ID
+                                    <input type="hidden" class="form-control" name="yearly_target_id" id="yearlyTargetId"
+                                        style="width: 100%;" readonly> 
+                                        ENERGY CONSUMPTION ID
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Energy Consumption Yearly Target</label>
+                                    <input type="text" class="form-control" name="yearly_target" id="txtAddEnergyYearlyTarget"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        <button type="submit" id="btnAddEnergyYearlyTarget" class="btn btn-primary"><i
+                                id="iBtnAddEnergyYearlyTargetIcon" class="fa fa-check"></i> Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> --}}
+     <!-- ADD ENERGY YEARLY TARGET END -->
 
     <!-- ADD ENERGY MONTHLY TARGET -->
     <div class="modal fade" data-backdrop="static" id="modalEnergyTarget">
@@ -138,11 +232,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-
-                                    <input type="hidden" class="form-control" name="fiscal_year" id="fiscalYearId"
-                                        style="width: 100%;" readonly> {{-- CURRENT FISCAL YEAR ID --}}
-                                    <input type="hidden" class="form-control" name="energy_id" id="energyId"
-                                        style="width: 100%;" readonly> {{-- ENERGY CONSUMPTION ID --}}
+                                    <input type="hidden" class="form-control" name="fiscal_year" id="fiscalYearId" style="width: 100%;" readonly> {{-- CURRENT FISCAL YEAR ID --}}
+                                    <input type="hidden" class="form-control" name="energy_id" id="energyId" style="width: 100%;" readonly> {{-- ENERGY CONSUMPTION ID --}}
                                 </div>
                             </div>
 
@@ -194,7 +285,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h4 class="modal-title" id="h4EnergyConsumptionActualChangeTitle"></h4>
+                    <h4 class="modal-title" id="EnergyConsumptionActualChangeTitle"></h4>
                     <button type="button" style="color: #fff;" class="close" data-dismiss="modal"
                         aria-label="Close" id="closeModalAddId">
                         <span aria-hidden="true">&times;</span>
@@ -267,9 +358,13 @@
             });
 
             GetFiscalYear();
-            GetMonthsFilter($('.selectMonthEnergy'));
+            // GetMonthsFilter($('.selectMonthEnergy'));
             GetFiscalYearFilter($('.selectYearEnergy'));
 
+
+            // $("#selMonthEnergy").on('change', function() {
+            //     dataTableEnergyConsumptions.column(0).search($(this).val()).draw();
+            // });
 
             $("#selMonthEnergy").on('change', function() {
                 dataTableEnergyConsumptions.column(0).search($(this).val()).draw();
@@ -306,12 +401,12 @@
                     },
                     {
                         "data": "target",
-                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        "render": $.fn.dataTable.render.number( '\,', '.', 2, '' ),
                         orderable: false
                     },
                     {
                         "data": "actual",
-                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        "render": $.fn.dataTable.render.number( '\,', '.', 2, '' ),
                         orderable: false
                     },
                     {
@@ -332,14 +427,14 @@
             //===== DATATABLES OF ENERGY CONSUMPTION END ================
 
 
-            $('#txtAddEnergyTarget, #txtAddEnergyConsumption').keyup(function(e) {
+            $('#txtAddEnergyTarget, #txtAddEnergyConsumption, #txtAddEnergyYearlyTarget').keyup(function(e) {
                 if (e.which >= 37 && e.which <= 40) return;
 
-                $(this).val(function(index, value) {
-                    return value
-                        .replace(/\D/g, "")
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                });
+                // $(this).val(function(index, value) {
+                //     return value
+                //         .replace(/\D/g, "")
+                //         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                // });
             });
 
             $('#btnShowEnergyTarget').on('click', function(e) {
@@ -356,6 +451,172 @@
                 $('div').find('select').removeClass('is-invalid');
                 $("div").find('select').attr('title', '');
             });
+
+            $('#btnShowEnergyActual').on('click', function(e) {
+                $('input[name="energy_consumption_id"]', $("#formAddEnergyActual")).val('');
+                $('input[name="energy_consumption"]', $("#formAddEnergyActual")).val('');
+                $('select[name="month_consumption"]', $("#formAddEnergyActual")).val(0).trigger('change');
+                // $('select[name="month"]', $("#formAddEnergyActual")).val(0).trigger('change');
+                $('select[name="month_consumption"]', $("#formAddEnergyActual")).prop('disabled', false);
+
+                $('#EnergyConsumptionActualChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Energy Actual Consumption');
+
+                $('div').find('input').removeClass('is-invalid');
+                $("div").find('input').attr('title', '');
+                $('div').find('select').removeClass('is-invalid');
+                $("div").find('select').attr('title', '');
+
+            });
+
+            $("#modalYearlyTarget").on('hidden.bs.modal', function () {
+                // console.log('Reload');
+                setInterval('location.reload()', 2000);
+                    });
+
+            $('#btnShowEditEnergyYearlyTarget').on('click', function(e) {
+                
+                // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).val(0).trigger('change');
+                // // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).val(0).trigger('change');
+                // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).prop('disabled', false);
+
+                // $('#h4EnergyConsumptionChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Energy Consumption Target');
+                
+                $('div').find('input').removeClass('is-invalid');
+                $("div").find('input').attr('title', '');
+                $('div').find('select').removeClass('is-invalid');
+                $("div").find('select').attr('title', '');
+                $.ajax({
+                    url: "get_fiscal_year_target",
+                    method: "get",
+                    data: $('#formAddEnergyYearlyTarget').serialize(),
+                    dataType: "json",
+                    beforeSend: function() {
+                        // $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-spinner fa-pulse');
+                        // $("#btnAddEnergyYearlyTarget").prop('disabled', 'disabled');
+                    },
+                    success: function(response) {
+                        console.log(response['energy']);
+                        $('input[name="fiscal_year"]', $("#formAddEnergyYearlyTarget")).val(response['energy'][0]['fiscal_year_id']);
+                        $('input[name="yearly_target_id"]', $("#formAddEnergyYearlyTarget")).val(response['energy'][0]['id']);
+                        $('input[name="yearly_target"]', $("#formAddEnergyYearlyTarget")).val(response['energy'][0]['yearly_target']);
+                        // $("#iBtnAddEnergyYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        // $("#btnAddEnergyYearlyTarget").removeAttr('disabled');
+                        // $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-check');
+                    },
+                    error: function(data, xhr, status) {
+                        toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+                        $("#iBtnAddEnergyYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        $("#btnAddEnergyYearlyTarget").removeAttr('disabled');
+                        $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-check');
+                    }
+                });
+            });
+
+            $('#btnShowAddEnergyYearlyTarget').on('click', function(e) {
+                
+                // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).val(0).trigger('change');
+                // // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).val(0).trigger('change');
+                // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).prop('disabled', false);
+
+                // $('#h4EnergyConsumptionChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Energy Consumption Target');
+
+                $('div').find('input').removeClass('is-invalid');
+                $("div").find('input').attr('title', '');
+                $('div').find('select').removeClass('is-invalid');
+                $("div").find('select').attr('title', '');
+                $.ajax({
+                    url: "get_fiscal_year_target",
+                    method: "get",
+                    data: $('#formAddEnergyYearlyTarget').serialize(),
+                    dataType: "json",
+                    beforeSend: function() {
+                        // $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-spinner fa-pulse');
+                        // $("#btnAddEnergyYearlyTarget").prop('disabled', 'disabled');
+                    },
+                    success: function(response) {
+                        // console.log(response['energy']);
+                        $('input[name="fiscal_year"]', $("#formAddEnergyYearlyTarget")).val(response['fiscal_year'][0]['id']);
+                        $('input[name="yearly_target_id"]', $("#formAddEnergyYearlyTarget")).val(response['energy'][0]['id']);
+                        // $('input[name="yearly_target"]', $("#formAddEnergyYearlyTarget")).val(response['energy'][0]['yearly_target']);
+                        // $("#iBtnAddEnergyYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        // $("#btnAddEnergyYearlyTarget").removeAttr('disabled');
+                        // $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-check');
+                    },
+                    error: function(data, xhr, status) {
+                        toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+                        $("#iBtnAddEnergyYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        $("#btnAddEnergyYearlyTarget").removeAttr('disabled');
+                        $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-check');
+                    }
+                });
+            });
+
+            //====== ADD ENERGY CONSUMPTION YEARLY TARGET ======
+            function AddEnergyYearlyTarget() {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "3000",
+                    "timeOut": "3000",
+                    "extendedTimeOut": "3000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                };
+
+                $.ajax({
+                    url: "insert_energy_yearly_target",
+                    method: "post",
+                    data: $('#formAddEnergyYearlyTarget').serialize(),
+                    dataType: "json",
+                    beforeSend: function() {
+                        $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-spinner fa-pulse');
+                        $("#btnAddEnergyYearlyTarget").prop('disabled', 'disabled');
+                    },
+                    success: function(response) {
+                        if (response['validation'] == 'hasError') {
+                            toastr.error('Saving failed!');
+
+                            if (response['error']['yearly_target'] === undefined) {
+                                $("#txtAddEnergyYearlyTarget").removeClass('is-invalid');
+                                $("#txtAddEnergyYearlyTarget").attr('title', '');
+                            } else {
+                                $("#txtAddEnergyYearlyTarget").addClass('is-invalid');
+                                $("#txtAddEnergyYearlyTarget").attr('title', response['error']['yearly_target']);
+                            }
+                        } else if (response['result'] == 0) {
+                            toastr.warning( 'You already have a record for this month!');
+                        }else if (response['result'] == 1) {
+                            $("#modalYearlyTarget").modal('hide');
+
+                            dataTableEnergyConsumptions.draw(); // reload the tables after insertion
+                            toastr.success('Save success!');
+                            setInterval('location.reload()', 3000);
+                        } else if (response['result'] == 2) {
+                            toastr.warning( 'You already have a record for this month!');
+                        }else if (response['result'] == 3) {
+                            toastr.warning( 'You have no target for this month, please put target first!');
+                        }
+
+                        $("#iBtnAddEnergyYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        $("#btnAddEnergyYearlyTarget").removeAttr('disabled');
+                        $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-check');
+                    },
+                    error: function(data, xhr, status) {
+                        toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+                        $("#iBtnAddEnergyYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        $("#btnAddEnergyYearlyTarget").removeAttr('disabled');
+                        $("#iBtnAddEnergyYearlyTargetIcon").addClass('fa fa-check');
+                    }
+                });
+            }
 
 
             //====== ADD ENERGY CONSUMPTION TARGET ======
@@ -405,13 +666,18 @@
                                 $("#txtAddEnergyTarget").addClass('is-invalid');
                                 $("#txtAddEnergyTarget").attr('title', response['error']['energy_target']);
                             }
-                        } else if (response['result'] == 1) {
+                            
+                        }  else if (response['result'] == 0) {
+                            toastr.warning( 'You already have a record for this month!');
+                        }else if (response['result'] == 1) {
                             $("#modalEnergyTarget").modal('hide');
 
                             dataTableEnergyConsumptions.draw(); // reload the tables after insertion
                             toastr.success('Save success!');
                         } else if (response['result'] == 2) {
-                            toastr.warning( 'You already have a record for this month, please edit');
+                            toastr.warning( 'You already have a record for this month!');
+                        }else if (response['result'] == 3) {
+                            toastr.warning( 'You have no target for this month, please put target first!');
                         }
 
                         $("#iBtnAddEnergyTargetIcon").removeClass('fa fa-spinner fa-pulse');
@@ -466,11 +732,18 @@
                                 $("#txtAddEnergyConsumption").addClass('is-invalid');
                                 $("#txtAddEnergyConsumption").attr('title', response['error']['energy_consumption']);
                             }
+                        }else if (response['result'] == 0) {
+                            toastr.warning( 'You already have a record for this month!');
                         } else if (response['result'] == 1) {
                             $("#modalEnergyConsumption").modal('hide');
 
                             dataTableEnergyConsumptions.draw(); // reload the tables after insertion
                             toastr.success('Save success!');
+                        }else if (response['result'] == 2) {
+                            toastr.warning( 'You already have a record for this month!');
+                        }
+                        else if (response['result'] == 3) {
+                            toastr.warning( 'You have no target for this month, please put target first!');
                         }
                    
                         $("#iBtnAddEnergyActualIcon").removeClass('fa fa-spinner fa-pulse');
@@ -599,20 +872,32 @@
                 });
             }
 
-
+            //energy monthly target form on click
             $("#formAddEnergyTarget").submit(function(event) {
                 event.preventDefault(); // to stop the form submission
                 $('select[name="month"]', $("#formAddEnergyTarget")).prop('disabled', false);
                 AddEnergyConsumptionTarget();
             });
 
+            //energy yearly target form on click
+            $("#formAddEnergyYearlyTarget").submit(function(event) {
+                event.preventDefault(); // to stop the form submission
+                $('select[name="yearly_target_id"]', $("#formAddEnergyYearlyTarget")).prop('disabled', false);
+                AddEnergyYearlyTarget();
+            });
+
             //===== EDIT ENERGY CONSUMPTION =====
             $("#tblEnergyConsumption").on('click', '.actionEditEnergyConsumptionTarget', function() {
+                let fiscalyearid = $(this).attr('get_fiscal_year_id');
                 let id = $(this).attr('energy-id');
 
+                $("input[name='fiscal_year'", $("#formAddEnergyTarget")).val(fiscalyearid);
                 $("input[name='energy_id'", $("#formAddEnergyTarget")).val(id);
                 $('#h4EnergyConsumptionChangeTitle').html('<i class="fas fa-edit"></i>&nbsp;&nbsp; Edit Energy Consumption Target');
-                $('select[name="month"]', $("#formAddEnergyTarget")).prop('disabled', true);
+                $('select[name="month"]', $("#formAddEnergyTarget")).prop('disabled', false);
+
+                console.log('Energy Consumption ID:', id);
+                console.log('Fiscal year ID:', fiscalyearid);
 
                 $('div').find('input').removeClass('is-invalid');
                 $("div").find('input').attr('title', '');
@@ -629,7 +914,7 @@
                 $('input[name="energy_consumption_id"]', $("#formAddEnergyActual")).val(id);
                 $('input[name="energy_consumption"]', $("#formAddEnergyActual")).val('');
                 $('select[name="month_consumption"]', $("#formAddEnergyActual")).val(0).trigger('change');
-                $('#h4EnergyConsumptionActualChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Energy Consumption Actual');
+                $('#EnergyConsumptionActualChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Energy Consumption Actual');
 
                 $('div').find('input').removeClass('is-invalid');
                 $("div").find('input').attr('title', '');
@@ -649,9 +934,9 @@
             $('#tblEnergyConsumption').on('click', '.actionEditEnergyConsumption', function() {
                 let id = $(this).attr('energy-id');
 
-                $('select[name="month_consumption"]', $("#formAddEnergyActual")).prop('disabled', true);
+                $('select[name="month_consumption"]', $("#formAddEnergyActual")).prop('disabled', false);
                 $('input[name="energy_consumption_id"]', $("#formAddEnergyActual")).val(id);
-                $('#h4EnergyConsumptionActualChangeTitle').html('<i class="fas fa-edit"></i>&nbsp;&nbsp; Edit Energy Consumption Actual');
+                $('#EnergyConsumptionActualChangeTitle').html('<i class="fas fa-edit"></i>&nbsp;&nbsp; Edit Energy Consumption Actual');
 
                 $('div').find('input').removeClass('is-invalid');
                 $("div").find('input').attr('title', '');

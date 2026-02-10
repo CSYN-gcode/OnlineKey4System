@@ -45,7 +45,8 @@
                 second: '2-digit'
             });
 
-            if(month == 4 && firstDayOfMonth == 1) {
+            // if(month == 4 && firstDayOfMonth == 1) { // old code by chelvin 
+            if(month == 4 && firstDayOfMonth == 6) { // new code by clark 04032023
                 if(current_time == '12:00:00 AM') {
                     TransitionFY();
                 }

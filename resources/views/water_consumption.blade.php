@@ -27,7 +27,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('energy_consumption') }}">Energy Consumption</a></li>
+                            {{-- <!-- <li class="breadcrumb-item"><a href="{{ route('energy_consumption') }}">Energy Consumption</a></li> --> --}}
                             <li class="breadcrumb-item active">Water Consumption</li>
                         </ol>
                     </div>
@@ -102,17 +102,45 @@
                                                 <option value="2">Factory 2</option>
                                             </select>
                                         </div> --}}
-                                       
-                                        <div style="margin-left: auto">
+                                       {{-- Spacing --}}
+                                    {{-- <div class="form-group ml-3 col-2">
+                                        //CURRENT FISCAL YEAR ID
+                                        <input type="hidden" class="form-control" name="fiscal_year" id="fiscalYearId1" value="{{ $fiscal_year_id }}" style="width: 100%;" readonly> 
+                                        
+                                        <label><strong>Current FY | Yearly Target :</strong></label>
+                                        @if (isset($yearly_target)) 
+                                            @php
+                                            $val = $yearly_target;
+                                            @endphp
+                                        @else
+                                            @php
+                                             $val = 'NO DATA, PLEASE INSERT!';
+                                            @endphp
+                                        @endif
+                                        <input type="text" class="form-control" style="width: 100%;" value="{{ $val }}" readonly>
+                                    </div> --}}
+                                
+                                    <div style="margin-left: auto">
 
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalWaterTarget"
-                                                id="btnShowWaterTarget"><i class="fa fa-plus fa-md"></i> Add Monthly
-                                                Target</button> &nbsp;
+                                        {{-- @if (isset($fiscal_year_id)) 
+                                            <button class="btn btn-warning" data-toggle="modal" data-target="#modalYearlyTarget"
+                                            id="btnShowEditWaterYearlyTarget"><i class="fa fa-plus fa-md"></i> Edit Fiscal Year
+                                            Target</button> &nbsp;
+                                        @else
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#modalYearlyTarget"
+                                            id="btnShowAddWaterYearlyTarget"><i class="fa fa-plus fa-md"></i> Add Fiscal Year
+                                            Target</button> &nbsp;
+                                        @endif --}}
+                                        
+                                        &nbsp;
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalWaterTarget"
+                                                id="btnShowWaterTarget"><i class="fa fa-plus fa-md"></i> Add Monthly Target</button> &nbsp;
 
-                                            {{-- <button class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modalEnergyConsumption" id="btnShowEnergyActual"><i
-                                                    class="fa fa-plus fa-md"></i> Add Actual Consumption</button> --}}
-                                        </div>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalWaterConsumption"
+                                                id="btnShowWaterActual"><i class="fa fa-plus fa-md"></i> Add Actual Consumption</button> &nbsp;
+
+                                    </div>
+
                                     </div><br>
 
                                     <div class="table-responsive" style="overflow: scroll; height: 500px;" >
@@ -125,14 +153,14 @@
                                                     <th>Month</th>
                                                     <th>Fiscal Year</th>
                                                     <th>Year</th>
-                                                    <th class="text-white" style="background-color: rgb(21, 163, 245);">Target</th>
+                                                    <th class="text-white" style="background-color: rgb(21, 163, 245); 200px;">Target</th>
                                                     {{-- <th>Factory 1 - Actual</th> --}}
-                                                    <th>Factory 1 - Actual</th>
-                                                    <th>Factory 1 - Manpower</th>
-                                                    <th>Factory 2 - Actual</th>
-                                                    <th>Factory 2 - Manpower</th>
-                                                    <th class="text-white" style="background-color: rgb(12, 238, 12);"">Actual</th>
-                                                    <th>Status</th>
+                                                    <th style="width: 170px;">Factory 1 - Actual</th>
+                                                    <th style="width: 170px;">Factory 1 - Manpower</th>
+                                                    <th style="width: 170px;">Factory 2 - Actual</th>
+                                                    <th style="width: 170px;">Factory 2 - Manpower</th>
+                                                    <th class="text-white" style="background-color: rgb(12, 238, 12); 200px;">Actual</th>
+                                                    <th style="width: 200px;">Status</th>
                                                     <th>Action</th>
 
                                                 </tr>
@@ -150,7 +178,7 @@
         </section>
     </div>
 
-     <!-- ADD ENERGY MONTHLY TARGET -->
+     <!-- ADD WATER MONTHLY TARGET -->
      <div class="modal fade" data-backdrop="static" id="modalWaterTarget">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -173,21 +201,6 @@
                                         style="width: 100%;" readonly> {{-- ENERGY CONSUMPTION ID --}}
                                 </div>
                             </div>
-
-                            
-
-                            {{-- <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label>Factory</label>
-                                    <select class="form-control select2bs4 selectFactory" type="text" name="factory"
-                                        id="txtSelectAddFactory" style="width: 100%;">
-                                        <option value="0" disabled selected>Select Factory</option>
-                                        <option value="1">Factory 1</option>
-                                        <option value="2">Factory 2</option>
-                                        <
-                                    </select>
-                                </div>
-                            </div> --}}
 
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -228,15 +241,15 @@
                 </form>
             </div>
         </div>
-    </div> <!-- ADD ENERGY MONTHLY TARGET END -->
+    </div> <!-- ADD WATER MONTHLY TARGET END -->
 
 
-    <!-- ADD ENERGY MONTHLY CONSUMPTION -->
+    <!-- ADD WATER MONTHLY CONSUMPTION -->
     <div class="modal fade" data-backdrop="static" id="modalWaterConsumption">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h4 class="modal-title" id="h4WaterConsumptionActualChangeTitle"></h4>
+                    <h4 class="modal-title" id="ActualWaterConsumptionChangeTitle"></h4>
                     <button type="button" style="color: #fff;" class="close" data-dismiss="modal"
                         aria-label="Close" id="closeModalAddId">
                         <span aria-hidden="true">&times;</span>
@@ -250,7 +263,7 @@
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="fiscal_year" id="txtFiscalYearId"
                                         style="width: 100%;" readonly> {{-- CURRENT FISCAL YEAR ID --}}
-                                    <input type="hidden" class="form-control" name="water_id" id="txtEnergyId"
+                                    <input type="hidden" class="form-control" name="water_id" id="txtWaterId"
                                         style="width: 100%;" readonly> {{-- ENERGY CONSUMPTION ID --}}
                                 </div>
                             </div>
@@ -281,14 +294,16 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Water Consumption</label>
-                                    <input type="text" class="form-control" name="water_consumption_factory_1" id="txtAddWaterConsumptionFactory1">
+                                    <input type="text" class="form-control" name="water_consumption_factory_1" id="txtAddWaterConsumptionFactory1"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                 </div>
                             </div>
                             
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Manpower</label>
-                                    <input type="text" class="form-control" name="manpower_factory_1" id="txtAddManpowerFactory1">
+                                    <input type="text" class="form-control" name="manpower_factory_1" id="txtAddManpowerFactory1"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                 </div>
                             </div>
                             
@@ -297,14 +312,16 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Water Consumption</label>
-                                    <input type="text" class="form-control" name="water_consumption_factory_2" id="txtAddWaterConsumptionFactory2">
+                                    <input type="text" class="form-control" name="water_consumption_factory_2" id="txtAddWaterConsumptionFactory2"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Manpower</label>
-                                    <input type="text" class="form-control" name="manpower_factory_2" id="txtAddManpowerFactory2">
+                                    <input type="text" class="form-control" name="manpower_factory_2" id="txtAddManpowerFactory2"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                 </div>
                             </div>
                         </div>
@@ -318,7 +335,7 @@
                 </form>
             </div>
         </div>
-    </div> <!-- ADD ENERGY MONTHLY CONSUMPTION -->
+    </div> <!-- ADD WATER MONTHLY CONSUMPTION -->
 @endsection
 
 @section('js_content')
@@ -379,26 +396,31 @@
                     },
                     {
                         "data": "factory_1_actual",
-                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        // "render": $.fn.dataTable.render.number(',', 2, ''),
+                        "render": $.fn.dataTable.render.number( '\,', '.', 2, '' ),
                         orderable: false
                     },
                     {
                         "data": "factory_1_manpower",
-                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        // "render": $.fn.dataTable.render.number(',', 2, ''),
+                        "render": $.fn.dataTable.render.number( '\,', '.', 2, '' ),
                         orderable: false
                     },
                     {
                         "data": "factory_2_actual",
-                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        // "render": $.fn.dataTable.render.number(',', 2, ''),
+                        "render": $.fn.dataTable.render.number( '\,', '.', 2, '' ),
                         orderable: false
                     },
                     {
                         "data": "factory_2_manpower",
-                        "render": $.fn.dataTable.render.number(',', 2, ''),
+                        // "render": $.fn.dataTable.render.number(',', 2, ''),
+                        "render": $.fn.dataTable.render.number( '\,', '.', 2, '' ),
                         orderable: false
                     },
                     {
                         "data": "actual",
+                        "render": $.fn.dataTable.render.number( '\,', '.', 2, '' ),
                         // "render": $.fn.dataTable.render.number(',', 2, ''),
                         orderable: false
                     },
@@ -440,7 +462,179 @@
             });
 
 
+            $('#btnShowWaterActual').on('click', function(e) {
+                // console.log('test');
+       
+                $('input[name="water_id"]', $("#formAddWaterActual")).val('');
+                $('select[name="month"]', $("#formAddWaterActual")).val(0).trigger('change');
+                $('input[name="water_consumption_factory_1"]', $("#formAddWaterActual")).val('');
+                $('input[name="manpower_factory_1"]', $("#formAddWaterActual")).val('');
+                $('input[name="water_consumption_factory_2"]', $("#formAddWaterActual")).val('');
+                $('input[name="manpower_factory_2"]', $("#formAddWaterActual")).val('');
+                $('#ActualWaterConsumptionChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Water Consumption Actual');
 
+                $('select[name="month"]', $("#formAddWaterActual")).prop('disabled', false);
+                // $('select[name="factory"]', $("#formAddWaterActual")).prop('disabled', false);
+                // $('select[name="factory"]', $("#formAddWaterActual")).val(0).trigger('change');
+
+                $('div').find('input').removeClass('is-invalid');
+                $("div").find('input').attr('title', '');
+                $('div').find('select').removeClass('is-invalid');
+                $("div").find('select').attr('title', '');
+            });
+
+            $("#modalYearlyTarget").on('hidden.bs.modal', function () {
+                // console.log('Reload');
+                setInterval('location.reload()', 2000);
+                    });
+
+            $('#btnShowEditWaterYearlyTarget').on('click', function(e) {
+                
+                // $('select[name="month"]', $("#formAddWaterYearlyTarget")).val(0).trigger('change');
+                // // $('select[name="month"]', $("#formAddWaterYearlyTarget")).val(0).trigger('change');
+                // $('select[name="month"]', $("#formAddWaterYearlyTarget")).prop('disabled', false);
+
+                // $('#h4EnergyConsumptionChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Energy Consumption Target');
+                
+                $('div').find('input').removeClass('is-invalid');
+                $("div").find('input').attr('title', '');
+                $('div').find('select').removeClass('is-invalid');
+                $("div").find('select').attr('title', '');
+                $.ajax({
+                    url: "get_fiscal_year_target",
+                    method: "get",
+                    data: $('#formAddWaterYearlyTarget').serialize(),
+                    dataType: "json",
+                    beforeSend: function() {
+                        // $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-spinner fa-pulse');
+                        // $("#btnAddWaterYearlyTarget").prop('disabled', 'disabled');
+                    },
+                    success: function(response) {
+                        console.log(response['water']);
+                        $('input[name="fiscal_year"]', $("#formAddWaterYearlyTarget")).val(response['water'][0]['fiscal_year_id']);
+                        $('input[name="yearly_target_id"]', $("#formAddWaterYearlyTarget")).val(response['water'][0]['id']);
+                        $('input[name="yearly_target"]', $("#formAddWaterYearlyTarget")).val(response['water'][0]['yearly_target']);
+                        // $("#iBtnAddWaterYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        // $("#btnAddWaterYearlyTarget").removeAttr('disabled');
+                        // $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-check');
+                    },
+                    error: function(data, xhr, status) {
+                        toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+                        $("#iBtnAddWaterYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        $("#btnAddWaterYearlyTarget").removeAttr('disabled');
+                        $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-check');
+                    }
+                });
+            });
+
+            $('#btnShowAddWaterYearlyTarget').on('click', function(e) {
+                
+                // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).val(0).trigger('change');
+                // // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).val(0).trigger('change');
+                // $('select[name="month"]', $("#formAddEnergyYearlyTarget")).prop('disabled', false);
+
+                // $('#h4EnergyConsumptionChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Energy Consumption Target');
+
+                $('div').find('input').removeClass('is-invalid');
+                $("div").find('input').attr('title', '');
+                $('div').find('select').removeClass('is-invalid');
+                $("div").find('select').attr('title', '');
+                $.ajax({
+                    url: "get_fiscal_year_target",
+                    method: "get",
+                    data: $('#formAddWaterYearlyTarget').serialize(),
+                    dataType: "json",
+                    beforeSend: function() {
+                        // $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-spinner fa-pulse');
+                        // $("#btnAddWaterYearlyTarget").prop('disabled', 'disabled');
+                    },
+                    success: function(response) {
+                        // console.log(response['water']);
+                        $('input[name="fiscal_year"]', $("#formAddWaterYearlyTarget")).val(response['fiscal_year'][0]['id']);
+                        $('input[name="yearly_target_id"]', $("#formAddWaterYearlyTarget")).val(response['water'][0]['id']);
+                        // $('input[name="yearly_target"]', $("#formAddWaterYearlyTarget")).val(response['water'][0]['yearly_target']);
+                        // $("#iBtnAddWaterYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        // $("#btnAddWaterYearlyTarget").removeAttr('disabled');
+                        // $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-check');
+                    },
+                    error: function(data, xhr, status) {
+                        toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+                        $("#iBtnAddWaterYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        $("#btnAddWaterYearlyTarget").removeAttr('disabled');
+                        $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-check');
+                    }
+                });
+            });
+
+            //====== ADD ENERGY CONSUMPTION YEARLY TARGET ======
+            function AddWaterYearlyTarget() {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "3000",
+                    "timeOut": "3000",
+                    "extendedTimeOut": "3000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                };
+
+                $.ajax({
+                    url: "insert_water_yearly_target",
+                    method: "post",
+                    data: $('#formAddWaterYearlyTarget').serialize(),
+                    dataType: "json",
+                    beforeSend: function() {
+                        $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-spinner fa-pulse');
+                        $("#btnAddWaterYearlyTarget").prop('disabled', 'disabled');
+                    },
+                    success: function(response) {
+                        if (response['validation'] == 'hasError') {
+                            toastr.error('Saving failed!');
+
+                            if (response['error']['yearly_target'] === undefined) {
+                                $("#txtAddWaterYearlyTarget").removeClass('is-invalid');
+                                $("#txtAddWaterYearlyTarget").attr('title', '');
+                            } else {
+                                $("#txtAddWaterYearlyTarget").addClass('is-invalid');
+                                $("#txtAddWaterYearlyTarget").attr('title', response['error']['yearly_target']);
+                            }
+                        } else if (response['result'] == 1) {
+                            $("#modalYearlyTarget").modal('hide');
+
+                            dataTableWaterConsumptions.draw(); // reload the tables after insertion
+                            toastr.success('Save success!');
+                            // setInterval('location.reload()', 3000);
+                        } else if (response['result'] == 2) {
+                            toastr.warning( 'You already have a record for this month, please edit');
+                        }
+
+                        $("#iBtnAddWaterYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        $("#btnAddWaterYearlyTarget").removeAttr('disabled');
+                        $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-check');
+                    },
+                    error: function(data, xhr, status) {
+                        toastr.error('An error occured!\n' + 'Data: ' + data + "\n" + "XHR: " + xhr + "\n" + "Status: " + status);
+                        $("#iBtnAddWaterYearlyTargetIcon").removeClass('fa fa-spinner fa-pulse');
+                        $("#btnAddWaterYearlyTarget").removeAttr('disabled');
+                        $("#iBtnAddWaterYearlyTargetIcon").addClass('fa fa-check');
+                    }
+                });
+            }
+
+            //energy yearly target form on click
+            $("#formAddWaterYearlyTarget").submit(function(event) {
+                event.preventDefault(); // to stop the form submission
+                $('select[name="yearly_target_id"]', $("#formAddWaterYearlyTarget")).prop('disabled', false);
+                AddWaterYearlyTarget();
+            });
 
             //====== ADD ENERGY CONSUMPTION TARGET ======
             function AddWaterConsumptionTarget() {
@@ -500,14 +694,19 @@
                                 $("#txtAddWaterTarget").addClass('is-invalid');
                                 $("#txtAddWaterTarget").attr('title', response['error']['water_target']);
                             }
+                        }else if (response['result'] == 0) {
+                            toastr.warning( 'You already have a record for this month!');
                         } else if (response['result'] == 1) {
                             $("#modalWaterTarget").modal('hide');
 
                             dataTableWaterConsumptions.draw(); // reload the tables after insertion
                             toastr.success('Save success!');
                         } else if (response['result'] == 2) {
-                            toastr.warning( 'You already have a record for this month, please edit');
+                            toastr.warning( 'You already have a record for this month!');
+                        }else if (response['result'] == 3) {
+                            toastr.warning( 'You have no target for this month, please put target first!');
                         }
+                        
 
                         $("#iBtnAddWaterTargetIcon").removeClass('fa fa-spinner fa-pulse');
                         $("#btnAddWaterTarget").removeAttr('disabled');
@@ -586,13 +785,18 @@
                                 $("#txtAddManpowerFactory2").attr('title', response['error']['manpower_factory_2']);
                             }
 
-                        } else if (response['result'] == 1) {
+                        } else if (response['result'] == 0) {
+                            toastr.warning( 'You already have a record for this month!');
+                        }else if (response['result'] == 1) {
                             $("#modalWaterConsumption").modal('hide');
 
                             dataTableWaterConsumptions.draw(); // reload the tables after insertion
                             toastr.success('Save success!');
                         } else if (response['result'] == 2) {
-                            toastr.warning( 'You already have a record for this month, please edit');
+                            toastr.warning( 'You already have a record for this month!');
+                        }
+                        else if (response['result'] == 3) {
+                            toastr.warning( 'You have no target for this month, please put target first!');
                         }
 
                         $("#iBtnAddWaterActualIcon").removeClass('fa fa-spinner fa-pulse');
@@ -690,7 +894,7 @@
 
                 $("input[name='water_id'", $("#formAddWaterTarget")).val(id);
                 $('#h4WaterConsumptionChangeTitle').html('<i class="fas fa-edit"></i>&nbsp;&nbsp; Edit Water Consumption Target');
-                $('select[name="month"]', $("#formAddWaterTarget")).prop('disabled', true);
+                $('select[name="month"]', $("#formAddWaterTarget")).prop('disabled', false);
                 // $('select[name="factory"]', $("#formAddWaterTarget")).prop('disabled', true);
 
 
@@ -714,7 +918,7 @@
                 $('input[name="water_consumption_factory_2"]', $("#formAddWaterActual")).val('');
                 $('input[name="manpower_factory_1"]', $("#formAddWaterActual")).val('');
                 $('input[name="manpower_factory_2"]', $("#formAddWaterActual")).val('');
-                $('#h4WaterConsumptionActualChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Water Consumption Actual');
+                $('#ActualWaterConsumptionChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Add Water Consumption Actual');
 
                 $('div').find('input').removeClass('is-invalid');
                 $("div").find('input').attr('title', '');
@@ -734,7 +938,7 @@
             $('#tblWaterConsumption').on('click', '.actionEditWaterConsumption', function() {
                 let id = $(this).attr('water-id');
 
-                $('select[name="month"]', $("#formAddWaterActual")).prop('disabled', true);
+                $('select[name="month"]', $("#formAddWaterActual")).prop('disabled', false);
                 // $('select[name="factory"]', $("#formAddWaterActual")).prop('disabled', true);
                 // $('select[name="factory"]', $("#formAddWaterActual")).val(0).trigger('change');
                 $('input[name="water_id"]', $("#formAddWaterActual")).val(id);
@@ -744,7 +948,7 @@
                 $('input[name="water_consumption_factory_2"]', $("#formAddWaterActual")).val('');
                 $('input[name="manpower_factory_1"]', $("#formAddWaterActual")).val('');
                 $('input[name="manpower_factory_2"]', $("#formAddWaterActual")).val('');
-                $('#h4WaterConsumptionActualChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Edit Water Consumption Actual');
+                $('#ActualWaterConsumptionChangeTitle').html('<i class="fas fa-plus"></i>&nbsp;&nbsp; Edit Water Consumption Actual');
 
                 $('div').find('input').removeClass('is-invalid');
                 $("div").find('input').attr('title', '');

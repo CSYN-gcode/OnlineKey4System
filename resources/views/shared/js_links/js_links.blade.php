@@ -29,6 +29,8 @@
 <!-- Toastr -->
 <script src="{{ asset('public/template/plugins/toastr/toastr.min.js') }}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script> --}}
 
@@ -38,18 +40,42 @@
 {{-- <script src="{{ asset('public/template/plugins/daterangepicker/moment.min.js') }}"></script>
 <script src="{{ asset('public/template/plugins/daterangepicker/daterangepicker.js') }}"></script> --}}
 
-<script type="text/javascript"
-src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jquery.smartWizard.min.js"></script>
+<script type="text/javascript" src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jquery.smartWizard.min.js"></script>
 
+
+<script src="{{ asset('public/js/my_js/Mailer.js?n=5') }}"></script>
 <!-- Custom JS -->
 <script src="{{ asset('public/js/my_js/Common.js?n=6') }}"></script>
 <script src="{{ asset('public/js/my_js/FiscalYear.js') }}"></script>
-<script src="{{ asset('public/js/my_js/EnergyConsumption.js?n=7') }}"></script>
-<script src="{{ asset('public/js/my_js/PaperConsumptionTS.js?n=1') }}"></script>
+<script src="{{ asset('public/js/my_js/EnergyConsumption.js?n=1') }}"></script>
+<script src="{{ asset('public/js/my_js/PaperConsumptionTS.js?n=3') }}"></script>
 <script src="{{ asset('public/js/my_js/PaperConsumptionCN.js?n=2') }}"></script>
-<script src="{{ asset('public/js/my_js/PaperConsumptionYF.js?n=3') }}"></script>
-<script src="{{ asset('public/js/my_js/PaperConsumptionPPS.js?n=4') }}"></script>
+<script src="{{ asset('public/js/my_js/PaperConsumptionYF.js?n=2') }}"></script>
+<script src="{{ asset('public/js/my_js/PaperConsumptionPPS.js?n=2') }}"></script>
 <script src="{{ asset('public/js/my_js/WaterConsumption.js?n=2') }}"></script>
+
+{{-- INK CONSUMPTION DEPARTMENTS --}}
+<script src="{{ asset('public/js/my_js/InkConsumptionBOD.js?n=3') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionIAS.js?n=2') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionFIN.js?n=3') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionHRD.js?n=1') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionESS.js?n=1') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionLOG.js?n=2') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionFAC.js?n=2') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionISS.js?n=2') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionQAD.js?n=1') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionEMS.js?n=2') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionTS.js?n=2') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionCN.js?n=3') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionYF.js?n=2') }}"></script>
+<script src="{{ asset('public/js/my_js/InkConsumptionPPS.js?n=2') }}"></script>
+{{-- INK CONSUMPTION DEPARTMENTS END--}}
+
+<script src="{{ asset('public/js/my_js/PastFYSelector.js') }}"></script>
+
+{{-- User Management --}}
+<script src="{{ asset('public/js/my_js/User.js?n=4') }}"></script>
+
 {{-- <script src="{{ asset('public/js/my_js/CustomerClaim.js') }}"></script> --}}
 {{-- <script src="{{ asset('public/js/my_js/RapidXUser.js') }}"></script> --}}
 {{-- <script src="{{ asset('public/js/my_js/EmailRecipient.js') }}"></script> --}}

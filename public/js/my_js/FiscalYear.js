@@ -8,9 +8,14 @@ function GetFiscalYear() {
             if (fiscalYear > 0) {
                 $('#fiscalYearId').val(fiscalYear);
                 $('#txtFiscalYearId').val(fiscalYear);
+                $('#fiscalYearIdSemiAdmin').val(fiscalYear);
+                $('#txtFiscalYearIdSemiAdmin').val(fiscalYear);
             }
             else {
                 $('#fiscalYearId').val(0);
+                $('#txtFiscalYearId').val(0);
+                $('#fiscalYearIdSemiAdmin').val(0);
+                $('#txtFiscalYearIdSemiAdmin').val(0);
             }
         }
     });

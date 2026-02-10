@@ -10,12 +10,16 @@ use App\MonthlyTargetPaperConsumption;
 use App\MonthlyActualPaperConsumption;
 use App\FiscalYear;
 use App\PaperConsumption;
+use App\RapidXUser;
+use App\RapidXDepartment;
+use App\User;
 
 use DataTables;
 use Carbon\Carbon;
 
 class PaperConsumptionController extends Controller
 {
+
     public function get_current_paper_data(Request $request) {
 
     if($request->fiscal_year == null) {
@@ -1154,6 +1158,8 @@ class PaperConsumptionController extends Controller
 
             $validator = Validator::make($data, $rules);
 
+            // return $picked_month;
+
             if ($validator->passes()) {
                 $update_paper_target = [
                     'month' => $request->month,
@@ -1162,10 +1168,17 @@ class PaperConsumptionController extends Controller
                     'updated_at' => date('Y-m-d H:i:s')
                 ];
 
+                $picked_data = PaperConsumption::where('id', $request->paper_id)->get();
+                $picked_month = $picked_data[0]->month;
+
                 if (isset($request->paper_id)) {
-                    PaperConsumption::where('id', $request->paper_id)->update(
-                        $update_paper_target
-                    );
+                    if (PaperConsumption::where('department', $request->department)->where('month', $request->month)->exists() && $request->month != $picked_month) {
+                        // if ($request->user_access_id !== $request->user_id) {
+                        return response()->json(['result' => 0]);
+                        // }
+                    }else{
+                        PaperConsumption::where('id', $request->paper_id)->update($update_paper_target);
+                    }
                 }
                 return response()->json(['result' => "1"]);
             } else {
@@ -1175,7 +1188,46 @@ class PaperConsumptionController extends Controller
     }
 
     public function view_paper_consumption() {
-        $paper_consumptions = PaperConsumption::with(['fiscal_year_id'])->get();
+        session_start();
+
+        $rapidx_user_details = RapidXUser::where('id', $_SESSION['rapidx_user_id'])->get();
+        $rapidx_user_id = $rapidx_user_details[0]->id; 
+        $rapidx_dept_id = $rapidx_user_details[0]->department_id;
+
+        $user_details = User::where('rapidx_id', $_SESSION['rapidx_user_id'])->get();
+        $user_level_id = $user_details[0]->user_level_id;
+        
+        // test
+       // $rapidx_dept_id = 3;
+
+        // department id from rapidx
+        $ts_department = RapidXDepartment::where('department_name', 'like', 'TS%')->pluck('department_id')->toArray();
+        $cn_department = RapidXDepartment::where('department_name', 'like', 'CN%')->pluck('department_id')->toArray();
+        $yf_department = RapidXDepartment::where('department_name', 'like', 'YF%')->pluck('department_id')->toArray();
+        $pps_department = RapidXDepartment::where('department_name', 'like', 'PPS%')->pluck('department_id')->toArray();
+
+        if(in_array($rapidx_dept_id, $ts_department) && $user_level_id == 1 ){
+            $dep = 3;
+            $paper_consumptions = PaperConsumption::with(['fiscal_year_id'])->where('department', $dep)->where('logdel', 0)->get();
+        }
+        else if(in_array($rapidx_dept_id, $cn_department) && $user_level_id == 1){
+            $dep = 1;
+            $paper_consumptions = PaperConsumption::with(['fiscal_year_id'])->where('department', $dep)->where('logdel', 0)->get();
+        }
+        else if(in_array($rapidx_dept_id, $yf_department) && $user_level_id == 1){
+            $dep = 4;
+            $paper_consumptions = PaperConsumption::with(['fiscal_year_id'])->where('department', $dep)->where('logdel', 0)->get();
+        }
+        else if(in_array($rapidx_dept_id, $pps_department) && $user_level_id == 1){
+            $dep = 2;
+            $paper_consumptions = PaperConsumption::with(['fiscal_year_id'])->where('department', $dep)->where('logdel', 0)->get();
+        }
+        else if($user_level_id == 4 || $user_level_id == 3 || $user_level_id == 2){
+            $paper_consumptions = PaperConsumption::with(['fiscal_year_id'])->whereBetween('department', [1, 4])->where('logdel', 0)->get();
+        }
+
+        // $paper_consumptions = PaperConsumption::with(['fiscal_year_id'])->where('department', $dep)->get();
+        // $Water_PastFyActual = WaterConsumption::with('fiscal_year')->whereHas('fiscal_year', function($query) use ($pastFy){ $query->where('id', $pastFy); })->get();
 
         return DataTables::of($paper_consumptions)
             ->addColumn('month', function ($paper_consumption) {
@@ -1242,7 +1294,7 @@ class PaperConsumptionController extends Controller
                 $paper_actual = $paper_consumption->actual;
 
 
-                if ($paper_actual == NULL) {
+                if ($paper_actual === NULL) {
                     $result .= '<center><span class="badge badge-pill badge-secondary">No Actual Consumption Data</span></center>';
 
                 } elseif($paper_actual > $paper_target) {
@@ -1273,26 +1325,81 @@ class PaperConsumptionController extends Controller
 
         $data = $request->all();
 
+        if (!isset($request->paper_id)) {
+        
             $rules = [
-                'paper_consumption' => 'required'
+                'department' => 'required',
+                'month' => 'required',
+                'paper_consumption' => 'required',
+                'reason' => 'required'
+            ];
+
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->passes()) {
+                if(PaperConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('department', $request->department)->whereNotNull('actual')->exists()) {
+                    // PaperConsumption::whereNotNull('actual')
+                    
+                    return response()->json(['result' => "2"]);
+                }
+                else if(PaperConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('department', $request->department)->where('target', null)->exists()){
+                    return response()->json(['result' => "3"]);
+                }else if(PaperConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('department', $request->department)->whereNull('actual')->exists()){
+
+                $update_paper_actual = [
+                    'actual' => $request->paper_consumption,
+                    'reason' => $request->reason,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ];
+
+                PaperConsumption::where('fiscal_year_id', $request->fiscal_year)->where('month', $request->month)->where('department', $request->department)->update($update_paper_actual);
+
+                    // PaperConsumption::where('id', $request->paper_id)->update(
+                    //     $update_paper_actual
+                    // );
+            
+                return response()->json(['result' => "1"]);
+                }else{
+                    return response()->json(['result' => "3"]);
+                }
+            } else {
+                return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
+            }
+        } else {
+            $rules = [
+                'department' => 'required',
+                'month' => 'required',
+                'paper_consumption' => 'required',
+                'reason' => 'required'
             ];
 
             $validator = Validator::make($data, $rules);
 
             if ($validator->passes()) {
                 $update_paper_actual = [
+                    'month' => $request->month,
                     'actual' => $request->paper_consumption,
+                    'reason' => $request->reason,
                     'updated_at' => date('Y-m-d H:i:s')
                 ];
 
-                    PaperConsumption::where('id', $request->paper_id)->update(
-                        $update_paper_actual
-                    );
-            
+                $picked_data = PaperConsumption::where('id', $request->paper_id)->get();
+                $picked_month = $picked_data[0]->month;
+
+                if (isset($request->paper_id)) {
+                    if (PaperConsumption::where('department', $request->department)->where('month', $request->month)->exists() && $request->month != $picked_month) {
+                        return response()->json(['result' => 0]);
+                    }
+                    else{
+                        PaperConsumption::where('id', $request->paper_id)->update($update_paper_actual);
+                    }
+                }
                 return response()->json(['result' => "1"]);
             } else {
                 return response()->json(['validation' => "hasError", 'error' => $validator->messages()]);
             }
+        }
+
     }
 
     public function get_current_paper_data_ts(Request $request) {
@@ -1308,7 +1415,7 @@ class PaperConsumptionController extends Controller
 
             //===== Column department == 3 (TS) ======//
             $paper_consumption_ts = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            ->where('department', '3')
+            ->where('department', '3')->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $paper_consumption_ts, 'currentYear' => $current_fy_year]);
@@ -1322,7 +1429,7 @@ class PaperConsumptionController extends Controller
             $current_fy_year = $current_fy[0]->fiscal_year;
 
             $paper_consumption_ts = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            ->where('department', '3')
+            ->where('department', '3')->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $paper_consumption_ts, 'currentYear' => $current_fy_year]);
@@ -1342,7 +1449,7 @@ class PaperConsumptionController extends Controller
 
             //===== Column department == 1 (CN) ======//
             $paper_consumption_cn = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            ->where('department', '1')
+            ->where('department', '1')->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $paper_consumption_cn, 'currentYear' => $current_fy_year]);
@@ -1356,7 +1463,7 @@ class PaperConsumptionController extends Controller
             $current_fy_year = $current_fy[0]->fiscal_year;
 
             $paper_consumption_cn = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            ->where('department', '1')
+            ->where('department', '1')->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $paper_consumption_cn, 'currentYear' => $current_fy_year]);
@@ -1376,7 +1483,7 @@ class PaperConsumptionController extends Controller
 
             //===== Column department == 4 (YF) ======//
             $paper_consumption_yf = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            ->where('department', '4')
+            ->where('department', '4')->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $paper_consumption_yf, 'currentYear' => $current_fy_year]);
@@ -1390,7 +1497,7 @@ class PaperConsumptionController extends Controller
             $current_fy_year = $current_fy[0]->fiscal_year;
 
             $paper_consumption_yf = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            ->where('department', '4')
+            ->where('department', '4')->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $paper_consumption_yf, 'currentYear' => $current_fy_year]);
@@ -1410,7 +1517,7 @@ class PaperConsumptionController extends Controller
 
             //===== Column department == 2 (PPS) ======//
             $paper_consumption_pps = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            ->where('department', '2')
+            ->where('department', '2')->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $paper_consumption_pps, 'currentYear' => $current_fy_year]);
@@ -1424,7 +1531,7 @@ class PaperConsumptionController extends Controller
             $current_fy_year = $current_fy[0]->fiscal_year;
 
             $paper_consumption_pps = PaperConsumption::where('fiscal_year_id', $current_fy_id)
-            ->where('department', '2')
+            ->where('department', '2')->where('logdel', 0)
             ->get();
 
            return response()->json(['result' => $paper_consumption_pps, 'currentYear' => $current_fy_year]);
